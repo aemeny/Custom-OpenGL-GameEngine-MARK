@@ -134,6 +134,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameProject\main.cpp" />
+    <ClCompile Include="Graphics\GraphicsModelHandler.cpp" />
+    <ClCompile Include="Graphics\GraphicsShaderHandler.cpp" />
+    <ClCompile Include="Graphics\GraphicsTextureHandler.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Graphics\GraphicsMasterHeader.h" />
+    <ClInclude Include="Graphics\GraphicsModelHandler.h" />
+    <ClInclude Include="Graphics\GraphicsShaderHandler.h" />
+    <ClInclude Include="Graphics\GraphicsTextureHandler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
