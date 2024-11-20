@@ -26,6 +26,9 @@ namespace GraphicsRenderer
         /* Binds matrix with passed shader type */
         void bindShader(glm::mat4 _matrix, const GLchar* _type);
 
+        /* Returns assigned shader program ID */
+        GLuint getId() { return m_programID; }
+
     private:
         // Held IDs
         GLuint m_programID;

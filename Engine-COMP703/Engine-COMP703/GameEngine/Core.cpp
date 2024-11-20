@@ -20,4 +20,12 @@ namespace GameEngine
 
 		return rtn;
 	}
+
+	void Core::run()
+	{
+		while (true)
+		{
+
+		}
+	}
 }

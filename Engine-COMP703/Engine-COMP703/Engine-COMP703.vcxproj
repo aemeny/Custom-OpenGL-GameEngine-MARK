@@ -133,12 +133,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameEngine\Core.cpp" />
+    <ClCompile Include="GameEngine\Window.cpp" />
     <ClCompile Include="GameProject\main.cpp" />
     <ClCompile Include="Graphics\GraphicsModelHandler.cpp" />
     <ClCompile Include="Graphics\GraphicsShaderHandler.cpp" />
     <ClCompile Include="Graphics\GraphicsTextureHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameEngine\Core.h" />
+    <ClInclude Include="GameEngine\GameEngineMasterHeader.h" />
+    <ClInclude Include="GameEngine\Window.h" />
     <ClInclude Include="Graphics\GraphicsMasterHeader.h" />
     <ClInclude Include="Graphics\GraphicsModelHandler.h" />
     <ClInclude Include="Graphics\GraphicsShaderHandler.h" />

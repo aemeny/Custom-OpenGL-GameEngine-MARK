@@ -1,13 +1,14 @@
 #pragma once
 #include "Window.h"
-
-#include <memory>
+#include "Input.h"
 
 namespace GameEngine
 {
 	struct Core
 	{
 		static std::shared_ptr<Core> initialize();
+
+		void run();
 
 	private:
 		std::shared_ptr<Window> windowContext;
