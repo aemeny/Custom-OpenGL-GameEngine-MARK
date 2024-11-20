@@ -7,6 +7,7 @@
  */
 
 #include "GraphicsModelHandler.h"
+
 #include <iostream>
 
 namespace GraphicsRenderer
