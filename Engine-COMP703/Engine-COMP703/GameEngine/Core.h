@@ -11,6 +11,7 @@ namespace GameEngine
 		void run();
 
 	private:
+		std::shared_ptr<InputHandler> inputHandler;
 		std::shared_ptr<Window> windowContext;
 	};
 }

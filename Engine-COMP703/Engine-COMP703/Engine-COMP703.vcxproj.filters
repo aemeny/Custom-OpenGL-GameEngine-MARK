@@ -57,6 +57,9 @@
     <ClCompile Include="GameEngine\Window.cpp">
       <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngine\Input.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\GraphicsMasterHeader.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="GameEngine\Window.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Input.h">
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
   </ItemGroup>
