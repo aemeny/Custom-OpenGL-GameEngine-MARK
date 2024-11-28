@@ -1,7 +1,31 @@
-#ifdef BU_GL_H
+/*
+    MIT License
+
+    Copyright (c) 2024 Alex Emeny @https://github.com/aemeny.
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+*/
+
+#ifdef OBJ_GL_H
   #error This header file should never need to be included twice!
 #endif
-#define BU_GL_H
+#define OBJ_GL_H
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
@@ -10,8 +34,9 @@
 #include <vector>
 #include <stdexcept>
 #include <fstream>
+#include <optional>
 
-namespace bu
+namespace objgl
 {
 
 struct Face
@@ -94,8 +119,12 @@ void splitString(const std::string& input, char splitter,
 }
 
 template <typename T>
-GLuint loadModel(const std::string& path, size_t& vertexCount, std::vector<Face>& faces)
+GLuint loadModel(const std::string& path, size_t& vertexCount, std::optional<std::reference_wrapper<std::vector<Face> > > passedFaces = std::nullopt)
 {
+    std::vector<Face> localFaces;
+    // Use either the provided `faces` or the local variable
+    std::vector<Face>& faces = passedFaces.has_value() ? passedFaces->get() : localFaces;
+
   std::vector<glm::vec3> positions;
   std::vector<glm::vec2> tcs;
   std::vector<glm::vec3> normals;
@@ -313,7 +342,7 @@ GLuint loadModel(const std::string& path, size_t& vertexCount, std::vector<Face>
   return vaoId;
 }
 
-#define buLoadModel bu::loadModel<int>
+#define objLoadModel objgl::loadModel<int>
 
 
 template <typename T>
@@ -414,7 +443,7 @@ void updateModel(GLuint modelID, std::vector<Face> faces)
         glBindVertexArray(0);
     }
 }
-#define buUpdateModel bu::updateModel<void>
+#define objUpdateModel objgl::updateModel<void>
 }
 
 
