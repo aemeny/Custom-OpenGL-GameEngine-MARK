@@ -14,7 +14,7 @@
 
 namespace GameEngine
 {
-	/* Input contructor, assigns a weak core ref and sets up InputHandler variables */
+	/* Input constructor, assigns a weak core ref and sets up InputHandler variables */
 	InputHandler::InputHandler(std::weak_ptr<Window> _windowRef) :
 		m_windowRef(_windowRef), m_keys(), m_pressedKeys(), m_releasedKeys(),
 		m_mouseDown{false}, m_mouseDownHeld{false}, 
@@ -99,7 +99,7 @@ namespace GameEngine
 
 
 	/* Checks all SDL poll events to check for mouse and keyboard input */
-	void InputHandler::checkInput()
+	void InputHandler::tick()
 	{
 		// Reset mouse delta (velocity) each frame
 		m_mouseDelta.x = 0;
@@ -151,7 +151,7 @@ namespace GameEngine
 				// Add key released to released keys this frame
 				m_releasedKeys.push_back(releasedKey);
 
-				// Remove realsed key from held keys list
+				// Remove released key from held keys list
 				std::vector<int>::iterator keyPosition = std::find(m_keys.begin(), m_keys.end(), releasedKey); // Find key in list
 				// If returned myVector.end() the element was not found
 				if (keyPosition != m_keys.end()) 
@@ -192,7 +192,7 @@ namespace GameEngine
 		{
 			float halfWindowWidth = m_windowRef.lock()->m_windowWidth * 0.5f;
 			float halfWindowHeight = m_windowRef.lock()->m_windowHeight * 0.5f; 
-			SDL_WarpMouseInWindow(m_windowRef.lock()->m_window, halfWindowWidth, halfWindowHeight);
+			SDL_WarpMouseInWindow(NULL, halfWindowWidth, halfWindowHeight);
 		}
 	}
 }

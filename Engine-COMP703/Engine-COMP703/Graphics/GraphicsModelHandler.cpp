@@ -7,11 +7,12 @@
  */
 
 #include "GraphicsModelHandler.h"
+
 #include <iostream>
 
 namespace GraphicsRenderer
 {
-    /* Uploads .obj model to gpu from given file address */
+    /* Uploads .obj model to GPU from given file address */
     ModelHandler::ModelHandler(std::string _fileAddress)
     {
         m_modelId = objLoadModel(_fileAddress, m_vertices, m_faces);
@@ -22,7 +23,7 @@ namespace GraphicsRenderer
         }
     }
 
-    /* Calls upon the .obj model to be reuploaded to the gpu */
+    /* Calls upon the .obj model to be re-uploaded to the GPU */
     void ModelHandler::updateModel()
     {
         objUpdateModel(m_modelId, m_faces);

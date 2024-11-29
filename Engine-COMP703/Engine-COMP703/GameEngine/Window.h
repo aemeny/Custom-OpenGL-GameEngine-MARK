@@ -16,7 +16,7 @@ namespace GameEngine
 	{
 		/* Initializes SDL window and context with passed window height & width */
 		void initialize(int _width, int _height);
-		/* Deletes SDL Context and Destroyes Window. 
+		/* Deletes SDL Context and Destroys Window. 
 		   QUITS SDL PROGRAM */
 		~Window();
 

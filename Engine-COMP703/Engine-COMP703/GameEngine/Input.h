@@ -28,7 +28,7 @@ namespace GameEngine
 
 	struct InputHandler
 	{
-		/* Input contructor, assigns a weak Window ref and sets up InputHandler variables */
+		/* Input constructor, assigns a weak Window ref and sets up InputHandler variables */
 		InputHandler(std::weak_ptr<Window> _coreRef);
 		
 		/* Returns if a key is currently being held down */
@@ -42,18 +42,21 @@ namespace GameEngine
 		bool isMouseDown(MouseButton _button);
 		/* Returns if a mouse button is currently held down */
 		bool isMouseDownHeld(MouseButton _button);
-		/* Getter for mouse cooridnate on the screen */
+		/* Getter for mouse coordinate on the screen */
 		glm::ivec2 getMousePos() { return m_mousePos; } 
 		/* Getter for the current velocity of the mouse for this frame */
 		glm::vec2 getMouseDelta() { return m_mouseDelta; }
 
 		/* Checks all SDL poll events to check for mouse and keyboard input */
-		void checkInput();
+		void tick();
 		/* Clears one frame valid inputs */
 		void clear();
 
 		/* If the mouse cursor should be shown */
 		void setCursorActive(bool _active) { _active ? SDL_ShowCursor(SDL_ENABLE) : SDL_ShowCursor(SDL_DISABLE); }
+
+		/* Setter for locking the mouse to the center of the screen */
+		void setMouseLock(bool _lock) { m_mouseLock = _lock; }
 
 	private:
 		/* Weak reference to window handler for updated window sizes */

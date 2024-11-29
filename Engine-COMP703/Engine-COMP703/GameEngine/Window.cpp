@@ -34,7 +34,7 @@ namespace GameEngine
 		}
 	}
 
-	/* Deletes SDL Context and Destroyes Window.
+	/* Deletes SDL Context and Destroys Window.
 		   QUITS SDL PROGRAM */
 	Window::~Window()
 	{

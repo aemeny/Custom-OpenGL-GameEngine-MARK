@@ -1,10 +1,2 @@
-<<<<<<< HEAD
-﻿  Core.cpp
-=======
-﻿  main.cpp
-  GraphicsModelHandler.cpp
-  GraphicsShaderHandler.cpp
-C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\GraphicsShaderHandler.cpp(150,58): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-  Generating Code...
->>>>>>> 531c99b25a2a755eafd5c6d45502274ecd267606
+﻿  GraphicsTextureHandler.cpp
   Engine-COMP703.vcxproj -> C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\x64\Debug\Engine-COMP703.exe

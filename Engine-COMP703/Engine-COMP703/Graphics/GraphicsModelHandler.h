@@ -14,10 +14,10 @@ namespace GraphicsRenderer
 {
     struct ModelHandler
     {
-        /* Uploads .obj model to gpu from given file address */
+        /* Uploads .obj model to GPU from given file address */
         ModelHandler(std::string _fileAddress);
 
-        /* Calls upon the .obj model to be reuploaded to the gpu */
+        /* Calls upon the .obj model to be re-uploaded to the GPU */
         void updateModel();
 
         /* Returns the number of vertices in the model */
