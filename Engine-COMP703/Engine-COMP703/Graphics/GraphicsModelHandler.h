@@ -8,7 +8,7 @@
  */
 
 #pragma once
-#include <bugl.h> // .obj model reader and loader
+#include <objgl.h> // .obj model reader and loader
 
 namespace GraphicsRenderer
 {
@@ -29,13 +29,13 @@ namespace GraphicsRenderer
         GLuint getModelId() const { return m_modelId; }
 
         /* Returns a pointer to a vector of the models faces */
-        std::vector<bu::Face>* getFaces() { return &m_faces; }
+        std::vector<objgl::Face>* getFaces() { return &m_faces; }
         /* Sets passed faces to the models held faces */
-        void setFaces(std::vector<bu::Face> _newFaces) { m_faces = _newFaces; }
+        void setFaces(std::vector<objgl::Face> _newFaces) { m_faces = _newFaces; }
 
     private:
         size_t m_vertices;
         GLuint m_modelId;
-        std::vector<bu::Face> m_faces;
+        std::vector<objgl::Face> m_faces;
     };
 }

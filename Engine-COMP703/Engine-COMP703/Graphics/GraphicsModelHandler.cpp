@@ -14,7 +14,7 @@ namespace GraphicsRenderer
     /* Uploads .obj model to gpu from given file address */
     ModelHandler::ModelHandler(std::string _fileAddress)
     {
-        m_modelId = buLoadModel(_fileAddress, m_vertices, m_faces);
+        m_modelId = objLoadModel(_fileAddress, m_vertices, m_faces);
         if (!m_modelId)
         {
             std::cerr << "Failed to load model from " << _fileAddress << std::endl;
@@ -25,6 +25,6 @@ namespace GraphicsRenderer
     /* Calls upon the .obj model to be reuploaded to the gpu */
     void ModelHandler::updateModel()
     {
-        buUpdateModel(m_modelId, m_faces);
+        objUpdateModel(m_modelId, m_faces);
     }
 }
