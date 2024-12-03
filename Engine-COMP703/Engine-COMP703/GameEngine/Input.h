@@ -21,9 +21,9 @@ namespace GameEngine
 	/* Enum that holds more meaningful reference to mouse input compared to an array index */
 	enum class MouseButton
 	{
-		Left = 0,   
-		Right = 1,  
-		Middle = 2
+		Left,   
+		Right,  
+		Middle
 	};
 
 	struct InputHandler

@@ -40,7 +40,8 @@ namespace GameEngine
 		std::shared_ptr<GraphicsRenderer::TextureHandler> texture =
 			std::make_shared<GraphicsRenderer::TextureHandler>("../Samples/Textures/Curuthers/Curuthers.png");
 
-		glm::mat4 projection = glm::perspective(glm::radians(60.0f), (float)(900 / 900), 0.01f, 100.0f);
+		std::shared_ptr<Camera> camera = std::make_shared<Camera>(
+			CameraProjection::Perspective, PerspectiveParamaters{60.0f, 0.1f, 100.0f});
 
 
 		while (isGameRunning)
@@ -62,7 +63,7 @@ namespace GameEngine
 			/* GUI tick */
 
 			/* Entity render */
-			shader->bindShader(projection, "u_Projection");
+			shader->bindShader(camera->getProjectionMatrix(), "u_Projection");
 			shader->renderModel(model, texture);
 
 			/* GUI render */

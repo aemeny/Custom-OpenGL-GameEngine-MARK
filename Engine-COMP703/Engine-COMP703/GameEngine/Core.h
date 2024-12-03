@@ -13,10 +13,8 @@
 #include "Environment.h"
 #include "Input.h"
 #include "Module.h"
+#include "Camera.h"
 
-
-
-#include "glm/gtc/matrix_transform.hpp" // TEMP
 namespace GameEngine
 {
 	struct Core
