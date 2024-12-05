@@ -1,7 +1,7 @@
 /*
  * File: Input.cpp
  * Author: Alex Emeny
- * Date: November 21th, 2024
+ * Date: November 21th, 2024 (Last Edited)
  * Description: This file implements the methods declared in Input.h.
  *              It implements the functions for initializing the InputHandler variables and checking input.
  *				It also takes care of ticking SDL poll events to assign taken inputs.

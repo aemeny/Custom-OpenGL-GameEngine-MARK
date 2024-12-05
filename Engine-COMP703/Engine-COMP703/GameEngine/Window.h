@@ -1,7 +1,7 @@
 /*
  *  File: Window.h
  *  Author: Alex Emeny
- *  Date: November 15th, 2024
+ *  Date: November 15th, 2024 (Last Edited)
  *  Description: This file contains the Window struct,
  *               which is responsible for initializing the window and creating SDL Context.
  *               The Window struct also stores SDL window information / data.

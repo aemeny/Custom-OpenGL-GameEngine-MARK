@@ -1,7 +1,7 @@
 /*
  * File: Environment.cpp
  * Author: Alex Emeny
- * Date: November 27th, 2024
+ * Date: November 27th, 2024 (Last Edited)
  * Description: This file implements the methods declared in Environment.h.
  *              It defines the functions for initializing delta time.
  *				Manages and updates delta time.

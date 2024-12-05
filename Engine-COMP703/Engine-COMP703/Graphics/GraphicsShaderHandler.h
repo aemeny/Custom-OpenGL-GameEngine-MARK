@@ -1,7 +1,7 @@
 /*
  *  File: GraphicsShaderHandler.h
  *  Author: Alex Emeny
- *  Date: November 14th, 2024
+ *  Date: November 14th, 2024 (Last Edited)
  *  Description: This file contains the ShaderHandler struct,
  *               which is responsible for compiling, linking, and managing shaders.
  *               The ShaderHandler also provides methods for rendering models with textures.

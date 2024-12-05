@@ -1,7 +1,7 @@
 /*
  * File: GraphicsModelHandler.cpp
  * Author: Alex Emeny
- * Date: November 14th, 2024
+ * Date: November 14th, 2024 (Last Edited)
  * Description: This file implements the methods declared in GraphicsModelHandler.h.
  *              It defines the functions for uploading .obj models to the GPU.
  */

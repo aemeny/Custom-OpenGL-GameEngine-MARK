@@ -1,7 +1,7 @@
 /*
  *  File: GraphicsModelHandler.h
  *  Author: Alex Emeny
- *  Date: November 14th, 2024
+ *  Date: November 14th, 2024 (Last Edited)
  *  Description: This file contains the ModelHandler struct, 
  *               which is responsible for handling the uploading of .obj 
  *               model data to the GPU and storing information about the model's data.

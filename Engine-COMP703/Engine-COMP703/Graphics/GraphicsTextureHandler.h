@@ -1,7 +1,7 @@
 /*
  *  File: GraphicsTextureHandler.h
  *  Author: Alex Emeny
- *  Date: November 19th, 2024
+ *  Date: November 19th, 2024 (Last Edited)
  *  Description: This file contains the TextureHandler struct,
  *               which is responsible for generating, binding, and uploading texture data.
  */

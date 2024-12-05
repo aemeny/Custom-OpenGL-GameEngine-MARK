@@ -1,10 +1,10 @@
 /*
  *  File: Core.h
  *  Author: Alex Emeny
- *  Date: November 27th, 2024
+ *  Date: December 3rd, 2024 (Last Edited)
  *  Description: This file contains the Core struct,
  *               The core of the game engine, this struct holds the main game loop within and is vital
- *				 for the program to run. It contains references to every other entity and component in the engine.
+ *				 for the program to run. It contains references to every other module, entity and component in the engine.
  *				 This struct also handles the initialization of GLEW and SDL2.
  */
 
@@ -25,12 +25,19 @@ namespace GameEngine
 		/* Main engine game loop ticks all required engine components */
 		void run();
 
-	private:
-		/*  */
-		std::shared_ptr<InputHandler> m_inputHandler;
-		std::shared_ptr<Window> m_windowContext;
-		std::shared_ptr<Environment> m_environment;
+		/* Creates a new module, adds them to the core vector and returns for user use */
+		std::shared_ptr<Module> addModule();
 
-		bool isGameRunning;
+	private:
+		/* Object constants required for the engine to run */
+		std::shared_ptr<InputHandler> m_inputHandler; // Uses SDL to handle inputs and expose them to the engine
+		std::shared_ptr<Window> m_windowContext; // Sets up and initializes runtime window using SDL
+		std::shared_ptr<Environment> m_environment; // Handles deltatime processing
+
+		/* Vector of game entity modules which handle sections of grouped entities */
+		std::vector<std::shared_ptr<Module>> m_modules;
+
+		/* Keeps the main game loop running while true */
+		bool isGameRunning; 
 	};
 }

@@ -2,7 +2,18 @@
 
 namespace GameEngine
 {
-	Component::Component()
+	Component::Component(){}
+
+	void Component::tick()
 	{
+		onTick();
 	}
+
+	void Component::display()
+	{
+		onDisplay();
+	}
+
+	void Component::onTick() {}
+	void Component::onDisplay() {}
 }

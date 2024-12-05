@@ -1,7 +1,7 @@
 /*
  *  File: GraphicsTextureHandler.cpp
  *  Author: Alex Emeny
- *  Date: November 19th, 2024
+ *  Date: November 19th, 2024 (Last Edited)
  *  Description: This file implements the TextureHandler struct.
  *               It defines the functions for generating, binding, and uploading texture data.
  */

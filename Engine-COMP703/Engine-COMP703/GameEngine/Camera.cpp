@@ -1,3 +1,11 @@
+/*
+ *  File: Camera.cpp
+ *  Author: Alex Emeny
+ *  Date: December 3rd, 2024 (Last Edited)
+ *  Description: This file implements the methods declared in Camera.h
+ *               It implements the functions for initializing the Camera variables,
+ */
+
 #include "Camera.h"
 
 #include <stdexcept>

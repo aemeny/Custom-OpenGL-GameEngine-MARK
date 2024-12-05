@@ -1,3 +1,12 @@
+/*
+ *  File: Camera.h
+ *  Author: Alex Emeny
+ *  Date: December 3rd, 2024 (Last Edited)
+ *  Description: This file contains the Camera struct & related enums and structs,
+ *               It defines functions for initializing perspective and orthographic cameras.
+ *               This class handles returning vital matrices for both 3/2D.
+ */
+
 #pragma once
 #include "glm/gtc/matrix_transform.hpp"
 

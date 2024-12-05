@@ -1,7 +1,7 @@
 /*
  *  File: Environment.h
  *  Author: Alex Emeny
- *  Date: November 27th, 2024
+ *  Date: November 27th, 2024 (Last Edited)
  *  Description: This file contains the Environment struct,
  *               which is responsible for managing delta time within the engine.
  */

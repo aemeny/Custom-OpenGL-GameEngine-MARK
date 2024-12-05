@@ -1,7 +1,7 @@
 /*
  * File: Window.cpp
  * Author: Alex Emeny
- * Date: November 15th, 2024
+ * Date: November 15th, 2024 (Last Edited)
  * Description: This file implements the methods declared in Window.h.
  *              It defines the functions for initializing the window and creating SDL Context.
  *				Cleans up SDL with Deleting Context and Destroying Window to finally Quit SDL

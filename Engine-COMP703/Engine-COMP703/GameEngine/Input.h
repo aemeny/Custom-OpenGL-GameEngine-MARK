@@ -1,7 +1,7 @@
 /*
  * File: Input.H
  * Author: Alex Emeny
- * Date: November 21th, 2024
+ * Date: November 21th, 2024 (Last Edited)
  * Description: This file contains the InputHandler struct.
  *              It defines the functions for initializing the Input variables and checking input.
  *				This class handles holding data from the keyboard and mouse.

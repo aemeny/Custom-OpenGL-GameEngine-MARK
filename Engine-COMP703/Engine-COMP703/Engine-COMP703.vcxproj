@@ -163,6 +163,10 @@
     <ClInclude Include="Graphics\GraphicsShaderHandler.h" />
     <ClInclude Include="Graphics\GraphicsTextureHandler.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Shaders\Perspective\FragmentShader.fs" />
+    <None Include="..\Shaders\Perspective\VertexShader.vs" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
