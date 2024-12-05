@@ -1,2 +1,10 @@
-﻿  Core.cpp
-  Engine-COMP703.vcxproj -> C:\Users\AE319035\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\x64\Debug\Engine-COMP703.exe
+﻿  Component.cpp
+  Core.cpp
+  Entity.cpp
+  Environment.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Environment.cpp(26,26): warning C4244: '=': conversion from 'ULONGLONG' to 'double', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Environment.cpp(38,14): warning C4244: 'initializing': conversion from 'ULONGLONG' to 'DWORD', possible loss of data
+  Module.cpp
+  main.cpp
+  Generating Code...
+  Engine-COMP703.vcxproj -> C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\x64\Debug\Engine-COMP703.exe

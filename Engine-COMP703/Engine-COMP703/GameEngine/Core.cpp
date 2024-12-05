@@ -42,9 +42,12 @@ namespace GameEngine
 		rtn->m_inputHandler = std::make_shared<InputHandler>(rtn->m_windowContext);
 		rtn->m_environment = std::make_shared<Environment>();
 
+		/* weak reference to its self to pass to its modules */
+		rtn->m_self = rtn;
+
 		/* Ensures the engine always has a module to build upon by default */
-		rtn->m_modules.emplace_back(std::make_shared<Module>());
-		
+		rtn->addModule();
+
 		/* returns core object to main() */
 		return rtn;
 	}
@@ -83,28 +86,28 @@ namespace GameEngine
 			m_inputHandler->tick();
 
 			/* Entity tick */
-			for (std::shared_ptr<Module> module : m_modules)
+			for (size_t mi = 0; mi < m_modules.size(); ++mi)
 			{
-				module->tick();
+				m_modules.at(mi)->tick();
 			}
 
-			/* GUI tick */
-
-
 			/* Entity render */
-			for (std::shared_ptr<Module> module : m_modules)
+			for (size_t mi = 0; mi < m_modules.size(); ++mi)
 			{
-				module->display();
+				m_modules.at(mi)->display();
+			}
+
+			/* GUI render */
+			for (size_t mi = 0; mi < m_modules.size(); ++mi)
+			{
+				m_modules.at(mi)->GUIDisplay();
 			}
 
 			// TEMP ENTITY RENDERING
 			shader->bindShader(camera->getProjectionMatrix(), "u_Projection");
 			shader->renderModel(model, texture);
 
-			/* GUI render */
-
-
-			/* Escape method from window */
+			/* Built in escape method from window */
 			if (m_inputHandler->isKeyPressed(SDLK_ESCAPE))
 				isGameRunning = false;
 
@@ -120,6 +123,9 @@ namespace GameEngine
 	std::shared_ptr<Module> Core::addModule()
 	{
 		std::shared_ptr<Module> rtn = std::make_shared<Module>();
+
+		rtn->m_corePtr = m_self;
+		rtn->m_self = rtn;
 
 		/* Adds created module to vector storage in core */
 		m_modules.push_back(rtn);

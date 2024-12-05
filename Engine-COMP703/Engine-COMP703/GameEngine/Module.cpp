@@ -1,15 +1,17 @@
-#include "Module.h"
 #include "Core.h"
 
 namespace GameEngine
 {
-	Module::Module(std::weak_ptr<Core> _corePtr) : 
-		m_relativePosition(0), m_corePtr(_corePtr) {}
+	Module::Module() : m_relativePosition(0) {}
 
 	/* Creates a new Entity, adds them to the modules vector and returns for user use */
 	std::shared_ptr<Entity> Module::addEntity()
 	{
 		std::shared_ptr rtn = std::make_shared<Entity>();
+
+		/* Assign variables */
+		rtn->m_modulePtr = m_self;
+		rtn->m_self = rtn;
 
 		/* Adds created Entity to vector storage in this module */
 		m_entities.push_back(rtn);
@@ -21,22 +23,36 @@ namespace GameEngine
 	/* Loops through all Entities and calls tick on them */
 	void Module::tick()
 	{
-		for (std::shared_ptr<Entity> entity : m_entities)
+		for (size_t ei = 0; ei < m_entities.size(); ++ei)
 		{
-			entity->tick();
+			m_entities.at(ei)->tick();
 		}
 	}
 
 	/* Loops through all Entities and calls display on them */
 	void Module::display()
 	{
-		for (std::shared_ptr<Entity> entity : m_entities)
+		for (size_t ei = 0; ei < m_entities.size(); ++ei)
 		{
-			entity->display();
+			m_entities.at(ei)->display();
 		}
 	}
 
-	/* Loads and Unloads the entites within this module */
+	void Module::GUIDisplay()
+	{
+		for (size_t ei = 0; ei < m_entities.size(); ++ei)
+		{
+			m_entities.at(ei)->GUIDisplay();
+		}
+	}
+
+	/* returns deltatime from Core */
+	double Module::getDeltaTime()
+	{
+		return m_corePtr.lock()->m_environment->getDeltaTime();
+	}
+
+	/* Loads and Unloads the entities within this module */
 	void Module::load(){} /// Currently not in use
 	void Module::unload(){} /// Currently not in use
 }

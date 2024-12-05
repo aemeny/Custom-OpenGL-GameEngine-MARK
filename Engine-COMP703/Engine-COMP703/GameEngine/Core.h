@@ -13,7 +13,6 @@
 #include "Environment.h"
 #include "Input.h"
 #include "Module.h"
-#include "Camera.h"
 
 namespace GameEngine
 {
@@ -29,6 +28,8 @@ namespace GameEngine
 		std::shared_ptr<Module> addModule();
 
 	private:
+		friend Module;
+
 		/* Object constants required for the engine to run */
 		std::shared_ptr<InputHandler> m_inputHandler; // Uses SDL to handle inputs and expose them to the engine
 		std::shared_ptr<Window> m_windowContext; // Sets up and initializes runtime window using SDL
@@ -36,6 +37,9 @@ namespace GameEngine
 
 		/* Vector of game entity modules which handle sections of grouped entities */
 		std::vector<std::shared_ptr<Module>> m_modules;
+
+		/* weak reference to its self to pass to its modules */
+		std::weak_ptr<Core> m_self;
 
 		/* Keeps the main game loop running while true */
 		bool isGameRunning; 
