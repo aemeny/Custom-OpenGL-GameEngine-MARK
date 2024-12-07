@@ -1,4 +1,11 @@
-#include "Component.h"
+/*
+ *  File: Component.cpp
+ *  Author: Alex Emeny
+ *  Date: December 6th, 2024 (Last Edited)
+ *  Description: This file implements the methods declared in Component.h
+ *               It implements the functions for initializing and calling on inherited Components,
+ */
+
 #include "Core.h"
 
 namespace GameEngine
@@ -24,7 +31,12 @@ namespace GameEngine
 	/* returns deltatime from Core */
 	double Component::getDeltaTime()
 	{
-		return m_entity.lock()->getDeltaTime();
+		return m_corePtr.lock()->m_environment->getDeltaTime();
+	}
+
+	std::weak_ptr<Window> Component::getWindowFromCore()
+	{
+		return m_corePtr.lock()->m_windowContext;
 	}
 
 	/* Calls on inherited overridden initialize functions */

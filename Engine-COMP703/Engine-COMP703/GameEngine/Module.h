@@ -1,3 +1,16 @@
+/*
+ *  File: Module.h
+ *  Author: Alex Emeny
+ *  Date: December 6th, 2024 (Last Edited)
+ *  Description: This file contains the Module struct,
+ *               It defines functions for adding and calling on Entites.
+ *               This struct handles storing and managing it's Entities.
+ * 
+ *               MODULE can be seen as a modified version on Unity's "Scene" system.
+ *               This allows mass loading or unloading of areas of entities. 
+ *               It can allow multiple loaded Modules at once with relative positions.
+ */
+
 #pragma once
 #include "Entity.h"
 
@@ -16,11 +29,11 @@ namespace GameEngine
 		/* Loops through all Entities and calls tick on them */
 		void tick();
 
-		/* Loops through all Entities and calls display on them */
-		void display();
+		/* Loops through all Entities and calls render on them */
+		void render();
 
 		/* Loops through all Entities and calls GUI on them to render */
-		void GUIDisplay();
+		void GUIRender();
 
 		/* Loads and Unloads the entities within this module */
 		void load(); /// Currently not in use
@@ -30,11 +43,7 @@ namespace GameEngine
 		glm::vec3 getRelativePosition() { return m_relativePosition; }
 
 	private:
-		friend Entity;
 		friend Core;
-
-		/* returns deltatime from Core */
-		double getDeltaTime();
 
 		/* Relative position of the module of entities so they can be loaded ahead of time within the same world at different locations */
 		glm::vec3 m_relativePosition;

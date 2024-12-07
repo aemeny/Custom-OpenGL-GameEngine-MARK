@@ -1,7 +1,7 @@
 /*
  *  File: Core.h
  *  Author: Alex Emeny
- *  Date: December 3rd, 2024 (Last Edited)
+ *  Date: December 6th, 2024 (Last Edited)
  *  Description: This file contains the Core struct,
  *               The core of the game engine, this struct holds the main game loop within and is vital
  *				 for the program to run. It contains references to every other module, entity and component in the engine.
@@ -13,6 +13,7 @@
 #include "Environment.h"
 #include "Input.h"
 #include "Module.h"
+#include "Camera.h"
 
 namespace GameEngine
 {
@@ -28,7 +29,7 @@ namespace GameEngine
 		std::shared_ptr<Module> addModule();
 
 	private:
-		friend Module;
+		friend Component;
 
 		/* Object constants required for the engine to run */
 		std::shared_ptr<InputHandler> m_inputHandler; // Uses SDL to handle inputs and expose them to the engine

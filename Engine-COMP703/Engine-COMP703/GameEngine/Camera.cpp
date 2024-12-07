@@ -1,18 +1,19 @@
 /*
  *  File: Camera.cpp
  *  Author: Alex Emeny
- *  Date: December 3rd, 2024 (Last Edited)
+ *  Date: December 6th, 2024 (Last Edited)
  *  Description: This file implements the methods declared in Camera.h
  *               It implements the functions for initializing the Camera variables,
  */
 
 #include "Camera.h"
+#include "Core.h"
 
 #include <stdexcept>
 
 namespace GameEngine
 {
-    Camera::Camera(CameraProjection _projectionType, std::optional<PerspectiveParamaters> _perspectibeParams = std::nullopt)
+    void Camera::initialize(CameraProjection _projectionType, std::optional<PerspectiveParamaters> _perspectibeParams = std::nullopt)
     {
         m_cameraProjection = _projectionType;
 
@@ -23,8 +24,9 @@ namespace GameEngine
                 throw std::invalid_argument("Perspective projection camera requires Parameters (FOV, Near Plane, Far Plane).");
             }
 
+            std::weak_ptr<Window> windowContext = getWindowFromCore();
             m_projectionMatrix = glm::perspective(glm::radians(_perspectibeParams->FOV),
-                (float)(/*WINDOW WIDTH / WINDW HEIGHT*/ 800.0f / 800.0f),
+                (float)(windowContext.lock()->m_windowWidth / windowContext.lock()->m_windowHeight),
                 _perspectibeParams->nearPlane, _perspectibeParams->farPlane);
 
             // TEMP VIEW MATRIX SET UP
@@ -37,9 +39,9 @@ namespace GameEngine
                 throw std::invalid_argument("Orthographic projection camera does not use perspective parameters.");
             }
 
-            // ADD REFERENCE TO WINDOW HEIGHT / WIDH FROM CORE
-            m_projectionMatrix = glm::ortho(0.0f, /*(float)WINDOW WIDTH*/ 800.0f, //Camera width bounds
-                                            0.0f, /*(float)WINDOW HEIGHT*/800.0f, //Camera height bounds
+            std::weak_ptr<Window> windowContext = getWindowFromCore();
+            m_projectionMatrix = glm::ortho(0.0f, (float)windowContext.lock()->m_windowWidth, //Camera width bounds
+                                            0.0f, (float)windowContext.lock()->m_windowHeight, //Camera height bounds
                                             -1.0f, 1.0f); // Far/Near plane
         }
     }

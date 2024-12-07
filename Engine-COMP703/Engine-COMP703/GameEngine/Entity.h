@@ -1,8 +1,16 @@
+/*
+ *  File: Entity.h
+ *  Author: Alex Emeny
+ *  Date: December 6th, 2024 (Last Edited)
+ *  Description: This file contains the Entity struct,
+ *               It defines functions for adding, finding and calling on Components.
+ *               This struct handles storing and managing it's Components.
+ */
+
 #pragma once
 #include "Component.h"
 
 #include <vector>
-#include <optional>
 
 namespace GameEngine
 {
@@ -10,17 +18,14 @@ namespace GameEngine
 
 	struct Entity
 	{
-		/* Basic constructor as placeholder */
-		Entity();
-
 		/* Loops through all Components and calls tick on them */
 		void tick();
 
-		/* Loops through all Components and calls display on them */
-		void display();
+		/* Loops through all Components and calls render on them */
+		void render();
 
 		/* Loops through all Components and calls GUI on them to render */
-		void GUIDisplay();
+		void GUIRender();
 
 		/* Returns a Component of any type that is passed into it.
 		 * Checks through all Components within the Entity for a matching type. */
@@ -41,11 +46,12 @@ namespace GameEngine
 		 * All Components have an initialize override which is called here
 		 * in par with setting the required variables shared. */
 		template <typename T>
-		std::shared_ptr<T> addComponent()
+		std::shared_ptr<T> addComponent() 
 		{
 			std::shared_ptr<T> rtn = std::make_shared<T>();
 
 			rtn->m_entity = m_self;
+			rtn->m_corePtr = m_corePtr;
 			rtn->m_componentType = typeid(T).name();
 			rtn->initialize();
 
@@ -61,6 +67,7 @@ namespace GameEngine
 			std::shared_ptr<T> rtn = std::make_shared<T>();
 
 			rtn->m_entity = m_self;
+			rtn->m_corePtr = m_corePtr;
 			rtn->m_componentType = typeid(T).name();
 			rtn->initialize(_projectionType, _perspectibeParams);
 
@@ -70,11 +77,7 @@ namespace GameEngine
 		}
 
 	private:
-		friend Component;
 		friend Module;
-
-		/* returns deltatime from Core */
-		double getDeltaTime();
 
 		/* Vector of game components which handle all their independent functions */
 		std::vector<std::shared_ptr<Component>> m_components;
@@ -84,5 +87,8 @@ namespace GameEngine
 
 		/* Weak reference to its self to pass to its Components */
 		std::weak_ptr<Entity> m_self;
+
+		/* Weak reference to core to call for any required functions e.g. deltatime */
+		std::weak_ptr<Core> m_corePtr;
 	};
 }

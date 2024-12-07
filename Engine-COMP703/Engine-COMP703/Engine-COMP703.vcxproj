@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine\Camera.h" />
+    <ClInclude Include="GameEngine\CameraTypes.h" />
     <ClInclude Include="GameEngine\Component.h" />
     <ClInclude Include="GameEngine\Core.h" />
     <ClInclude Include="GameEngine\Entity.h" />

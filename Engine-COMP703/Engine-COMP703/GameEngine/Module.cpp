@@ -1,3 +1,15 @@
+/*
+ *  File: Module.cpp
+ *  Author: Alex Emeny
+ *  Date: December 6th, 2024 (Last Edited)
+ *  Description: This file implements the methods declared in Module.h,
+ *               It implements the functions for for adding and calling on Entites.
+ *
+ *               MODULE can be seen as a modified version on Unity's "Scene" system.
+ *               This allows mass loading or unloading of areas of entities.
+ *               It can allow multiple loaded Modules at once with relative positions.
+ */
+
 #include "Core.h"
 
 namespace GameEngine
@@ -11,6 +23,7 @@ namespace GameEngine
 
 		/* Assign variables */
 		rtn->m_modulePtr = m_self;
+		rtn->m_corePtr = m_corePtr;
 		rtn->m_self = rtn;
 
 		/* Adds created Entity to vector storage in this module */
@@ -30,26 +43,21 @@ namespace GameEngine
 	}
 
 	/* Loops through all Entities and calls display on them */
-	void Module::display()
+	void Module::render()
 	{
 		for (size_t ei = 0; ei < m_entities.size(); ++ei)
 		{
-			m_entities.at(ei)->display();
+			m_entities.at(ei)->render();
 		}
 	}
 
-	void Module::GUIDisplay()
+	/* Loops through all Entities and calls GUI on them to render */
+	void Module::GUIRender()
 	{
 		for (size_t ei = 0; ei < m_entities.size(); ++ei)
 		{
-			m_entities.at(ei)->GUIDisplay();
+			m_entities.at(ei)->GUIRender();
 		}
-	}
-
-	/* returns deltatime from Core */
-	double Module::getDeltaTime()
-	{
-		return m_corePtr.lock()->m_environment->getDeltaTime();
 	}
 
 	/* Loads and Unloads the entities within this module */

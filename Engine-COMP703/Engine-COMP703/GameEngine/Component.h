@@ -1,13 +1,25 @@
-#pragma once
-#include "Camera.h"
+/*
+ *  File: Component.h
+ *  Author: Alex Emeny
+ *  Date: December 6th, 2024 (Last Edited)
+ *  Description: This file contains the Component struct,
+ *               It defines functions for initializing and calling on inherited Components.
+ *               This struct is a parent for any Component that will be added to an Entity.
+ */
 
-#include <glm/glm.hpp>
+#pragma once
+#include "CameraTypes.h"
+
 #include <memory>
 #include <string>
+#include <optional>
 
 namespace GameEngine
 {
 	struct Entity;
+	struct Core;
+	struct Camera;
+	struct Window;
 
 	struct Component
 	{
@@ -17,14 +29,14 @@ namespace GameEngine
 		void display();
 		/* Calls the override function onGUIRender() for all child components */
 		void GUIRender();
-		
+
 		/* Holds the name of a child component type */
 		std::string m_componentType;
 	private:
 		friend Entity;
 
-		/* Object reference to the parent entity */
-		std::weak_ptr<Entity> m_entity;
+		/* Weak reference to core to call for any required functions e.g. deltatime */
+		std::weak_ptr<Core> m_corePtr;
 
 		/* Calls on inherited overridden initialize functions */
 		virtual void initialize();
@@ -40,7 +52,14 @@ namespace GameEngine
 		/* Calls on inherited overridden GUI render functions */
 		virtual void onGUIRender();
 
+	protected:
 		/* returns deltatime from Core */
 		double getDeltaTime();
+
+		/* returns Window handler from Core */
+		std::weak_ptr<Window> getWindowFromCore();
+
+		/* Object reference to the parent entity */
+		std::weak_ptr<Entity> m_entity;
 	};
 }

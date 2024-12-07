@@ -67,8 +67,8 @@ namespace GameEngine
 		std::shared_ptr<GraphicsRenderer::TextureHandler> texture =
 			std::make_shared<GraphicsRenderer::TextureHandler>("../Samples/Textures/Curuthers/Curuthers.png");
 
-		std::shared_ptr<Camera> camera = std::make_shared<Camera>(
-			CameraProjection::Perspective, PerspectiveParamaters{60.0f, 0.1f, 100.0f});
+		//std::shared_ptr<Camera> camera = std::make_shared<Camera>(
+		//	CameraProjection::Perspective, PerspectiveParamaters{60.0f, 0.1f, 100.0f});
 
 
 		while (isGameRunning)
@@ -94,17 +94,17 @@ namespace GameEngine
 			/* Entity render */
 			for (size_t mi = 0; mi < m_modules.size(); ++mi)
 			{
-				m_modules.at(mi)->display();
+				m_modules.at(mi)->render();
 			}
 
 			/* GUI render */
 			for (size_t mi = 0; mi < m_modules.size(); ++mi)
 			{
-				m_modules.at(mi)->GUIDisplay();
+				m_modules.at(mi)->GUIRender();
 			}
 
 			// TEMP ENTITY RENDERING
-			shader->bindShader(camera->getProjectionMatrix(), "u_Projection");
+			//shader->bindShader(camera->getProjectionMatrix(), "u_Projection");
 			shader->renderModel(model, texture);
 
 			/* Built in escape method from window */
