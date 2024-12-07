@@ -48,7 +48,7 @@ namespace GameEngine
 		/* Ensures the engine always has a module to build upon by default */
 		rtn->addModule();
 
-		/* returns core object to main() */
+		/* Returns core object to main() */
 		return rtn;
 	}
 
@@ -67,16 +67,16 @@ namespace GameEngine
 		std::shared_ptr<GraphicsRenderer::TextureHandler> texture =
 			std::make_shared<GraphicsRenderer::TextureHandler>("../Samples/Textures/Curuthers/Curuthers.png");
 
-		//std::shared_ptr<Camera> camera = std::make_shared<Camera>(
-		//	CameraProjection::Perspective, PerspectiveParamaters{60.0f, 0.1f, 100.0f});
+		std::shared_ptr<Entity> cameraEntity = m_modules.at(0)->addEntity();
+		std::shared_ptr<Camera> cameraComponent = cameraEntity->addComponent<Camera>(CameraProjection::Perspective, PerspectiveParamaters{ 60.0f, 0.1f, 100.0f });
 
 
 		while (isGameRunning)
 		{
-			//Clear depth buffer
+			/* Clear depth buffer */
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			//draw background
+			/* Draw background */
 			glClearColor(0.42f, 0.5f, 0.68f, 1.0f);
 
 			/* Tick environment for delta time */
@@ -104,7 +104,7 @@ namespace GameEngine
 			}
 
 			// TEMP ENTITY RENDERING
-			//shader->bindShader(camera->getProjectionMatrix(), "u_Projection");
+			shader->bindShader(cameraComponent->getProjectionMatrix(), "u_Projection");
 			shader->renderModel(model, texture);
 
 			/* Built in escape method from window */

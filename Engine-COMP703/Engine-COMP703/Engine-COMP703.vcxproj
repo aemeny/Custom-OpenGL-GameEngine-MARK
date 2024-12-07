@@ -142,6 +142,7 @@
     <ClCompile Include="GameEngine\Environment.cpp" />
     <ClCompile Include="GameEngine\Input.cpp" />
     <ClCompile Include="GameEngine\Module.cpp" />
+    <ClCompile Include="GameEngine\Transform.cpp" />
     <ClCompile Include="GameEngine\Window.cpp" />
     <ClCompile Include="GameProject\main.cpp" />
     <ClCompile Include="Graphics\GraphicsModelHandler.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="GameEngine\GameEngineMasterHeader.h" />
     <ClInclude Include="GameEngine\Input.h" />
     <ClInclude Include="GameEngine\Module.h" />
+    <ClInclude Include="GameEngine\Transform.h" />
     <ClInclude Include="GameEngine\Window.h" />
     <ClInclude Include="Graphics\GraphicsMasterHeader.h" />
     <ClInclude Include="Graphics\GraphicsModelHandler.h" />

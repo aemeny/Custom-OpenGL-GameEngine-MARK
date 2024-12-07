@@ -11,6 +11,7 @@
  */
 
 #include "Core.h"
+#include "Transform.h"
 
 namespace GameEngine
 {
@@ -25,6 +26,9 @@ namespace GameEngine
 		rtn->m_modulePtr = m_self;
 		rtn->m_corePtr = m_corePtr;
 		rtn->m_self = rtn;
+
+		/* Each Entity starts with a Transform Component */
+		rtn->addComponent<Transform>();
 
 		/* Adds created Entity to vector storage in this module */
 		m_entities.push_back(rtn);

@@ -12,16 +12,16 @@
 #include "Component.h"
 #include "glm/gtc/matrix_transform.hpp"
 
-
 namespace GameEngine
 {
     struct Camera : Component
     {
         void initialize(CameraProjection _projectionType, std::optional<PerspectiveParamaters> _perspectibeParams) override;
-        
+
         glm::mat4 getProjectionMatrix() { return m_projectionMatrix; }
         glm::mat4 getViewingMatrix() { return m_viewingMatrix; } // MAKE USE OF ----------------
     private:
+        /* Contains type Perspective or Orthographic */
         CameraProjection m_cameraProjection;
 
         glm::mat4 m_projectionMatrix;

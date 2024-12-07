@@ -25,7 +25,7 @@ namespace GameEngine
 	/* Calls the override function onGUIRender() for all child components */
 	void Component::GUIRender()
 	{
-		onDisplay();
+		onGUIRender();
 	}
 
 	/* returns deltatime from Core */
