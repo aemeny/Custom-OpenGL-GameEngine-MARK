@@ -8,6 +8,8 @@
  */
 
 #pragma once
+#include "../Graphics/GraphicsMasterHeader.h"
+#include <memory>
 #include <string>
 
 namespace GameEngine

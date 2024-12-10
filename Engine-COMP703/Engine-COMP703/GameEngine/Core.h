@@ -28,6 +28,7 @@ namespace GameEngine
 		/* Creates a new module, adds them to the core vector and returns for user use */
 		std::shared_ptr<Module> addModule();
 
+		std::weak_ptr<Camera> m_mainCamera;
 	private:
 		friend Component;
 
@@ -38,6 +39,8 @@ namespace GameEngine
 
 		/* Vector of game entity modules which handle sections of grouped entities */
 		std::vector<std::shared_ptr<Module>> m_modules;
+
+		std::vector<std::weak_ptr<Camera>> m_cameras;
 
 		/* weak reference to its self to pass to its modules */
 		std::weak_ptr<Core> m_self;

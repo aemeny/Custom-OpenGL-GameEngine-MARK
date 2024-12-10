@@ -141,7 +141,12 @@
     <ClCompile Include="GameEngine\Entity.cpp" />
     <ClCompile Include="GameEngine\Environment.cpp" />
     <ClCompile Include="GameEngine\Input.cpp" />
+    <ClCompile Include="GameEngine\ModelHandler.cpp" />
+    <ClCompile Include="GameEngine\ModelResource.cpp" />
     <ClCompile Include="GameEngine\Module.cpp" />
+    <ClCompile Include="GameEngine\ResourceParent.cpp" />
+    <ClCompile Include="GameEngine\ShaderResource.cpp" />
+    <ClCompile Include="GameEngine\TextureResource.cpp" />
     <ClCompile Include="GameEngine\Transform.cpp" />
     <ClCompile Include="GameEngine\Window.cpp" />
     <ClCompile Include="GameProject\main.cpp" />
@@ -158,7 +163,13 @@
     <ClInclude Include="GameEngine\Environment.h" />
     <ClInclude Include="GameEngine\GameEngineMasterHeader.h" />
     <ClInclude Include="GameEngine\Input.h" />
+    <ClInclude Include="GameEngine\ModelHandler.h" />
+    <ClInclude Include="GameEngine\ModelResource.h" />
     <ClInclude Include="GameEngine\Module.h" />
+    <ClInclude Include="GameEngine\ResourceParent.h" />
+    <ClInclude Include="GameEngine\Resources.h" />
+    <ClInclude Include="GameEngine\ShaderResource.h" />
+    <ClInclude Include="GameEngine\TextureResource.h" />
     <ClInclude Include="GameEngine\Transform.h" />
     <ClInclude Include="GameEngine\Window.h" />
     <ClInclude Include="Graphics\GraphicsMasterHeader.h" />
