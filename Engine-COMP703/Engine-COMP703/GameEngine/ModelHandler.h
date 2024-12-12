@@ -2,8 +2,25 @@
 #include "Component.h"
 #include "TextureResource.h"
 #include "ModelResource.h"
+#include "ShaderResource.h"
 
 namespace GameEngine
 {
+    struct ModelHandler : Component
+    {
+        void onDisplay() override;
 
+        /* Loads the Graphics Renderer's ModelHandler resource */
+        void setModel(std::string _modelFileAddress);
+        /* Loads the Graphics Renderer's TextureHandler resource */
+        void setTexture(std::string _textureFileAddress);
+        /* Loads the Graphics Renderer's ShaderHandler resource */
+        void setShaders(std::string _vertShaderFileAddress, std::string _fragShaderFileAddress);
+
+    private:
+        /* Pointer references */
+        std::shared_ptr<GraphicsRenderer::ModelHandler> m_model;
+        std::shared_ptr<GraphicsRenderer::TextureHandler> m_texture;
+        std::shared_ptr<GraphicsRenderer::ShaderHandler> m_shader;
+    };
 }

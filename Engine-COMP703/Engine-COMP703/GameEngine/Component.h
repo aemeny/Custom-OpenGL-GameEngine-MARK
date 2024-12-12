@@ -24,6 +24,13 @@ namespace GameEngine
 
 	struct Component
 	{
+		/* Holds the name of a child component type */
+		std::string m_componentType;
+
+	private:
+		friend Entity;
+		friend Core;
+
 		/* Calls the override function onTick() for all child components */
 		void tick();
 		/* Calls the override function onDisplay() for all child components */
@@ -31,34 +38,30 @@ namespace GameEngine
 		/* Calls the override function onGUIRender() for all child components */
 		void GUIRender();
 
-		/* Holds the name of a child component type */
-		std::string m_componentType;
-	private:
-		friend Entity;
+		/* Calls on inherited overridden initialize functions */
+		virtual void initialize();
+		/* Calls on inherited overridden initialize function for the Camera */
+		virtual void initialize(CameraProjection _projectionType, std::weak_ptr<Camera> _selfPtr, std::optional<PerspectiveParamaters> _perspectibeParams);
+
+		/* Calls on inherited overridden tick functions */
+		virtual void onTick();
+		/* Calls on inherited overridden display functions */
+		virtual void onDisplay();
+		/* Calls on inherited overridden GUI render functions */
+		virtual void onGUIRender();
 
 		/* Weak reference to core to call for any required functions e.g. deltatime */
 		std::weak_ptr<Core> m_corePtr;
 
-		/* Calls on inherited overridden initialize functions */
-		virtual void initialize();
-		/* Calls on inherited overridden initialize function for the Camera */
-		virtual void initialize(CameraProjection _projectionType, std::optional<PerspectiveParamaters> _perspectibeParams);
-
-		/* Calls on inherited overridden tick functions */
-		virtual void onTick();
-
-		/* Calls on inherited overridden display functions */
-		virtual void onDisplay();
-
-		/* Calls on inherited overridden GUI render functions */
-		virtual void onGUIRender();
-
 	protected:
-		/* returns deltatime from Core */
+		/* Returns deltatime from Core */
 		double getDeltaTime();
 
-		/* returns Window handler from Core */
+		/* Returns Window handler from Core */
 		std::weak_ptr<Window> getWindowFromCore();
+
+		/* Sets main camera in core as passed camera pointer */
+		void setCameraAsMainProt(std::weak_ptr<Camera> _camPtr);
 
 		/* Object reference to the parent entity */
 		std::weak_ptr<Entity> m_entity;

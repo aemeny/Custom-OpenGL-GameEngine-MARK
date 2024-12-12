@@ -9,6 +9,8 @@
 
 #include "Core.h"
 
+#include "ModelHandler.h" // TEMP ----------------------------------------
+
 namespace GameEngine
 {
 	/* Initializes essential libraries for the engine to run */
@@ -41,6 +43,7 @@ namespace GameEngine
 		/* Object variables Initialize */
 		rtn->m_inputHandler = std::make_shared<InputHandler>(rtn->m_windowContext);
 		rtn->m_environment = std::make_shared<Environment>();
+		rtn->m_resources = std::make_shared<Resources>();
 
 		/* weak reference to its self to pass to its modules */
 		rtn->m_self = rtn;
@@ -58,17 +61,14 @@ namespace GameEngine
 		isGameRunning = true;
 
 		// TEMP MODEL LOADING FOR TESTING
-		std::shared_ptr<GraphicsRenderer::ModelHandler> model =
-			std::make_shared<GraphicsRenderer::ModelHandler>("../Samples/Models/Curuthers/Curuthers.obj");
-
-		std::shared_ptr<GraphicsRenderer::ShaderHandler> shader =
-			std::make_shared<GraphicsRenderer::ShaderHandler>("../Shaders/Perspective/VertexShader.vs", "../Shaders/Perspective/FragmentShader.fs");
-
-		std::shared_ptr<GraphicsRenderer::TextureHandler> texture =
-			std::make_shared<GraphicsRenderer::TextureHandler>("../Samples/Textures/Curuthers/Curuthers.png");
-
 		std::shared_ptr<Entity> cameraEntity = m_modules.at(0)->addEntity();
 		std::shared_ptr<Camera> cameraComponent = cameraEntity->addComponent<Camera>(CameraProjection::Perspective, PerspectiveParamaters{ 60.0f, 0.1f, 100.0f });
+
+		std::shared_ptr<Entity> characterEntity = m_modules.at(0)->addEntity();
+		std::shared_ptr<ModelHandler> modelHandlerComponent = characterEntity->addComponent<ModelHandler>();
+		modelHandlerComponent->setModel("Curuthers/Curuthers.obj");
+		modelHandlerComponent->setTexture("Curuthers/Curuthers.png");
+		modelHandlerComponent->setShaders("Perspective/VertexShader.glsl", "Perspective/FragmentShader.glsl");
 
 
 		while (isGameRunning)
@@ -94,22 +94,23 @@ namespace GameEngine
 			/* Entity render */
 			for (size_t ci = 0; ci < m_cameras.size(); ++ci)
 			{
-				m_activeRenderingCamera = m_cameras.at(ci);
-				for (size_t mi = 0; mi < m_modules.size(); ++mi)
+				/* Only render with the camera if th entity it is within is active */
+				if (m_cameras.at(ci).lock()->m_entity.lock()->getActiveStatus())
 				{
-					m_modules.at(mi)->render();
+					m_activeRenderingCamera = m_cameras.at(ci);
+					for (size_t mi = 0; mi < m_modules.size(); ++mi)
+					{
+						m_modules.at(mi)->render();
+					}
 				}
 			}
 
 			/* GUI render */
+			m_activeRenderingCamera = m_mainCamera; // Only main camera renders GUI
 			for (size_t mi = 0; mi < m_modules.size(); ++mi)
 			{
 				m_modules.at(mi)->GUIRender();
 			}
-
-			// TEMP ENTITY RENDERING
-			shader->bindShader(cameraComponent->getProjectionMatrix(), "u_Projection");
-			shader->renderModel(model, texture);
 
 			/* Built in escape method from window */
 			if (m_inputHandler->isKeyPressed(SDLK_ESCAPE))

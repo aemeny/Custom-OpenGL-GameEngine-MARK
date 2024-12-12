@@ -34,16 +34,23 @@ namespace GameEngine
 		return m_corePtr.lock()->m_environment->getDeltaTime();
 	}
 
+	/* Returns Window handler from Core */
 	std::weak_ptr<Window> Component::getWindowFromCore()
 	{
 		return m_corePtr.lock()->m_windowContext;
+	}
+
+	/* Sets main camera in core as passed camera pointer */
+	void Component::setCameraAsMainProt(std::weak_ptr<Camera> _camPtr)
+	{
+		m_corePtr.lock()->m_mainCamera = _camPtr;
 	}
 
 	/* Calls on inherited overridden initialize functions */
 	void Component::initialize(){}
 
 	/* Calls on inherited overridden initialize function for the Camera */
-	void Component::initialize(CameraProjection _projectionType, std::optional<PerspectiveParamaters> _perspectibeParams = std::nullopt){}
+	void Component::initialize(CameraProjection _projectionType, std::weak_ptr<Camera> _selfPtr, std::optional<PerspectiveParamaters> _perspectibeParams = std::nullopt){}
 
 	/* Calls on inherited overridden tick functions */
 	void Component::onTick(){}

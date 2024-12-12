@@ -13,8 +13,9 @@
 
 namespace GameEngine
 {
-    void Camera::initialize(CameraProjection _projectionType, std::optional<PerspectiveParamaters> _perspectibeParams = std::nullopt)
+    void Camera::initialize(CameraProjection _projectionType, std::weak_ptr<Camera> _selfPtr, std::optional<PerspectiveParamaters> _perspectibeParams = std::nullopt)
     {
+        m_self = _selfPtr;
         m_cameraProjection = _projectionType;
 
         if (_projectionType == CameraProjection::Perspective)

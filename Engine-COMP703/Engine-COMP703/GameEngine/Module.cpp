@@ -15,8 +15,6 @@
 
 namespace GameEngine
 {
-	Module::Module() : m_relativePosition(0) {}
-
 	/* Creates a new Entity, adds them to the modules vector and returns for user use */
 	std::shared_ptr<Entity> Module::addEntity()
 	{
@@ -26,6 +24,7 @@ namespace GameEngine
 		rtn->m_modulePtr = m_self;
 		rtn->m_corePtr = m_corePtr;
 		rtn->m_self = rtn;
+		rtn->m_active = true;
 
 		/* Each Entity starts with a Transform Component */
 		rtn->addComponent<Transform>();
@@ -42,7 +41,10 @@ namespace GameEngine
 	{
 		for (size_t ei = 0; ei < m_entities.size(); ++ei)
 		{
-			m_entities.at(ei)->tick();
+			if (m_entities.at(ei)->getActiveStatus())
+			{
+				m_entities.at(ei)->tick();
+			}
 		}
 	}
 
@@ -51,7 +53,10 @@ namespace GameEngine
 	{
 		for (size_t ei = 0; ei < m_entities.size(); ++ei)
 		{
-			m_entities.at(ei)->render();
+			if (m_entities.at(ei)->getActiveStatus())
+			{
+				m_entities.at(ei)->render();
+			}
 		}
 	}
 
@@ -60,7 +65,10 @@ namespace GameEngine
 	{
 		for (size_t ei = 0; ei < m_entities.size(); ++ei)
 		{
-			m_entities.at(ei)->GUIRender();
+			if (m_entities.at(ei)->getActiveStatus())
+			{
+				m_entities.at(ei)->GUIRender();
+			}
 		}
 	}
 

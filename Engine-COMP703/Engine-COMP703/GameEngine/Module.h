@@ -20,11 +20,14 @@ namespace GameEngine
 
 	struct Module
 	{
-		/* Basic constructor that passes a pointer to the engines core */
-		Module();
-
 		/* Creates a new Entity, adds them to the modules vector and returns for user use */
 		std::shared_ptr<Entity> addEntity();
+
+		void setRelativePosition(glm::vec3 _newPos) { m_relativePosition = _newPos; }
+		glm::vec3 getRelativePosition() { return m_relativePosition; }
+
+	private:
+		friend Core;
 
 		/* Loops through all Entities and calls tick on them */
 		void tick();
@@ -38,12 +41,6 @@ namespace GameEngine
 		/* Loads and Unloads the entities within this module */
 		void load(); /// Currently not in use
 		void unload(); /// Currently not in use
-
-		void setRelativePosition(glm::vec3 _newPos) { m_relativePosition = _newPos; }
-		glm::vec3 getRelativePosition() { return m_relativePosition; }
-
-	private:
-		friend Core;
 
 		/* Relative position of the module of entities so they can be loaded ahead of time within the same world at different locations */
 		glm::vec3 m_relativePosition;

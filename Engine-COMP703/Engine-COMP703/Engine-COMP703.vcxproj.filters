@@ -166,10 +166,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Shaders\Perspective\FragmentShader.fs">
+    <None Include="..\Shaders\Perspective\FragmentShader.glsl">
       <Filter>Shaders\Perspective</Filter>
     </None>
-    <None Include="..\Shaders\Perspective\VertexShader.vs">
+    <None Include="..\Shaders\Perspective\VertexShader.glsl">
       <Filter>Shaders\Perspective</Filter>
     </None>
   </ItemGroup>

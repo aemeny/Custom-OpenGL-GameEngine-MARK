@@ -14,15 +14,22 @@
 
 namespace GameEngine
 {
+    struct Core;
     struct Camera : Component
     {
-        void initialize(CameraProjection _projectionType, std::optional<PerspectiveParamaters> _perspectibeParams) override;
-
+        void initialize(CameraProjection _projectionType, std::weak_ptr<Camera> _selfPtr, std::optional<PerspectiveParamaters> _perspectibeParams) override;
+        
         glm::mat4 getProjectionMatrix() { return m_projectionMatrix; }
-        glm::mat4 getViewingMatrix() { return m_viewingMatrix; } // MAKE USE OF ----------------
+        glm::mat4 getViewingMatrix() { return m_viewingMatrix; }
+    
+        /* Sets main camera in core as passed camera pointer */
+        void setCameraAsMain() { setCameraAsMainProt(m_self); }
     private:
         /* Contains type Perspective or Orthographic */
         CameraProjection m_cameraProjection;
+
+        /* Weak pointer to itself when needed to be passed */
+        std::weak_ptr<Camera> m_self;
 
         glm::mat4 m_projectionMatrix;
         glm::mat4 m_viewingMatrix;

@@ -4,6 +4,7 @@ attribute vec3 a_Position;
 attribute vec2 a_TexCoord;
 
 uniform mat4 u_Projection;
+uniform mat4 u_Viewing;
 
 varying vec2 v_TexCoord;
 //varying vec3 v_Normal;

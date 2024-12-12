@@ -19,14 +19,9 @@ namespace GameEngine
 
 	struct Entity
 	{
-		/* Loops through all Components and calls tick on them */
-		void tick();
-
-		/* Loops through all Components and calls render on them */
-		void render();
-
-		/* Loops through all Components and calls GUI on them to render */
-		void GUIRender();
+		/* Setter and getter for the active status of this entity */
+		bool getActiveStatus() { return m_active; }
+		void setActiveStatus(bool _active) { m_active = _active; }
 
 		/* Returns a Component of any type that is passed into it.
 		 * Checks through all Components within the Entity for a matching type. */
@@ -54,11 +49,13 @@ namespace GameEngine
 
 			std::shared_ptr<T> rtn = std::make_shared<T>();
 
+			/* Objects variables Initialize */
 			rtn->m_entity = m_self;
 			rtn->m_corePtr = m_corePtr;
 			rtn->m_componentType = typeid(T).name();
 			rtn->initialize();
 
+			/* Adds new Component to list of components */
 			m_components.push_back(rtn);
 
 			return rtn;
@@ -70,12 +67,15 @@ namespace GameEngine
 		{
 			std::shared_ptr<T> rtn = std::make_shared<T>();
 
+			/* Objects variables Initialize */
 			rtn->m_entity = m_self;
 			rtn->m_corePtr = m_corePtr;
 			rtn->m_componentType = typeid(T).name();
-			rtn->initialize(_projectionType, _perspectibeParams);
+			rtn->initialize(_projectionType, rtn, _perspectibeParams);
 
+			/* Adds Camera to list of components */
 			m_components.push_back(rtn);
+
 			/* Add the new camera as a weak ref in core */
 			m_corePtr.lock()->m_cameras.push_back(rtn);
 
@@ -84,6 +84,20 @@ namespace GameEngine
 
 	private:
 		friend Module;
+		friend Camera;
+		friend struct ModelHandler;
+
+		/* Loops through all Components and calls tick on them */
+		void tick();
+
+		/* Loops through all Components and calls render on them */
+		void render();
+
+		/* Loops through all Components and calls GUI on them to render */
+		void GUIRender();
+
+		/* If the entity is active, deactivated entities won't call render or tick */
+		bool m_active;
 
 		/* Vector of game components which handle all their independent functions */
 		std::vector<std::shared_ptr<Component>> m_components;
