@@ -30,8 +30,8 @@ namespace GameEngine
                 (float)(windowContext.lock()->m_windowWidth / windowContext.lock()->m_windowHeight),
                 _perspectibeParams->nearPlane, _perspectibeParams->farPlane);
 
-            // TEMP VIEW MATRIX SET UP
-            m_viewingMatrix = glm::lookAt(glm::vec3(0.0f), glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Camera pos, Center, Up direction
+            /* Default viewing matrix set for camera */
+            m_viewingMatrix = glm::lookAt(glm::vec3(0.0f), glm::vec3(0.0f, 0.0f, -100.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Camera pos, Center, Up direction
         }
         else if(_projectionType == CameraProjection::Orthographic)
         {

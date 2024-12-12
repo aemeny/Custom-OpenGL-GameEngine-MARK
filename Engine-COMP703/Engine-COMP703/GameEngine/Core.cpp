@@ -10,6 +10,7 @@
 #include "Core.h"
 
 #include "ModelHandler.h" // TEMP ----------------------------------------
+#include "Transform.h"    // TEMP ----------------------------------------
 
 namespace GameEngine
 {
@@ -65,6 +66,7 @@ namespace GameEngine
 		std::shared_ptr<Camera> cameraComponent = cameraEntity->addComponent<Camera>(CameraProjection::Perspective, PerspectiveParamaters{ 60.0f, 0.1f, 100.0f });
 
 		std::shared_ptr<Entity> characterEntity = m_modules.at(0)->addEntity();
+		characterEntity->addComponent<Transform>();
 		std::shared_ptr<ModelHandler> modelHandlerComponent = characterEntity->addComponent<ModelHandler>();
 		modelHandlerComponent->setModel("Curuthers/Curuthers.obj");
 		modelHandlerComponent->setTexture("Curuthers/Curuthers.png");
