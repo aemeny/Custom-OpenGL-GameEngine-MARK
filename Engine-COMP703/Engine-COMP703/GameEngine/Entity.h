@@ -11,6 +11,7 @@
 #include "Component.h"
 
 #include <vector>
+#include <stdexcept>
 
 namespace GameEngine
 {
@@ -48,6 +49,9 @@ namespace GameEngine
 		template <typename T>
 		std::shared_ptr<T> addComponent() 
 		{
+			if (typeid(T).name() == "Camera")
+				throw std::invalid_argument("Camera type should call addComponent(CameraProjection)");
+
 			std::shared_ptr<T> rtn = std::make_shared<T>();
 
 			rtn->m_entity = m_self;
@@ -72,6 +76,8 @@ namespace GameEngine
 			rtn->initialize(_projectionType, _perspectibeParams);
 
 			m_components.push_back(rtn);
+			/* Add the new camera as a weak ref in core */
+			m_corePtr.lock()->m_cameras.push_back(rtn);
 
 			return rtn;
 		}

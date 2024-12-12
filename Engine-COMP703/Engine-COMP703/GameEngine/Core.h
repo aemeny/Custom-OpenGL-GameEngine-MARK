@@ -28,9 +28,9 @@ namespace GameEngine
 		/* Creates a new module, adds them to the core vector and returns for user use */
 		std::shared_ptr<Module> addModule();
 
-		std::weak_ptr<Camera> m_mainCamera;
 	private:
 		friend Component;
+		friend Entity;
 
 		/* Object constants required for the engine to run */
 		std::shared_ptr<InputHandler> m_inputHandler; // Uses SDL to handle inputs and expose them to the engine
@@ -40,7 +40,12 @@ namespace GameEngine
 		/* Vector of game entity modules which handle sections of grouped entities */
 		std::vector<std::shared_ptr<Module>> m_modules;
 
+		/* List of all created cameras within the engine */
 		std::vector<std::weak_ptr<Camera>> m_cameras;
+		/* Current rendering camera passed as a weak ref to model renderers */
+		std::weak_ptr<Camera> m_activeRenderingCamera;
+		/* Main camera set to render GUI */
+		std::weak_ptr<Camera> m_mainCamera;
 
 		/* weak reference to its self to pass to its modules */
 		std::weak_ptr<Core> m_self;

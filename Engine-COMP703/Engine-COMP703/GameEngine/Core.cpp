@@ -92,9 +92,13 @@ namespace GameEngine
 			}
 
 			/* Entity render */
-			for (size_t mi = 0; mi < m_modules.size(); ++mi)
+			for (size_t ci = 0; ci < m_cameras.size(); ++ci)
 			{
-				m_modules.at(mi)->render();
+				m_activeRenderingCamera = m_cameras.at(ci);
+				for (size_t mi = 0; mi < m_modules.size(); ++mi)
+				{
+					m_modules.at(mi)->render();
+				}
 			}
 
 			/* GUI render */

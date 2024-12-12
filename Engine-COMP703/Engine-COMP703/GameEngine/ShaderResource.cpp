@@ -14,7 +14,7 @@ namespace GameEngine
      * stored in the Resource parent */
     void ShaderResource::onLoad()
     {
-        m_Shader = std::make_shared<GraphicsRenderer::ShaderHandler>(getfileAddress().c_str());
+        m_Shader = std::make_shared<GraphicsRenderer::ShaderHandler>(getfileAddress().c_str(), getfileAddress2().c_str());
     }
 
     /* Returns Shader Handler struct */

@@ -1,7 +1,8 @@
 ﻿  Camera.cpp
   Component.cpp
   Core.cpp
+  Entity.cpp
   Module.cpp
   main.cpp
   Generating Code...
-  Engine-COMP703.vcxproj -> C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\x64\Debug\Engine-COMP703.exe
+  Engine-COMP703.vcxproj -> C:\Users\AE319035\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\x64\Debug\Engine-COMP703.exe
