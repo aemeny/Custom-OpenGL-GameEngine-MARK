@@ -1,7 +1,7 @@
 /*
  *  File: Entity.h
  *  Author: Alex Emeny
- *  Date: December 6th, 2024 (Last Edited)
+ *  Date: December 17th, 2024 (Last Edited)
  *  Description: This file contains the Entity struct,
  *               It defines functions for adding, finding and calling on Components.
  *               This struct handles storing and managing it's Components.
@@ -16,6 +16,7 @@
 namespace GameEngine
 {
 	struct Module;
+	struct Transform;
 
 	struct Entity
 	{
@@ -85,6 +86,7 @@ namespace GameEngine
 	private:
 		friend Module;
 		friend Camera;
+		friend Component;
 		friend struct ModelHandler;
 
 		/* Loops through all Components and calls tick on them */
@@ -110,5 +112,8 @@ namespace GameEngine
 
 		/* Weak reference to core to call for any required functions e.g. deltatime */
 		std::weak_ptr<Core> m_corePtr;
+
+		/* Weak reference to its assigned transform component to return to its Components */
+		std::weak_ptr<Transform> m_transformPtr;
 	};
 }

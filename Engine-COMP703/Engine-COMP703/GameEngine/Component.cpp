@@ -40,6 +40,12 @@ namespace GameEngine
 		return m_corePtr.lock()->m_windowContext;
 	}
 
+	/* Returns a Weak reference to the entities assigned transform component */
+	std::weak_ptr<Transform> Component::getEntityTransform()
+	{
+		return m_entity.lock()->m_transformPtr;
+	}
+
 	/* Sets main camera in core as passed camera pointer */
 	void Component::setCameraAsMainProt(std::weak_ptr<Camera> _camPtr)
 	{

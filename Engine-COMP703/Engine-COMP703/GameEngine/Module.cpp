@@ -1,9 +1,9 @@
 /*
  *  File: Module.cpp
  *  Author: Alex Emeny
- *  Date: December 6th, 2024 (Last Edited)
+ *  Date: December 17th, 2024 (Last Edited)
  *  Description: This file implements the methods declared in Module.h,
- *               It implements the functions for for adding and calling on Entites.
+ *               It implements the functions for for adding and calling on Entities.
  *
  *               MODULE can be seen as a modified version on Unity's "Scene" system.
  *               This allows mass loading or unloading of areas of entities.
@@ -27,7 +27,7 @@ namespace GameEngine
 		rtn->m_active = true;
 
 		/* Each Entity starts with a Transform Component */
-		rtn->addComponent<Transform>();
+		rtn->m_transformPtr = rtn->addComponent<Transform>();
 
 		/* Adds created Entity to vector storage in this module */
 		m_entities.push_back(rtn);

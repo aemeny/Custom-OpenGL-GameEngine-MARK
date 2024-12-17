@@ -3,6 +3,7 @@
 // Matrices
 uniform mat4 u_Projection;
 uniform mat4 u_Viewing;
+uniform mat4 u_Model;
 
 // Passed Attributes
 attribute vec3 a_Position;
@@ -16,7 +17,7 @@ varying vec3 v_FragPos;
 
 void main()
 {
-    gl_Position = u_Projection * u_Viewing * vec4(a_Position.x, a_Position.y, a_Position.z - 10.0, 1.0);
+    gl_Position = u_Projection * u_Viewing * u_Model * vec4(a_Position, 1.0);
     
     v_TexCoord = a_TexCoord;
     v_Normal = normalize(mat3(1.0) * a_Normal); // REPLACE 1.0 in mat3() -> u_Model

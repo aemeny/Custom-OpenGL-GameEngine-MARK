@@ -66,12 +66,12 @@ namespace GameEngine
 		std::shared_ptr<Camera> cameraComponent = cameraEntity->addComponent<Camera>(CameraProjection::Perspective, PerspectiveParamaters{ 60.0f, 0.1f, 100.0f });
 
 		std::shared_ptr<Entity> characterEntity = m_modules.at(0)->addEntity();
-		characterEntity->addComponent<Transform>();
 		std::shared_ptr<ModelHandler> modelHandlerComponent = characterEntity->addComponent<ModelHandler>();
 		modelHandlerComponent->setModel("Curuthers/Curuthers.obj");
 		modelHandlerComponent->setTexture("Curuthers/Curuthers.png");
 		modelHandlerComponent->setShaders("Perspective/VertexShader.glsl", "Perspective/FragmentShader.glsl");
-
+		std::weak_ptr<Transform> transformComponent = characterEntity->findComponent<Transform>();
+		transformComponent.lock()->setPosition(glm::vec3(0.0f, 0.0f, -10.0f));
 
 		while (isGameRunning)
 		{

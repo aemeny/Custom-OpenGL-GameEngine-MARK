@@ -3,7 +3,7 @@
  *  Author: Alex Emeny
  *  Date: December 6th, 2024 (Last Edited)
  *  Description: This file contains the Module struct,
- *               It defines functions for adding and calling on Entites.
+ *               It defines functions for adding and calling on Entities.
  *               This struct handles storing and managing it's Entities.
  * 
  *               MODULE can be seen as a modified version on Unity's "Scene" system.

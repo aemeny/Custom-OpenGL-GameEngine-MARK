@@ -21,6 +21,7 @@ namespace GameEngine
 	struct Core;
 	struct Camera;
 	struct Window;
+	struct Transform;
 
 	struct Component
 	{
@@ -59,6 +60,9 @@ namespace GameEngine
 
 		/* Returns Window handler from Core */
 		std::weak_ptr<Window> getWindowFromCore();
+
+		/* Returns a Weak reference to the entities assigned transform component */
+		std::weak_ptr<Transform> getEntityTransform();
 
 		/* Sets main camera in core as passed camera pointer */
 		void setCameraAsMainProt(std::weak_ptr<Camera> _camPtr);

@@ -1,16 +1,28 @@
+/*
+ *  File: ModelHandler.cpp
+ *  Author: Alex Emeny
+ *  Date: December 17th, 2024 (Last Edited)
+ *  Description: This file implements the methods declared ModelHandler.h,
+ *               It implements the function for displaying a model with a texture and assigned shader.
+ *               This struct also handles storing and setting handlers from the graphics renderer.
+ */
+
 #include "ModelHandler.h"
+#include "Transform.h"
 #include "Core.h"
 
 namespace GameEngine
 {
     void ModelHandler::onDisplay()
     {
+        /* Get requires pointers */
         std::weak_ptr<Camera> camera = m_entity.lock()->m_corePtr.lock()->getActiveRenderingCamera();
+        std::weak_ptr<Transform> transform = getEntityTransform();
 
-        // UPDATE TRANSFORM MATRIX-------------------------------------------------------
-
+        /* update matrices and bind the shader */
+        transform.lock()->updateMatrix();
         m_shader->bindShader(camera.lock()->getProjectionMatrix(), "u_Projection");
-        //m_shader->bindShader(TRANSFORM GET MODEL MATRIX, "u_Model");
+        m_shader->bindShader(transform.lock()->getModelMatrix(), "u_Model");
         m_shader->bindShader(camera.lock()->getViewingMatrix(), "u_Viewing");
 
         m_shader->renderModel(m_model, m_texture);

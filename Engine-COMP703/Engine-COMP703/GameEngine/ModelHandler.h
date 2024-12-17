@@ -1,3 +1,12 @@
+/*
+ *  File: ModelHandler.h
+ *  Author: Alex Emeny
+ *  Date: December 17th, 2024 (Last Edited)
+ *  Description: This file contains the ModelHandler struct,
+ *               It defines the function for displaying a model with a texture and assigned shader.
+ *               This struct also handles storing and setting handlers from the graphics renderer.
+ */
+
 #pragma once
 #include "Component.h"
 #include "TextureResource.h"
