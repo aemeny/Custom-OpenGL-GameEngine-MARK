@@ -26,6 +26,8 @@ namespace GameEngine
 		void setRelativePosition(glm::vec3 _newPos) { m_relativePosition = _newPos; }
 		glm::vec3 getRelativePosition() { return m_relativePosition; }
 
+		/* Modules set name */
+		std::string m_name;
 	private:
 		friend Core;
 

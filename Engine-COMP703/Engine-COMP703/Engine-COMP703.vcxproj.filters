@@ -45,9 +45,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameProject\main.cpp">
-      <Filter>Source Files\GameProject</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\GraphicsModelHandler.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
@@ -98,6 +95,12 @@
     </ClCompile>
     <ClCompile Include="GameEngine\TextureResource.cpp">
       <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\main.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\Hierarchy.cpp">
+      <Filter>Source Files\GameProject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="GameEngine\TextureResource.h">
       <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Hierarchy.h">
+      <Filter>Header Files\GameProject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

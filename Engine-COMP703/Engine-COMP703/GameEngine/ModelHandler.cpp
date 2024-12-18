@@ -29,23 +29,26 @@ namespace GameEngine
     }
 
     /* Loads the Graphics Renderer's ModelHandler resource */
-    void ModelHandler::setModel(std::string _modelFileAddress)
+    ModelHandler& ModelHandler::setModel(std::string _modelFileAddress)
     {
         m_model = m_entity.lock()->m_corePtr.lock()->m_resources->
             load<ModelResource>("../Samples/Models/" + _modelFileAddress)->getModel();
+        return *this;
     }
 
     /* Loads the Graphics Renderer's TextureHandler resource */
-    void ModelHandler::setTexture(std::string _textureFileAddress)
+    ModelHandler& ModelHandler::setTexture(std::string _textureFileAddress)
     {
         m_texture = m_entity.lock()->m_corePtr.lock()->m_resources->
             load<TextureResource>("../Samples/Textures/" + _textureFileAddress)->getTexture();
+        return *this;
     }
 
     /* Loads the Graphics Renderer's ShaderHandler resource */
-    void ModelHandler::setShaders(std::string _vertShaderFileAddress, std::string _fragShaderFileAddress)
+    ModelHandler& ModelHandler::setShaders(std::string _vertShaderFileAddress, std::string _fragShaderFileAddress)
     {
         m_shader = m_entity.lock()->m_corePtr.lock()->m_resources->
             load<ShaderResource>("../Shaders/" + _vertShaderFileAddress, "../Shaders/" + _fragShaderFileAddress)->getShader();
+        return *this;
     }
 }

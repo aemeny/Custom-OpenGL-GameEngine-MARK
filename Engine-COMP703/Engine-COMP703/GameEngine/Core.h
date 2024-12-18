@@ -31,6 +31,10 @@ namespace GameEngine
 
 		/* Returns the camera that is currently set to render */
 		std::weak_ptr<Camera> getActiveRenderingCamera() { return m_activeRenderingCamera; }
+	
+		/* Returns the pointer to a module based on the passed name or index */
+		std::shared_ptr<Module> getModule(std::string _name);
+		std::shared_ptr<Module> getModule(int _index);
 	private:
 		friend Component;
 		friend Entity;

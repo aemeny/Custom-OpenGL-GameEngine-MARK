@@ -141,6 +141,7 @@
     <ClCompile Include="GameEngine\Entity.cpp" />
     <ClCompile Include="GameEngine\Environment.cpp" />
     <ClCompile Include="GameEngine\Input.cpp" />
+    <ClCompile Include="GameEngine\main.cpp" />
     <ClCompile Include="GameEngine\ModelHandler.cpp" />
     <ClCompile Include="GameEngine\ModelResource.cpp" />
     <ClCompile Include="GameEngine\Module.cpp" />
@@ -149,7 +150,7 @@
     <ClCompile Include="GameEngine\TextureResource.cpp" />
     <ClCompile Include="GameEngine\Transform.cpp" />
     <ClCompile Include="GameEngine\Window.cpp" />
-    <ClCompile Include="GameProject\main.cpp" />
+    <ClCompile Include="GameProject\Hierarchy.cpp" />
     <ClCompile Include="Graphics\GraphicsModelHandler.cpp" />
     <ClCompile Include="Graphics\GraphicsShaderHandler.cpp" />
     <ClCompile Include="Graphics\GraphicsTextureHandler.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="GameEngine\TextureResource.h" />
     <ClInclude Include="GameEngine\Transform.h" />
     <ClInclude Include="GameEngine\Window.h" />
+    <ClInclude Include="GameProject\Hierarchy.h" />
     <ClInclude Include="Graphics\GraphicsMasterHeader.h" />
     <ClInclude Include="Graphics\GraphicsModelHandler.h" />
     <ClInclude Include="Graphics\GraphicsShaderHandler.h" />

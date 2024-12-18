@@ -20,11 +20,11 @@ namespace GameEngine
         void onDisplay() override;
 
         /* Loads the Graphics Renderer's ModelHandler resource */
-        void setModel(std::string _modelFileAddress);
+        ModelHandler& setModel(std::string _modelFileAddress);
         /* Loads the Graphics Renderer's TextureHandler resource */
-        void setTexture(std::string _textureFileAddress);
+        ModelHandler& setTexture(std::string _textureFileAddress);
         /* Loads the Graphics Renderer's ShaderHandler resource */
-        void setShaders(std::string _vertShaderFileAddress, std::string _fragShaderFileAddress);
+        ModelHandler& setShaders(std::string _vertShaderFileAddress, std::string _fragShaderFileAddress);
 
     private:
         /* Pointer references */

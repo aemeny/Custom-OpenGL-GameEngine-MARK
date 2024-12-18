@@ -9,9 +9,6 @@
 
 #include "Core.h"
 
-#include "ModelHandler.h" // TEMP ----------------------------------------
-#include "Transform.h"    // TEMP ----------------------------------------
-
 namespace GameEngine
 {
 	/* Initializes essential libraries for the engine to run */
@@ -50,7 +47,7 @@ namespace GameEngine
 		rtn->m_self = rtn;
 
 		/* Ensures the engine always has a module to build upon by default */
-		rtn->addModule();
+		rtn->addModule()->m_name = "Default";
 
 		/* Returns core object to main() */
 		return rtn;
@@ -60,18 +57,6 @@ namespace GameEngine
 	void Core::run()
 	{
 		isGameRunning = true;
-
-		// TEMP MODEL LOADING FOR TESTING
-		std::shared_ptr<Entity> cameraEntity = m_modules.at(0)->addEntity();
-		std::shared_ptr<Camera> cameraComponent = cameraEntity->addComponent<Camera>(CameraProjection::Perspective, PerspectiveParamaters{ 60.0f, 0.1f, 100.0f });
-
-		std::shared_ptr<Entity> characterEntity = m_modules.at(0)->addEntity();
-		std::shared_ptr<ModelHandler> modelHandlerComponent = characterEntity->addComponent<ModelHandler>();
-		modelHandlerComponent->setModel("Curuthers/Curuthers.obj");
-		modelHandlerComponent->setTexture("Curuthers/Curuthers.png");
-		modelHandlerComponent->setShaders("Perspective/VertexShader.glsl", "Perspective/FragmentShader.glsl");
-		std::weak_ptr<Transform> transformComponent = characterEntity->findComponent<Transform>();
-		transformComponent.lock()->setPosition(glm::vec3(0.0f, 0.0f, -10.0f));
 
 		while (isGameRunning)
 		{
@@ -139,5 +124,27 @@ namespace GameEngine
 
 		/* Returns created module for user referencing and use */
 		return rtn;
+	}
+
+	std::shared_ptr<Module> Core::getModule(std::string _name)
+	{
+		for (int mi = 0; mi < m_modules.size(); ++mi)
+		{
+			if (m_modules.at(mi)->m_name == _name)
+			{
+				return m_modules.at(mi);
+			}
+		}
+		fprintf(stderr, "Error: No Module found with given name\n");
+		return NULL;
+	}
+
+	std::shared_ptr<Module> Core::getModule(int _index)
+	{
+		if (_index < m_modules.size())
+			return m_modules.at(_index);
+		
+		fprintf(stderr, "Error: No Module found within index range\n");
+		return NULL;
 	}
 }
