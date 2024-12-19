@@ -1,7 +1,7 @@
 /*
  *  File: Core.cpp
  *  Author: Alex Emeny
- *  Date: December 3rd, 2024 (Last Edited)
+ *  Date: December 19th, 2024 (Last Edited)
  *  Description: This file implements the methods declared in Core.h.
  *               It implements the functions for initializing the Core variables, GLEW and SDL2.
  *				 It also takes care of the main game loop which is vital for the program to run.
@@ -42,6 +42,7 @@ namespace GameEngine
 		rtn->m_inputHandler = std::make_shared<InputHandler>(rtn->m_windowContext);
 		rtn->m_environment = std::make_shared<Environment>();
 		rtn->m_resources = std::make_shared<Resources>();
+		rtn->m_physicsCore = std::make_shared<PhysicsSystem::PhysicsCore>();
 
 		/* weak reference to its self to pass to its modules */
 		rtn->m_self = rtn;
@@ -75,8 +76,14 @@ namespace GameEngine
 			/* Entity tick */
 			for (size_t mi = 0; mi < m_modules.size(); ++mi)
 			{
-				m_modules.at(mi)->tick();
+				if (m_modules.at(mi)->getActiveStatus())
+				{
+					m_modules.at(mi)->tick();
+				}
 			}
+
+			/* Physics tick */
+			m_physicsCore->physicsTick();
 
 			/* Entity render */
 			for (size_t ci = 0; ci < m_cameras.size(); ++ci)
@@ -87,7 +94,10 @@ namespace GameEngine
 					m_activeRenderingCamera = m_cameras.at(ci);
 					for (size_t mi = 0; mi < m_modules.size(); ++mi)
 					{
-						m_modules.at(mi)->render();
+						if (m_modules.at(mi)->getActiveStatus())
+						{
+							m_modules.at(mi)->render();
+						}
 					}
 				}
 			}
@@ -96,7 +106,10 @@ namespace GameEngine
 			m_activeRenderingCamera = m_mainCamera; // Only main camera renders GUI
 			for (size_t mi = 0; mi < m_modules.size(); ++mi)
 			{
-				m_modules.at(mi)->GUIRender();
+				if (m_modules.at(mi)->getActiveStatus())
+				{
+					m_modules.at(mi)->GUIRender();
+				}
 			}
 
 			/* Built in escape method from window */
@@ -118,6 +131,7 @@ namespace GameEngine
 
 		rtn->m_corePtr = m_self;
 		rtn->m_self = rtn;
+		rtn->m_active = true;
 
 		/* Adds created module to vector storage in core */
 		m_modules.push_back(rtn);

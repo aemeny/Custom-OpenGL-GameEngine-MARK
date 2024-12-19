@@ -1,14 +1,14 @@
 /*
  *  File: Entity.h
  *  Author: Alex Emeny
- *  Date: December 17th, 2024 (Last Edited)
+ *  Date: December 19th, 2024 (Last Edited)
  *  Description: This file contains the Entity struct,
  *               It defines functions for adding, finding and calling on Components.
  *               This struct handles storing and managing it's Components.
  */
 
 #pragma once
-#include "Component.h"
+#include "../Physics/PhysicsComponent.h"
 
 #include <vector>
 #include <stdexcept>
@@ -45,19 +45,41 @@ namespace GameEngine
 		template <typename T>
 		std::shared_ptr<T> addComponent() 
 		{
-			if (typeid(T).name() == "Camera")
-				throw std::invalid_argument("Camera type should call addComponent(CameraProjection)");
-
+			/* Create shared pointer */
 			std::shared_ptr<T> rtn = std::make_shared<T>();
+
+			/* Check whether incoming component is a physics component or game engine component */
+			if constexpr (std::is_base_of<PhysicsSystem::PhysicsComponent, T>::value)
+			{
+				/* Adds new Component to list of physics components */
+				m_physicsComponents.push_back(rtn);
+			}
+			else if constexpr (std::is_base_of<Component, T>::value)
+			{
+				/* Check to see if camera creation is attempted within the wrong function */
+				if (typeid(T).name() == "Camera")
+				{
+					throw std::invalid_argument("Camera type should call addComponent(CameraProjection)");
+					return NULL;
+				}
+
+				/* Adds new Component to list of components */
+				m_components.push_back(rtn);
+			}
+			else
+			{
+				/* throw error if neither */
+				static_assert(std::is_base_of<GameEngine::Component, T>::value ||
+					std::is_base_of<PhysicsSystem::PhysicsComponent, T>::value,
+					"Passed object must inherit from either GameEngine::Component or PhysicsSystem::PhysicsComponent");
+				return NULL;
+			}
 
 			/* Objects variables Initialize */
 			rtn->m_entity = m_self;
 			rtn->m_corePtr = m_corePtr;
 			rtn->m_componentType = typeid(T).name();
 			rtn->initialize();
-
-			/* Adds new Component to list of components */
-			m_components.push_back(rtn);
 
 			return rtn;
 		}
@@ -103,6 +125,9 @@ namespace GameEngine
 
 		/* Vector of game components which handle all their independent functions */
 		std::vector<std::shared_ptr<Component>> m_components;
+
+		/* Vector of game physics components which handles all their independent functions */
+		std::vector<std::shared_ptr<PhysicsSystem::PhysicsComponent>> m_physicsComponents;
 
 		/* Weak reference to Module parent to call for any required functions */
 		std::weak_ptr<Module> m_modulePtr;

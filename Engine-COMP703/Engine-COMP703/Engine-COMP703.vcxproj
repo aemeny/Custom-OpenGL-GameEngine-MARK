@@ -154,6 +154,9 @@
     <ClCompile Include="Graphics\GraphicsModelHandler.cpp" />
     <ClCompile Include="Graphics\GraphicsShaderHandler.cpp" />
     <ClCompile Include="Graphics\GraphicsTextureHandler.cpp" />
+    <ClCompile Include="Physics\BoxCollider.cpp" />
+    <ClCompile Include="Physics\PhysicsComponent.cpp" />
+    <ClCompile Include="Physics\PhysicsCore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine\Camera.h" />
@@ -178,6 +181,9 @@
     <ClInclude Include="Graphics\GraphicsModelHandler.h" />
     <ClInclude Include="Graphics\GraphicsShaderHandler.h" />
     <ClInclude Include="Graphics\GraphicsTextureHandler.h" />
+    <ClInclude Include="Physics\BoxCollider.h" />
+    <ClInclude Include="Physics\PhysicsComponent.h" />
+    <ClInclude Include="Physics\PhysicsCore.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Shaders\Perspective\FragmentShader.glsl" />

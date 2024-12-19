@@ -26,6 +26,14 @@ namespace GameEngine
 		void setRelativePosition(glm::vec3 _newPos) { m_relativePosition = _newPos; }
 		glm::vec3 getRelativePosition() { return m_relativePosition; }
 
+		bool getActiveStatus() { return m_active; }
+
+		/* Loads the entities within this module */
+		void load();
+
+		/* Unloads the entities within this module */
+		void unload();
+
 		/* Modules set name */
 		std::string m_name;
 	private:
@@ -40,9 +48,8 @@ namespace GameEngine
 		/* Loops through all Entities and calls GUI on them to render */
 		void GUIRender();
 
-		/* Loads and Unloads the entities within this module */
-		void load(); /// Currently not in use
-		void unload(); /// Currently not in use
+		/* Holds the active status of the module and if it should be rendered */
+		bool m_active;
 
 		/* Relative position of the module of entities so they can be loaded ahead of time within the same world at different locations */
 		glm::vec3 m_relativePosition;

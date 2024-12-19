@@ -39,11 +39,14 @@ namespace GameEngine
 		/* Calls the override function onGUIRender() for all child components */
 		void GUIRender();
 
+		/* Weak reference to core to call for any required functions e.g. deltatime */
+		std::weak_ptr<Core> m_corePtr;
+
+	protected:
 		/* Calls on inherited overridden initialize functions */
 		virtual void initialize();
 		/* Calls on inherited overridden initialize function for the Camera */
 		virtual void initialize(CameraProjection _projectionType, std::weak_ptr<Camera> _selfPtr, std::optional<PerspectiveParamaters> _perspectibeParams);
-
 		/* Calls on inherited overridden tick functions */
 		virtual void onTick();
 		/* Calls on inherited overridden display functions */
@@ -51,10 +54,6 @@ namespace GameEngine
 		/* Calls on inherited overridden GUI render functions */
 		virtual void onGUIRender();
 
-		/* Weak reference to core to call for any required functions e.g. deltatime */
-		std::weak_ptr<Core> m_corePtr;
-
-	protected:
 		/* Returns deltatime from Core */
 		double getDeltaTime();
 

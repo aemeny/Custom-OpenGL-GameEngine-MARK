@@ -1,7 +1,7 @@
 /*
  *  File: Core.h
  *  Author: Alex Emeny
- *  Date: December 6th, 2024 (Last Edited)
+ *  Date: December 19th, 2024 (Last Edited)
  *  Description: This file contains the Core struct,
  *               The core of the game engine, this struct holds the main game loop within and is vital
  *				 for the program to run. It contains references to every other module, entity and component in the engine.
@@ -11,6 +11,7 @@
 #pragma once
 #include "Window.h"
 #include "Environment.h"
+#include "../Physics/PhysicsCore.h"
 #include "Resources.h"
 #include "Input.h"
 #include "Module.h"
@@ -46,6 +47,7 @@ namespace GameEngine
 		std::shared_ptr<Window> m_windowContext; // Sets up and initializes runtime window using SDL
 		std::shared_ptr<Environment> m_environment; // Handles deltatime processing
 		std::shared_ptr<Resources> m_resources; // Handles storing and loading all resources
+		std::shared_ptr<PhysicsSystem::PhysicsCore> m_physicsCore; // Handles all physics based events
 
 		/* Vector of game entity modules which handle sections of grouped entities */
 		std::vector<std::shared_ptr<Module>> m_modules;

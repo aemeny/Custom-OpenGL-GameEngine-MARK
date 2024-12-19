@@ -72,7 +72,19 @@ namespace GameEngine
 		}
 	}
 
-	/* Loads and Unloads the entities within this module */
-	void Module::load(){} /// Currently not in use
-	void Module::unload(){} /// Currently not in use
+	/* Loads the entities within this module */
+	void Module::load() 
+	{
+		/* Basic implementation just sets active status to true 
+		and all entities within WILL be ticked and rendered */
+		m_active = true;
+	} 
+
+	/* Unloads the entities within this module */
+	void Module::unload()
+	{
+		/* Basic implementation just sets active status to false
+		and all entities within WONT be ticked and rendered */
+		m_active = false;
+	}
 }
