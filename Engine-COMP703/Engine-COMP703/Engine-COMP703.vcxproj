@@ -157,6 +157,7 @@
     <ClCompile Include="Physics\BoxCollider.cpp" />
     <ClCompile Include="Physics\PhysicsComponent.cpp" />
     <ClCompile Include="Physics\PhysicsCore.cpp" />
+    <ClCompile Include="Physics\RigidBody.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine\Camera.h" />
@@ -184,6 +185,7 @@
     <ClInclude Include="Physics\BoxCollider.h" />
     <ClInclude Include="Physics\PhysicsComponent.h" />
     <ClInclude Include="Physics\PhysicsCore.h" />
+    <ClInclude Include="Physics\RigidBody.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Shaders\Perspective\FragmentShader.glsl" />

@@ -61,7 +61,7 @@ namespace GameEngine
 		std::weak_ptr<Window> getWindowFromCore();
 
 		/* Returns a Weak reference to the entities assigned transform component */
-		std::weak_ptr<Transform> getEntityTransform();
+		std::weak_ptr<Transform> getEntityTransform() const;
 
 		/* Sets main camera in core as passed camera pointer */
 		void setCameraAsMainProt(std::weak_ptr<Camera> _camPtr);

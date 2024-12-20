@@ -1,11 +1,3 @@
-﻿  Camera.cpp
-  Component.cpp
-  Core.cpp
-  ModelHandler.cpp
-  Module.cpp
-  main.cpp
-  Hierarchy.cpp
-  PhysicsCore.cpp
-  Generating Code...
-C:\Users\alexe\OneDrive\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Entity.h(40): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+﻿  Hierarchy.cpp
+C:\Users\alexe\OneDrive\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Entity.h(49): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
   Engine-COMP703.vcxproj -> C:\Users\alexe\OneDrive\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\x64\Debug\Engine-COMP703.exe

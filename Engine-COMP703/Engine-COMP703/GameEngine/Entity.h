@@ -13,6 +13,7 @@
 #include <vector>
 #include <stdexcept>
 
+namespace PhysicsSystem { struct PhysicsCore; struct AABBCollider; struct RigidBody; }
 namespace GameEngine
 {
 	struct Module;
@@ -37,6 +38,14 @@ namespace GameEngine
 					return std::dynamic_pointer_cast<T>(m_components.at(i));
 				}
 			}
+			for (size_t i = 0; i < m_physicsComponents.size(); ++i)
+			{
+				// Returns Component if found with matching type
+				if (m_physicsComponents.at(i)->m_componentType == typeid(T).name())
+				{
+					return std::dynamic_pointer_cast<T>(m_physicsComponents.at(i));
+				}
+			}
 		}
 
 		/* Initializes a new Component of type passed and add it to this Entities vector.
@@ -52,7 +61,18 @@ namespace GameEngine
 			if constexpr (std::is_base_of<PhysicsSystem::PhysicsComponent, T>::value)
 			{
 				/* Adds new Component to list of physics components */
+				if constexpr (std::is_same<T, PhysicsSystem::AABBCollider>::value)
+				{
+					/* Add to the specialized AABB list */
+					m_corePtr.lock()->m_physicsCore->m_AABBColliders.push_back(
+						std::dynamic_pointer_cast<PhysicsSystem::AABBCollider>(rtn)
+					);
+				}
+
 				m_physicsComponents.push_back(rtn);
+
+				/* Pass this entity to the physics core to be added as a physics entity*/
+				m_corePtr.lock()->m_physicsCore->addPhysicsEntity(m_self);
 			}
 			else if constexpr (std::is_base_of<Component, T>::value)
 			{
@@ -109,6 +129,7 @@ namespace GameEngine
 		friend Module;
 		friend Camera;
 		friend Component;
+		friend PhysicsSystem::PhysicsCore;
 		friend struct ModelHandler;
 
 		/* Loops through all Components and calls tick on them */

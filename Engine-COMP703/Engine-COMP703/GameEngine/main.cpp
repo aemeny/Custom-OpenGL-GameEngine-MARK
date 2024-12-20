@@ -25,9 +25,9 @@ int main(int argc, char* argv[])
 }
 
 //  ####  TO-DO
-//        #1 Add entities with physics components to the physics core
-//        #2 Add virtual functions to the physics component
-//        #3 Loop through physics based entities in physics core and call overridden functions
+//  DONE  #1 Add entities with physics components to the physics core
+//  DONE  #2 Add virtual functions to the physics component
+//  DONE  #3 Loop through physics based entities in physics core and call overridden functions
 //           Ridgidbody -> Collision
-//        #4 Add code for Ridgidbody component
+//  DONE   #4 Add code for Rigid Body component
 //        #5 Add code for AABB collision component

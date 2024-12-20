@@ -41,7 +41,7 @@ namespace GameEngine
 	}
 
 	/* Returns a Weak reference to the entities assigned transform component */
-	std::weak_ptr<Transform> Component::getEntityTransform()
+	std::weak_ptr<Transform> Component::getEntityTransform() const
 	{
 		return m_entity.lock()->m_transformPtr;
 	}
