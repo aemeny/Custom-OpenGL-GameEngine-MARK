@@ -9,11 +9,15 @@
 
 #pragma once
 #include "CameraTypes.h"
+#include "Input.h"
 #include "glm/glm.hpp"
 
 #include <memory>
 #include <string>
 #include <optional>
+
+/* Using namespace for simplicity in user created scripts inheriting component */
+using namespace GameEngine;
 
 namespace GameEngine
 {
@@ -38,6 +42,9 @@ namespace GameEngine
 		void display();
 		/* Calls the override function onGUIRender() for all child components */
 		void GUIRender();
+		/* Calls the override function onLateTick() for all child components */
+		void lateTick();
+
 
 		/* Weak reference to core to call for any required functions e.g. deltatime */
 		std::weak_ptr<Core> m_corePtr;
@@ -53,12 +60,20 @@ namespace GameEngine
 		virtual void onDisplay();
 		/* Calls on inherited overridden GUI render functions */
 		virtual void onGUIRender();
+		/* Calls on inherited overridden lateTick functions */
+		virtual void onLateTick();
 
-		/* Returns deltatime from Core */
+		/* Returns deltaTime from Core */
 		double getDeltaTime();
+
+		/* Returns physicsDeltaTime from Core */
+		double getPhysicsDeltaTime();
 
 		/* Returns Window handler from Core */
 		std::weak_ptr<Window> getWindowFromCore();
+
+		/* Returns Input handler from Core */
+		std::weak_ptr<InputHandler> getInputHandler();
 
 		/* Returns a Weak reference to the entities assigned transform component */
 		std::weak_ptr<Transform> getEntityTransform() const;

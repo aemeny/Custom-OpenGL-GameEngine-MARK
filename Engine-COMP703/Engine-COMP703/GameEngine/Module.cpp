@@ -72,6 +72,19 @@ namespace GameEngine
 		}
 	}
 
+	/* Loops through all Entities and calls lateTick on them */
+	void Module::lateTick()
+	{
+		for (size_t ei = 0; ei < m_entities.size(); ++ei)
+		{
+			if (m_entities.at(ei)->getActiveStatus())
+			{
+				m_entities.at(ei)->lateTick();
+			}
+		}
+	}
+
+
 	/* Loads the entities within this module */
 	void Module::load() 
 	{

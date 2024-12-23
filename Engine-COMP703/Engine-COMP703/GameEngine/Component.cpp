@@ -28,16 +28,34 @@ namespace GameEngine
 		onGUIRender();
 	}
 
+	/* Calls the override function onLateTick() for all child components */
+	void Component::lateTick()
+	{
+		onLateTick();
+	}
+
 	/* returns deltatime from Core */
 	double Component::getDeltaTime()
 	{
 		return m_corePtr.lock()->m_environment->getDeltaTime();
 	}
 
+	/* Returns physicsDeltaTime from Core */
+	double Component::getPhysicsDeltaTime()
+	{
+		return m_corePtr.lock()->m_environment->getPhysicsDeltaTime();
+	}
+
 	/* Returns Window handler from Core */
 	std::weak_ptr<Window> Component::getWindowFromCore()
 	{
 		return m_corePtr.lock()->m_windowContext;
+	}
+
+	/* Returns Input handler from Core */
+	std::weak_ptr<InputHandler> Component::getInputHandler()
+	{
+		return m_corePtr.lock()->m_inputHandler;
 	}
 
 	/* Returns a Weak reference to the entities assigned transform component */
@@ -66,4 +84,7 @@ namespace GameEngine
 
 	/* Calls on inherited overridden GUI render functions */
 	void Component::onGUIRender(){}
+
+	/* Calls on inherited overridden lateTick functions */
+	void Component::onLateTick(){}
 }

@@ -1,12 +1,13 @@
 /*
  *  File: Environment.h
  *  Author: Alex Emeny
- *  Date: November 27th, 2024 (Last Edited)
+ *  Date: December 23rd, 2024 (Last Edited)
  *  Description: This file contains the Environment struct,
  *               which is responsible for managing delta time within the engine.
  */
 
 #pragma once
+#include <chrono>
 
 namespace GameEngine
 {
@@ -19,16 +20,25 @@ namespace GameEngine
 
 		/* returns deltaTime */
 		double getDeltaTime() const;
+		double getPhysicsDeltaTime() const;
 	private:
 		friend Core;
 
 		/* Initializes last tick count as a start point before the first frame */
 		void initialize();
+
 		/* Calls for Current tick count to compare from last frame to calculate deltaTime */
 		void tickDeltaTime();
 
+		/* Calls for Current tick count to compare from last frame physics tick to calculate physicsDeltaTime */
+		void tickPhysicsDeltaTime();
+
 		/* Last frame tick count and deltatime for the frame variables */
-		double m_last;
+		std::chrono::high_resolution_clock::time_point m_lastTime;
 		double m_deltaTime;
+
+		/* Last physics frame tick count and physicsDeltatime for the physics frame variables */
+		std::chrono::high_resolution_clock::time_point m_lastPhysicsTime;
+		double m_physicsDeltaTime;
 	};
 }

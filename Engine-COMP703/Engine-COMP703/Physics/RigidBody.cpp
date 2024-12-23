@@ -38,11 +38,11 @@ namespace PhysicsSystem
         }
 
         /* Calculate velocity from acceleration */
-        m_velocity += m_acceleration * static_cast<float>(getDeltaTime());
-
+        m_velocity += m_acceleration * static_cast<float>(getPhysicsDeltaTime());
+        
         /* Calculate new position from velocity */
         glm::vec3 position = getEntityTransform().lock()->getPosition();
-        position += m_velocity * static_cast<float>(getDeltaTime());
+        position += m_velocity * static_cast<float>(getPhysicsDeltaTime());
         getEntityTransform().lock()->setPosition(position);
 
         /* Reset Acceleration for next frame */

@@ -11,23 +11,25 @@ namespace GameEngine
          
 
         /* Return default created Module */
-        ModulePtr defaultModule = EngineCore->getModule("Default");
+        ModuleObj defaultModule = EngineCore->getModule("Default");
 
 
         /* Camera Entity */
-        defaultModule->addEntity()->addComponent
-            <Camera>(CameraProjection::Perspective, PerspectiveParamaters{ 60.0f, 0.1f, 100.0f });
+        EntityObj camera = defaultModule->addEntity();
+        camera->addComponent<Camera>(CameraProjection::Perspective, PerspectiveParamaters{ 60.0f, 0.1f, 100.0f });
+
+        camera->addComponent<CameraController>();
 
 
         /* Player Character Entity */
-        EntityPtr character = defaultModule->addEntity();
+        EntityObj character = defaultModule->addEntity();
         character->addComponent<ModelHandler>()
             ->setModel("Curuthers/Curuthers.obj")
             .setTexture("Curuthers/Curuthers.png")
             .setShaders("Perspective/VertexShader.glsl", "Perspective/FragmentShader.glsl");
 
         character->findComponent<Transform>().lock()
-            ->setPosition(glm::vec3(0.0f, 5.0f, -10.0f));
+            ->setPosition(glm::vec3(10.0f, 5.0f, 0.0f));
 
         character->addComponent<RigidBody>()->setMass(50.0f);
 
@@ -35,14 +37,14 @@ namespace GameEngine
 
 
         /* Floor Entity */
-        EntityPtr floor = defaultModule->addEntity();
+        EntityObj floor = defaultModule->addEntity();
         floor->addComponent<ModelHandler>()
             ->setModel("Cube/Cube.obj")
             .setTexture("Floor/Tile_Diffuse.png")
             .setShaders("Perspective/VertexShader.glsl", "Perspective/FragmentShader.glsl");
 
         floor->findComponent<Transform>().lock()
-            ->setPosition(glm::vec3(0.0f, -5.0f, -10.0f));
+            ->setPosition(glm::vec3(10.0f, -5.0f, 0.0f));
 
         floor->addComponent<AABBCollider>();
     }

@@ -114,6 +114,9 @@
     <ClCompile Include="Physics\RigidBody.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="GameProject\CameraController.cpp">
+      <Filter>Source Files\GameProject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\GraphicsMasterHeader.h">
@@ -193,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="Physics\RigidBody.h">
       <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\CameraController.h">
+      <Filter>Header Files\GameProject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

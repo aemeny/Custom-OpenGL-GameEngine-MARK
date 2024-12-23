@@ -111,15 +111,8 @@ namespace GameEngine
 			/* Check for any mouse movement */
 			if (m_event.type == SDL_MOUSEMOTION) 
 			{
-				float halfWindowWidth = m_windowRef.lock()->m_windowWidth * 0.5f;
-				float halfWindowHeight = m_windowRef.lock()->m_windowHeight * 0.5f;
-
-				// Update mouse pos & delta
-				m_mousePos.x = m_event.motion.x;
-				m_mousePos.y = m_event.motion.y;
-
-				m_mouseDelta.x += m_mousePos.x - halfWindowWidth;
-				m_mouseDelta.y += m_mousePos.y - halfWindowHeight;
+				m_mouseDelta.x += m_event.motion.xrel;
+				m_mouseDelta.y += m_event.motion.yrel;
 			}
 			/* Check if any keys have been pressed down */
 			else if (m_event.type == SDL_KEYDOWN) 
@@ -192,7 +185,7 @@ namespace GameEngine
 		{
 			float halfWindowWidth = m_windowRef.lock()->m_windowWidth * 0.5f;
 			float halfWindowHeight = m_windowRef.lock()->m_windowHeight * 0.5f; 
-			SDL_WarpMouseInWindow(NULL, halfWindowWidth, halfWindowHeight);
+			//SDL_WarpMouseInWindow(NULL, halfWindowWidth, halfWindowHeight);
 		}
 	}
 }

@@ -48,6 +48,9 @@ namespace GameEngine
 		/* Loops through all Entities and calls GUI on them to render */
 		void GUIRender();
 
+		/* Loops through all Entities and calls lateTick on them */
+		void lateTick();
+
 		/* Holds the active status of the module and if it should be rendered */
 		bool m_active;
 

@@ -36,4 +36,13 @@ namespace GameEngine
 			m_components.at(ci)->GUIRender();
 		}
 	}
+
+	/* Loops through all Components and calls lateTick on them */
+	void Entity::lateTick()
+	{
+		for (size_t ci = 0; ci < m_components.size(); ++ci)
+		{
+			m_components.at(ci)->lateTick();
+		}
+	}
 }

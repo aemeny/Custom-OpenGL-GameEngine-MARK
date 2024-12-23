@@ -32,3 +32,6 @@ namespace PhysicsSystem
         virtual void onAABBCollisionUpdate(const std::vector<std::weak_ptr<AABBCollider>>& _AABBColliders);
     };
 }
+
+/* Using namespace for simplicity in user created scripts inheriting component */
+using namespace PhysicsSystem;

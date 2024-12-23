@@ -18,6 +18,8 @@ namespace GameEngine
         m_self = _selfPtr;
         m_cameraProjection = _projectionType;
 
+        m_transform = getEntityTransform();
+
         if (_projectionType == CameraProjection::Perspective)
         {
             if (_perspectibeParams.has_value() == false)
@@ -31,7 +33,7 @@ namespace GameEngine
                 _perspectibeParams->nearPlane, _perspectibeParams->farPlane);
 
             /* Default viewing matrix set for camera */
-            m_viewingMatrix = glm::lookAt(glm::vec3(0.0f), glm::vec3(0.0f, 0.0f, -100.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Camera pos, Center, Up direction
+            m_viewingMatrix = glm::lookAt(glm::vec3(0.0f), glm::vec3(0.0f, 0.0f, -100.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         }
         else if(_projectionType == CameraProjection::Orthographic)
         {
@@ -45,5 +47,43 @@ namespace GameEngine
                                             0.0f, (float)windowContext.lock()->m_windowHeight, //Camera height bounds
                                             -1.0f, 1.0f); // Far/Near plane
         }
+    }
+
+    void Camera::onLateTick()
+    {
+        if (m_cameraProjection == CameraProjection::Perspective)
+        {
+            updateViewingMatrix();
+        }
+    }
+
+    void Camera::updateViewingMatrix()
+    {
+        if (m_transform.expired())
+            return;
+
+        /* Grab position and rotation */
+        glm::vec3 position = m_transform.lock()->getPosition();
+        glm::vec3 rotation = m_transform.lock()->getRotation();
+
+
+        /* Calculate forwards direction */
+        float yaw = glm::radians(rotation.y);
+        float pitch = glm::radians(rotation.x);
+
+        glm::vec3 forward;
+        forward.x = cos(pitch) * cos(yaw);
+        forward.y = sin(pitch);
+        forward.z = cos(pitch) * sin(yaw);
+        forward = glm::normalize(forward);
+
+
+        /* Define up and right vectors */
+        glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+        glm::vec3 target = position + forward;
+
+
+        /* Update viewing matrix */
+        m_viewingMatrix = glm::lookAt(position, target, up);
     }
 }

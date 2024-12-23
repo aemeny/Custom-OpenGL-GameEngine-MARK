@@ -8,6 +8,7 @@
  */
 
 #include "Core.h"
+#include <iostream>
 
 namespace GameEngine
 {
@@ -59,6 +60,14 @@ namespace GameEngine
 	{
 		isGameRunning = true;
 
+		/* Physics time steps */
+		const double fixedTimeStep = 0.02; // 20 ms
+		double physicsTimeAccumulator = 0.0;
+
+		/* FPS tracker */
+		int tickCount = 0;
+		double DTCount = 0;
+
 		while (isGameRunning)
 		{
 			/* Clear depth buffer */
@@ -67,11 +76,16 @@ namespace GameEngine
 			/* Draw background */
 			glClearColor(0.42f, 0.5f, 0.68f, 1.0f);
 
+
 			/* Tick environment for delta time */
 			m_environment->tickDeltaTime();
+			tickCount++;
+			DTCount += m_environment->getDeltaTime();
+			physicsTimeAccumulator += m_environment->getDeltaTime();
 
 			/* InputHandler tick, polls SDL for inputs */
 			m_inputHandler->tick();
+
 
 			/* Entity tick */
 			for (size_t mi = 0; mi < m_modules.size(); ++mi)
@@ -82,8 +96,27 @@ namespace GameEngine
 				}
 			}
 
+
 			/* Physics tick */
-			m_physicsCore->physicsTick();
+			while (physicsTimeAccumulator >= fixedTimeStep)
+			{
+				m_environment->tickPhysicsDeltaTime();
+
+				m_physicsCore->physicsTick();
+
+				physicsTimeAccumulator -= fixedTimeStep;
+			}
+
+
+			/* Entity late tick */
+			for (size_t mi = 0; mi < m_modules.size(); ++mi)
+			{
+				if (m_modules.at(mi)->getActiveStatus())
+				{
+					m_modules.at(mi)->lateTick();
+				}
+			}
+
 
 			/* Entity render */
 			for (size_t ci = 0; ci < m_cameras.size(); ++ci)
@@ -102,6 +135,7 @@ namespace GameEngine
 				}
 			}
 
+
 			/* GUI render */
 			m_activeRenderingCamera = m_mainCamera; // Only main camera renders GUI
 			for (size_t mi = 0; mi < m_modules.size(); ++mi)
@@ -112,15 +146,26 @@ namespace GameEngine
 				}
 			}
 
+
 			/* Built in escape method from window */
 			if (m_inputHandler->isKeyPressed(SDLK_ESCAPE))
 				isGameRunning = false;
 
+
 			/* Clear frame dependent input */
 			m_inputHandler->clear();
 
+
 			/* Swap window */
 			SDL_GL_SwapWindow(m_windowContext->m_window);
+
+			if (DTCount >= 1.0)
+			{
+				std::cout << tickCount << std::endl;
+
+				DTCount -= 1.0;
+				tickCount = 0;
+			}
 		}
 	}
 

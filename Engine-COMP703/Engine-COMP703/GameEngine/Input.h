@@ -58,6 +58,9 @@ namespace GameEngine
 		/* Setter for locking the mouse to the center of the screen */
 		void setMouseLock(bool _lock) { m_mouseLock = _lock; }
 
+		/* Sets the mouse cursor to relative mode, locking and setting invisible */
+		void setMouseRelativeMode(bool _active) { _active ? SDL_SetRelativeMouseMode(SDL_TRUE) : SDL_SetRelativeMouseMode(SDL_FALSE); }
+
 	private:
 		/* Weak reference to window handler for updated window sizes */
 		std::weak_ptr<Window> m_windowRef;

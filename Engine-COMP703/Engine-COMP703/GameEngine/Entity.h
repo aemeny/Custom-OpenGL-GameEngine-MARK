@@ -141,6 +141,9 @@ namespace GameEngine
 		/* Loops through all Components and calls GUI on them to render */
 		void GUIRender();
 
+		/* Loops through all Components and calls lateTick on them */
+		void lateTick();
+
 		/* If the entity is active, deactivated entities won't call render or tick */
 		bool m_active;
 
