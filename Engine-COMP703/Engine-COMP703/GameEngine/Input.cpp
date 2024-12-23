@@ -185,7 +185,7 @@ namespace GameEngine
 		{
 			float halfWindowWidth = m_windowRef.lock()->m_windowWidth * 0.5f;
 			float halfWindowHeight = m_windowRef.lock()->m_windowHeight * 0.5f; 
-			//SDL_WarpMouseInWindow(NULL, halfWindowWidth, halfWindowHeight);
+			SDL_WarpMouseInWindow(NULL, halfWindowWidth, halfWindowHeight);
 		}
 	}
 }
