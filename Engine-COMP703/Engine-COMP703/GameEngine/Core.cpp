@@ -43,6 +43,7 @@ namespace GameEngine
 		rtn->m_inputHandler = std::make_shared<InputHandler>(rtn->m_windowContext);
 		rtn->m_environment = std::make_shared<Environment>();
 		rtn->m_resources = std::make_shared<Resources>();
+		rtn->m_lineRenderer = std::make_shared<LineRenderer>(rtn);
 		rtn->m_physicsCore = std::make_shared<PhysicsSystem::PhysicsCore>();
 
 		/* weak reference to its self to pass to its modules */
@@ -135,6 +136,8 @@ namespace GameEngine
 				}
 			}
 
+			/* Debug Lines Render */
+			m_lineRenderer->renderDebugLines(m_self);
 
 			/* GUI render */
 			m_activeRenderingCamera = m_mainCamera; // Only main camera renders GUI

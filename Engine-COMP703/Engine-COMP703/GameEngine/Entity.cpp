@@ -17,6 +17,10 @@ namespace GameEngine
 		{
 			m_components.at(ci)->tick();
 		}
+		for (size_t pci = 0; pci < m_physicsComponents.size(); pci++)
+		{
+			m_physicsComponents.at(pci)->tick();
+		}
 	}
 
 	/* Loops through all Components and calls display on them */
@@ -25,6 +29,10 @@ namespace GameEngine
 		for (size_t ci = 0; ci < m_components.size(); ++ci)
 		{
 			m_components.at(ci)->display();
+		}
+		for (size_t pci = 0; pci < m_physicsComponents.size(); pci++)
+		{
+			m_physicsComponents.at(pci)->display();
 		}
 	}
 
@@ -35,6 +43,10 @@ namespace GameEngine
 		{
 			m_components.at(ci)->GUIRender();
 		}
+		for (size_t pci = 0; pci < m_physicsComponents.size(); pci++)
+		{
+			m_physicsComponents.at(pci)->GUIRender();
+		}
 	}
 
 	/* Loops through all Components and calls lateTick on them */
@@ -43,6 +55,10 @@ namespace GameEngine
 		for (size_t ci = 0; ci < m_components.size(); ++ci)
 		{
 			m_components.at(ci)->lateTick();
+		}
+		for (size_t pci = 0; pci < m_physicsComponents.size(); pci++)
+		{
+			m_physicsComponents.at(pci)->lateTick();
 		}
 	}
 }

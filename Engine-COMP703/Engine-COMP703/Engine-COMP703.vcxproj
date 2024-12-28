@@ -150,14 +150,14 @@
     <ClCompile Include="GameEngine\ShaderResource.cpp" />
     <ClCompile Include="GameEngine\TextureResource.cpp" />
     <ClCompile Include="GameEngine\Transform.cpp" />
-    <ClCompile Include="GameEngine\Vao.cpp" />
-    <ClCompile Include="GameEngine\Vbo.cpp" />
     <ClCompile Include="GameEngine\Window.cpp" />
     <ClCompile Include="GameProject\CameraController.cpp" />
     <ClCompile Include="GameProject\Hierarchy.cpp" />
     <ClCompile Include="Graphics\GraphicsModelHandler.cpp" />
     <ClCompile Include="Graphics\GraphicsShaderHandler.cpp" />
     <ClCompile Include="Graphics\GraphicsTextureHandler.cpp" />
+    <ClCompile Include="Graphics\Vao.cpp" />
+    <ClCompile Include="Graphics\Vbo.cpp" />
     <ClCompile Include="Physics\BoxCollider.cpp" />
     <ClCompile Include="Physics\PhysicsComponent.cpp" />
     <ClCompile Include="Physics\PhysicsCore.cpp" />
@@ -181,8 +181,6 @@
     <ClInclude Include="GameEngine\ShaderResource.h" />
     <ClInclude Include="GameEngine\TextureResource.h" />
     <ClInclude Include="GameEngine\Transform.h" />
-    <ClInclude Include="GameEngine\Vao.h" />
-    <ClInclude Include="GameEngine\Vbo.h" />
     <ClInclude Include="GameEngine\Window.h" />
     <ClInclude Include="GameProject\CameraController.h" />
     <ClInclude Include="GameProject\Hierarchy.h" />
@@ -190,12 +188,16 @@
     <ClInclude Include="Graphics\GraphicsModelHandler.h" />
     <ClInclude Include="Graphics\GraphicsShaderHandler.h" />
     <ClInclude Include="Graphics\GraphicsTextureHandler.h" />
+    <ClInclude Include="Graphics\Vao.h" />
+    <ClInclude Include="Graphics\Vbo.h" />
     <ClInclude Include="Physics\BoxCollider.h" />
     <ClInclude Include="Physics\PhysicsComponent.h" />
     <ClInclude Include="Physics\PhysicsCore.h" />
     <ClInclude Include="Physics\RigidBody.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Shaders\Basic\fragmentShader.glsl" />
+    <None Include="..\Shaders\Basic\vertexShader.glsl" />
     <None Include="..\Shaders\Perspective\FragmentShader.glsl" />
     <None Include="..\Shaders\Perspective\VertexShader.glsl" />
   </ItemGroup>

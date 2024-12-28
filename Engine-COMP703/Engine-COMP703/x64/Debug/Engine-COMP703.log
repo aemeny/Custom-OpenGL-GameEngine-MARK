@@ -1,35 +1,4 @@
-﻿  Camera.cpp
-  Component.cpp
-  Core.cpp
-  Entity.cpp
-  Environment.cpp
-  Input.cpp
-C:\Users\alexe\OneDrive\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Input.cpp(78,35): warning C4101: 'e': unreferenced local variable
-C:\Users\alexe\OneDrive\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Input.cpp(91,35): warning C4101: 'e': unreferenced local variable
-  main.cpp
-  ModelHandler.cpp
-  ModelResource.cpp
-  Module.cpp
-  ResourceParent.cpp
-  ShaderResource.cpp
-  TextureResource.cpp
-  Transform.cpp
-  Window.cpp
-  CameraController.cpp
-  Hierarchy.cpp
-  GraphicsModelHandler.cpp
-  GraphicsShaderHandler.cpp
-C:\Users\alexe\OneDrive\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\GraphicsShaderHandler.cpp(150,60): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-  GraphicsTextureHandler.cpp
-  Generating Code...
+﻿  Hierarchy.cpp
+C:\Users\alexe\OneDrive\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,27): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\alexe\OneDrive\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Entity.h(49): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
-  Compiling...
-  BoxCollider.cpp
-  PhysicsComponent.cpp
-  PhysicsCore.cpp
-  RigidBody.cpp
-  Generating Code...
-C:\Users\alexe\OneDrive\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Entity.h(49): warning C4715: 'GameEngine::Entity::findComponent<PhysicsSystem::RigidBody>': not all control paths return a value
-C:\Users\alexe\OneDrive\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Entity.h(49): warning C4715: 'GameEngine::Entity::findComponent<PhysicsSystem::AABBCollider>': not all control paths return a value
-C:\Users\alexe\OneDrive\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Entity.h(49): warning C4715: 'GameEngine::Entity::findComponent<PhysicsSystem::RigidBody>': not all control paths return a value
   Engine-COMP703.vcxproj -> C:\Users\alexe\OneDrive\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\x64\Debug\Engine-COMP703.exe

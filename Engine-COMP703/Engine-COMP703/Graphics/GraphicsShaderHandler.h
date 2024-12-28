@@ -10,6 +10,7 @@
 #pragma once
 #include "GraphicsModelHandler.h"
 #include "GraphicsTextureHandler.h"
+#include "Vao.h"
 
 namespace GraphicsRenderer
 {
@@ -22,6 +23,8 @@ namespace GraphicsRenderer
 
         /* Takes in a model and texture and instructs OpenGL to draw to the screen */
         void renderModel(std::shared_ptr<ModelHandler> _model, std::shared_ptr<TextureHandler> _texture);
+        /* Takes in a Vao from LineRenderer and instruct OpenGL to draw to the screen */
+        void renderDebugLine(std::shared_ptr<Vao> _Vao, int _numOfLines);
 
         /* Binds matrix with passed shader type */
         void bindShader(glm::mat4 _matrix, const GLchar* _type);

@@ -130,7 +130,9 @@ namespace GameEngine
 		friend Camera;
 		friend Component;
 		friend PhysicsSystem::PhysicsCore;
+		friend PhysicsSystem::AABBCollider;
 		friend struct ModelHandler;
+		friend struct LineRenderer;
 
 		/* Loops through all Components and calls tick on them */
 		void tick();

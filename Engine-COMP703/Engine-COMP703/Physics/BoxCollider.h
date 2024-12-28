@@ -9,6 +9,8 @@
 
 #pragma once
 #include "PhysicsComponent.h"
+#include "../GameEngine/LineRenderer.h"
+#include "../Graphics/Vao.h"
 
 namespace PhysicsSystem
 {
@@ -17,6 +19,7 @@ namespace PhysicsSystem
     {
         /* Override component functions */
         void initialize() override;
+        void onDisplay() override;
         void onAABBCollisionUpdate(const std::vector<std::weak_ptr<AABBCollider>>& _AABBColliders) override;
         
         /* Checks if this collider is colliding with passed collider */
@@ -29,11 +32,16 @@ namespace PhysicsSystem
         void setColliderSize(glm::vec3 _size) { m_colliderSize = _size; }
         void setColliderOffset(glm::vec3 _offset) { m_colliderOffset = _offset; }
 
+        /* If the debug outline should be rendered */
+        void setRenderOutline(bool _render) { m_renderOutline = _render; }
     private:
         friend RigidBody;
 
         glm::vec3 getMax() const;
         glm::vec3 getMin() const;
+
+        /* Pushes updates box collider size to LineRenderer */
+        void updateDebugOutline();
 
         /* Offsets the collider from the entities transform */
         glm::vec3 m_colliderOffset;
@@ -43,5 +51,11 @@ namespace PhysicsSystem
 
         /* Reference to a potential rigid body on entity */
         std::weak_ptr<RigidBody> m_rigidBodyPtr;
+
+        /* Debug outline render */
+        std::weak_ptr<GameEngine::LineRenderer> m_lineRenderer;
+        std::weak_ptr<GraphicsRenderer::Vbo> m_vbo;
+        bool m_renderOutline;
+        bool m_lineRendererDirty;
     };
 }

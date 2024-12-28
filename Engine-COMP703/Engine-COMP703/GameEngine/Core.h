@@ -15,6 +15,7 @@
 #include "Resources.h"
 #include "Module.h"
 #include "Camera.h"
+#include "LineRenderer.h"
 
 namespace GameEngine
 {
@@ -40,12 +41,15 @@ namespace GameEngine
 		friend Entity;
 		friend Camera;
 		friend struct ModelHandler;
+		friend struct LineRenderer;
+		friend PhysicsSystem::AABBCollider;
 
 		/* Object constants required for the engine to run */
 		std::shared_ptr<InputHandler> m_inputHandler; // Uses SDL to handle inputs and expose them to the engine
 		std::shared_ptr<Window> m_windowContext; // Sets up and initializes runtime window using SDL
 		std::shared_ptr<Environment> m_environment; // Handles deltatime processing
 		std::shared_ptr<Resources> m_resources; // Handles storing and loading all resources
+		std::shared_ptr<LineRenderer> m_lineRenderer; // Handles Debug line rendering
 		std::shared_ptr<PhysicsSystem::PhysicsCore> m_physicsCore; // Handles all physics based events
 
 		/* Vector of game entity modules which handle sections of grouped entities */

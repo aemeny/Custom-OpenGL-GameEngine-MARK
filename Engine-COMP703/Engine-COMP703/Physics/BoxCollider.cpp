@@ -1,7 +1,7 @@
 /*
  * File: BoxCollider.cpp
  * Author: Alex Emeny
- * Date: December 20th, 2024 (Last Edited)
+ * Date: December 28th, 2024 (Last Edited)
  * Description: This file implements the methods declared in BoxCollider.h.
  *              It implements the functions for initializing and updating physicals based handling.
  *				This struct handles collision based responses based on AABB's.
@@ -9,7 +9,7 @@
 
 #include "BoxCollider.h"
 #include "RigidBody.h"
-#include "../GameEngine/Entity.h"
+#include "../GameEngine/Core.h"
 
 namespace PhysicsSystem
 {
@@ -18,11 +18,21 @@ namespace PhysicsSystem
         m_colliderOffset = glm::vec3(0.0f);
         m_colliderSize = glm::vec3(1.0f);
 
+        m_lineRendererDirty = true;
+
         /* Checks if a rigid body exists on this entity */
         std::weak_ptr<RigidBody> rigidBodyPtr = m_entity.lock()->findComponent<RigidBody>();
         if (!rigidBodyPtr.expired())
         {
             m_rigidBodyPtr = rigidBodyPtr;
+        }
+    }
+
+    void AABBCollider::onDisplay()
+    {
+        if (m_renderOutline)
+        {
+            updateDebugOutline();
         }
     }
 
@@ -104,5 +114,54 @@ namespace PhysicsSystem
     glm::vec3 AABBCollider::getMin() const
     {
         return getEntityTransform().lock()->getPosition() + m_colliderOffset - (m_colliderSize / 2.0f);
+    }
+
+    void AABBCollider::updateDebugOutline()
+    {
+        if (m_lineRendererDirty)
+        {
+            m_lineRendererDirty = false;
+
+            /* Grab debug line renderer from core */
+            if (m_lineRenderer.expired())
+            {
+                m_lineRenderer = m_entity.lock()->m_corePtr.lock()->m_lineRenderer;
+            }
+            /* Make sure a vbo exists for this line data */
+            if (m_vbo.expired())
+            {
+                m_vbo = m_lineRenderer.lock()->addVbo();
+            }
+
+            /* Refresh data inside */
+            m_lineRenderer.lock()->clearLines(m_vbo);
+            
+            glm::vec3 CP = m_entity.lock()->m_transformPtr.lock()->getPosition() + m_colliderOffset; // Collider Position
+            glm::vec3 HCS = m_colliderSize * 0.5f; // Half the collider size
+
+            /* Position at each vertex of the box collider */
+            glm::vec3 pos1(CP.x + HCS.x, CP.y + HCS.y, CP.z + HCS.z);
+            glm::vec3 pos2(CP.x + HCS.x, CP.y + HCS.y, CP.z - HCS.z);
+            glm::vec3 pos3(CP.x + HCS.x, CP.y - HCS.y, CP.z + HCS.z);
+            glm::vec3 pos4(CP.x - HCS.x, CP.y + HCS.y, CP.z + HCS.z);
+            glm::vec3 pos5(CP.x - HCS.x, CP.y - HCS.y, CP.z - HCS.z);
+            glm::vec3 pos6(CP.x - HCS.x, CP.y - HCS.y, CP.z + HCS.z);
+            glm::vec3 pos7(CP.x - HCS.x, CP.y + HCS.y, CP.z - HCS.z);
+            glm::vec3 pos8(CP.x + HCS.x, CP.y - HCS.y, CP.z - HCS.z);
+
+            /* Adds a line between adjacent box positions */
+            m_lineRenderer.lock()->addLine(m_vbo, pos1, pos2);
+            m_lineRenderer.lock()->addLine(m_vbo, pos1, pos3);
+            m_lineRenderer.lock()->addLine(m_vbo, pos1, pos4);
+            m_lineRenderer.lock()->addLine(m_vbo, pos5, pos6);
+            m_lineRenderer.lock()->addLine(m_vbo, pos5, pos7);
+            m_lineRenderer.lock()->addLine(m_vbo, pos5, pos8);
+            m_lineRenderer.lock()->addLine(m_vbo, pos6, pos3);
+            m_lineRenderer.lock()->addLine(m_vbo, pos8, pos3);
+            m_lineRenderer.lock()->addLine(m_vbo, pos8, pos2);
+            m_lineRenderer.lock()->addLine(m_vbo, pos7, pos2);
+            m_lineRenderer.lock()->addLine(m_vbo, pos7, pos4);
+            m_lineRenderer.lock()->addLine(m_vbo, pos6, pos4);
+        }
     }
 }

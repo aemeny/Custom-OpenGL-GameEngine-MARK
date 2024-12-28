@@ -1,5 +1,7 @@
 #include "Hierarchy.h"
 
+#include "CameraController.h"
+
 namespace GameEngine
 {
     void Hierarchy::initializeEntities(std::shared_ptr<Core> EngineCore)
@@ -20,6 +22,9 @@ namespace GameEngine
 
         camera->addComponent<CameraController>();
 
+        /* Add line renderer to camera so it exists in the scene */
+        //camera->addComponent<LineRenderer>();
+
 
         /* Player Character Entity */
         EntityObj character = defaultModule->addEntity();
@@ -29,11 +34,14 @@ namespace GameEngine
             .setShaders("Perspective/VertexShader.glsl", "Perspective/FragmentShader.glsl");
 
         character->findComponent<Transform>().lock()
-            ->setPosition(glm::vec3(10.0f, 5.0f, 0.0f));
+            ->setPosition(glm::vec3(10.0f, 0.0f, 0.0f));
 
-        character->addComponent<RigidBody>()->setMass(50.0f);
+        //character->addComponent<RigidBody>()->setMass(50.0f);
 
-        character->addComponent<AABBCollider>()->setColliderSize(glm::vec3(2.0f, 5.5f, 2.0f));
+        BoxColliderObj characterCollider = character->addComponent<AABBCollider>();
+        characterCollider.lock()->setColliderSize(glm::vec3(2.0f, 5.5f, 2.0f));
+        characterCollider.lock()->setColliderOffset(glm::vec3(0.0f, 0.5f, 0.0f));
+        characterCollider.lock()->setRenderOutline(true);
 
 
         /* Floor Entity */
@@ -46,6 +54,8 @@ namespace GameEngine
         floor->findComponent<Transform>().lock()
             ->setPosition(glm::vec3(10.0f, -5.0f, 0.0f));
 
-        floor->addComponent<AABBCollider>();
+        BoxColliderObj boxCollider = floor->addComponent<AABBCollider>();
+        boxCollider.lock()->setColliderSize(glm::vec3(2.0f));
+        boxCollider.lock()->setRenderOutline(true);
     }
 }

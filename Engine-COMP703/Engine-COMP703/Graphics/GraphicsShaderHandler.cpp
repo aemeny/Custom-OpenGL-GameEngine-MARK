@@ -1,7 +1,7 @@
 /*
  * File: GraphicsShaderHandler.cpp
  * Author: Alex Emeny
- * Date: November 14th, 2024 (Last Edited)
+ * Date: December 28th, 2024 (Last Edited)
  * Description: This file implements the ShaderHandler struct methods 
  *              declared in GraphicsShaderHandler.h.
  *              It defines the logic for compiling vertex and 
@@ -19,11 +19,11 @@ namespace GraphicsRenderer
     ShaderHandler::ShaderHandler(std::string _vFileAddress, std::string _fFileAddress) 
         : m_programID(glCreateProgram())
     {
-        // Compile both vertex and fragment shader
+        /* Compile both vertex and fragment shader */
         m_vertShaderID = compileShader(_vFileAddress, GL_VERTEX_SHADER);
         m_fragShaderID = compileShader(_fFileAddress, GL_FRAGMENT_SHADER);
 
-        // Link attribute locations
+        /* Link attribute locations */
         linkAttributes();
     }
 
@@ -41,27 +41,27 @@ namespace GraphicsRenderer
            Returns generated ID from the created shader */
     GLuint ShaderHandler::compileShader(std::string _fileAddress, GLuint _shaderType)
     {
-        // Open file address and return the contents as a single string
+        /* Open file address and return the contents as a single string */
         std::string fileData = readFile(_fileAddress);
-        // Convert to C-style string
+        /* Convert to C - style string */
         const GLchar* shaderSrc = fileData.c_str();
 
-        // Create the new shader, attach source (shader data string), compile
+        /* Create the new shader, attach source(shader data string), compile */
         GLuint shaderID = glCreateShader(_shaderType);
         glShaderSource(shaderID, 1, &shaderSrc, NULL);
         glCompileShader(shaderID);
 
-        // Check for errors within shader code
+        /* Check for errors within shader code */
         GLint success = 0;
         glGetShaderiv(shaderID, GL_COMPILE_STATUS, &success);
 
         if (!success) // Print found error with exact location within shader for easier debugging
         {   
-            // Get length of error log info
+            /* Get length of error log info */
             GLint maxLength = 0;
             glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &maxLength);
 
-            // Print shader error log info
+            /* Print shader error log info */
             std::vector<GLchar> errorLog(maxLength);
             glGetShaderInfoLog(shaderID, maxLength, &maxLength, &errorLog[0]);
             std::cout << &errorLog.at(0) << std::endl;
@@ -69,7 +69,7 @@ namespace GraphicsRenderer
             throw std::exception();
         }
 
-        // If successful, attach shader
+        /* If successful, attach shader */
         glAttachShader(m_programID, shaderID);
 
         return shaderID;
@@ -83,10 +83,10 @@ namespace GraphicsRenderer
         std::string fileData = "";
         std::ifstream file(_fileAddress);
 
-        // Try opening file address
+        /* Try opening file address */
         if (file.is_open())
         {
-            // Run through each line and add it to the string
+            /* Run through each line and add it to the string */
             while (std::getline(file, line))
             {
                 fileData += line + '\n';
@@ -117,7 +117,7 @@ namespace GraphicsRenderer
         glBindAttribLocation(m_programID, 1, "a_TexCoord");
         glBindAttribLocation(m_programID, 2, "a_Normal");
 
-        // Link to shader and check for errors
+        /* Link to shader and check for errors */
         GLint success = 0;
         glLinkProgram(m_programID);
         glGetProgramiv(m_programID, GL_LINK_STATUS, &success);
@@ -133,23 +133,23 @@ namespace GraphicsRenderer
     {
         glUseProgram(m_programID);
 
-        // Bind model ID to VAO
+        /* Bind model ID to VAO */
         glBindVertexArray(_model->getModelId());
-        // Bind texture ID
+        /* Bind texture ID */
         glBindTexture(GL_TEXTURE_2D, _texture->getID());
 
-        // Enable Back Face Culling
+        /* Enable Back Face Culling */
         glEnable(GL_CULL_FACE);
-        // Enable Depth Testing
+        /* Enable Depth Testing */
         glEnable(GL_DEPTH_TEST);
-        // Enable Alpha Blending
+        /* Enable Alpha Blending */
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        // Draw model to screen using triangles (3 vertices)
+        /* Draw model to screen using triangles(3 vertices's) */
         glDrawArrays(GL_TRIANGLES, 0, _model->getVertices());
 
-        // Reset the state
+        /* Reset the state */
         glDisable(GL_DEPTH_TEST);
         glDisable(GL_CULL_FACE);
         glDisable(GL_BLEND);
@@ -157,5 +157,30 @@ namespace GraphicsRenderer
         glBindVertexArray(0);
         glUseProgram(0);
         glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
+    /* Takes in a Vao from LineRenderer and instruct OpenGL to draw to the screen */
+    void ShaderHandler::renderDebugLine(std::shared_ptr<Vao> _Vao, int _numOfLines)
+    {
+        glUseProgram(m_programID);
+
+        /* Bind model ID to VAO */
+        glBindVertexArray(_Vao->getID());
+
+        /* Depth Testing */
+        glEnable(GL_DEPTH_TEST);
+
+        /* Alpha Blending */
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        /* Draw 2 vertices's (a line) */
+        glDrawArrays(GL_LINES, 0, _numOfLines * 2);
+
+        /* Reset the state */
+        glDisable(GL_BLEND);
+        glDisable(GL_DEPTH_TEST);
+        glBindVertexArray(0);
+        glUseProgram(0);
     }
 }
