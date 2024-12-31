@@ -45,14 +45,23 @@ namespace GameEngine
 	}
 
 	/* Returns deltaTime */
-	double Environment::getDeltaTime() const
+	double Environment::getDTAsDouble() const
+	{
+		return m_deltaTime;
+	}
+	float Environment::getDTAsFloat() const
 	{
 		return m_deltaTime;
 	}
 
 	/* Returns physicsDeltaTime */
-	double Environment::getPhysicsDeltaTime() const
+	double Environment::getPhysDTAsDouble() const
 	{
 		return m_physicsDeltaTime;
 	}
+	float Environment::getPhysDTAsFloat() const
+	{
+		return m_physicsDeltaTime;
+	}
+
 }

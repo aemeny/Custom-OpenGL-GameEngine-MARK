@@ -81,8 +81,8 @@ namespace GameEngine
 			/* Tick environment for delta time */
 			m_environment->tickDeltaTime();
 			tickCount++;
-			DTCount += m_environment->getDeltaTime();
-			physicsTimeAccumulator += m_environment->getDeltaTime();
+			DTCount += m_environment->getDTAsDouble();
+			physicsTimeAccumulator += m_environment->getDTAsDouble();
 
 			/* InputHandler tick, polls SDL for inputs */
 			m_inputHandler->tick();

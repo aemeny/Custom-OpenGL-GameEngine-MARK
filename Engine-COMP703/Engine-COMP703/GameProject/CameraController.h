@@ -29,4 +29,7 @@ private:
 
     /* Current camera rotation */
     glm::vec3 m_cameraRotation;
+
+    /* Camera/Player movement multiplier */
+    float m_movementSpeed;
 };

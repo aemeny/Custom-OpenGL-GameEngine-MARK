@@ -64,10 +64,12 @@ namespace GameEngine
 		virtual void onLateTick();
 
 		/* Returns deltaTime from Core */
-		double getDeltaTime();
+		double getDTAsDouble();
+		float getDTAsFloat();
 
 		/* Returns physicsDeltaTime from Core */
-		double getPhysicsDeltaTime();
+		double getPhysDTAsDouble();
+		float getPhysDTAsFloat();
 
 		/* Returns Window handler from Core */
 		std::weak_ptr<Window> getWindowFromCore();

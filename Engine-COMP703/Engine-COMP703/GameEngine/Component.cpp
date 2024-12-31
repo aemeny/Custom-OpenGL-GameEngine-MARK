@@ -35,15 +35,23 @@ namespace GameEngine
 	}
 
 	/* returns deltatime from Core */
-	double Component::getDeltaTime()
+	double Component::getDTAsDouble()
 	{
-		return m_corePtr.lock()->m_environment->getDeltaTime();
+		return m_corePtr.lock()->m_environment->getDTAsDouble();
+	}
+	float Component::getDTAsFloat()
+	{
+		return m_corePtr.lock()->m_environment->getDTAsFloat();
 	}
 
 	/* Returns physicsDeltaTime from Core */
-	double Component::getPhysicsDeltaTime()
+	double Component::getPhysDTAsDouble()
 	{
-		return m_corePtr.lock()->m_environment->getPhysicsDeltaTime();
+		return m_corePtr.lock()->m_environment->getPhysDTAsDouble();
+	}
+	float Component::getPhysDTAsFloat()
+	{
+		return m_corePtr.lock()->m_environment->getPhysDTAsFloat();
 	}
 
 	/* Returns Window handler from Core */

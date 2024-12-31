@@ -22,10 +22,6 @@ namespace GameEngine
 
         camera->addComponent<CameraController>();
 
-        /* Add line renderer to camera so it exists in the scene */
-        //camera->addComponent<LineRenderer>();
-
-
         /* Player Character Entity */
         EntityObj character = defaultModule->addEntity();
         character->addComponent<ModelHandler>()

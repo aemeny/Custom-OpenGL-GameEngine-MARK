@@ -19,8 +19,10 @@ namespace GameEngine
 		Environment();
 
 		/* returns deltaTime */
-		double getDeltaTime() const;
-		double getPhysicsDeltaTime() const;
+		double getDTAsDouble() const;
+		float getDTAsFloat() const;
+		double getPhysDTAsDouble() const;
+		float getPhysDTAsFloat() const;
 	private:
 		friend Core;
 
