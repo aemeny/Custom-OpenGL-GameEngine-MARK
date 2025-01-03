@@ -27,8 +27,9 @@ namespace GameEngine
 		/* SDL Window Initialize */
 		int windowWidth = 800;
 		int windowHeight = 800;
+		int swapInterval = 0;
 		rtn->m_windowContext = std::make_shared<Window>();
-		rtn->m_windowContext->initialize(windowWidth, windowHeight);
+		rtn->m_windowContext->initialize(windowWidth, windowHeight, swapInterval);
 
 		/* GLEW Initialize */
 		GLenum err = glewInit();
@@ -37,7 +38,7 @@ namespace GameEngine
 			/* Major fault: glewInit failed */
 			fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 		}
-		fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
+		fprintf(stdout, "\nStatus: Using GLEW %s\n\n", glewGetString(GLEW_VERSION));
 
 		/* Object variables Initialize */
 		rtn->m_inputHandler = std::make_shared<InputHandler>(rtn->m_windowContext);
