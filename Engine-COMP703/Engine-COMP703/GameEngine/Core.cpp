@@ -25,8 +25,8 @@ namespace GameEngine
 		}
 
 		/* SDL Window Initialize */
-		int windowWidth = 800;
-		int windowHeight = 800;
+		int windowWidth = 1000;
+		int windowHeight = 1000;
 		int swapInterval = 0;
 		rtn->m_windowContext = std::make_shared<Window>();
 		rtn->m_windowContext->initialize(windowWidth, windowHeight, swapInterval);

@@ -20,6 +20,6 @@ void main()
     gl_Position = u_Projection * u_Viewing * u_Model * vec4(a_Position, 1.0);
     
     v_TexCoord = a_TexCoord;
-    v_Normal = normalize(mat3(1.0) * a_Normal); // REPLACE 1.0 in mat3() -> u_Model
-    v_FragPos = vec3(mat4(1.0) * vec4(a_Position, 1.0)); // REPLACE MAT4(1.0) -> u_Model
+    v_Normal = normalize(mat3(u_Model) * a_Normal);
+    v_FragPos = vec3(u_Model * vec4(a_Position, 1.0));
 }

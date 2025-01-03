@@ -10,6 +10,7 @@
 #pragma once
 #include "GraphicsModelHandler.h"
 #include "GraphicsTextureHandler.h"
+#include "GraphicsRenderTextureHandler.h"
 #include "Vao.h"
 
 namespace GraphicsRenderer

@@ -32,7 +32,7 @@ namespace GameEngine
         character->findComponent<Transform>().lock()
             ->setPosition(glm::vec3(10.0f, 0.0f, 0.0f));
 
-        //character->addComponent<RigidBody>()->setMass(50.0f);
+        character->addComponent<RigidBody>()->setMass(50.0f);
 
         BoxColliderObj characterCollider = character->addComponent<AABBCollider>();
         characterCollider.lock()->setColliderSize(glm::vec3(2.0f, 5.5f, 2.0f));

@@ -22,6 +22,6 @@ namespace GameEngine
         std::shared_ptr<GraphicsRenderer::TextureHandler> getTexture();
 
     private:
-        std::shared_ptr<GraphicsRenderer::TextureHandler> m_Texture;
+        std::shared_ptr<GraphicsRenderer::TextureHandler> m_texture;
     };
 }

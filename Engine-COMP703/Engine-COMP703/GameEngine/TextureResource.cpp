@@ -14,12 +14,12 @@ namespace GameEngine
      * stored in the Resource parent */
     void TextureResource::onLoad()
     {
-        m_Texture = std::make_shared<GraphicsRenderer::TextureHandler>(getfileAddress().c_str());
+        m_texture = std::make_shared<GraphicsRenderer::TextureHandler>(getfileAddress().c_str());
     }
 
     /* Returns Texture Handler struct */
     std::shared_ptr<GraphicsRenderer::TextureHandler> TextureResource::getTexture()
     {
-        return m_Texture;
+        return m_texture;
     }
 }

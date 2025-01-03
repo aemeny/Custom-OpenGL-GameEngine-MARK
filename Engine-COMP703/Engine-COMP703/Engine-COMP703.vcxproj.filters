@@ -129,6 +129,12 @@
     <ClCompile Include="GameEngine\LineRenderer.cpp">
       <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\GraphicsRenderTextureHandler.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\RenderTextureResource.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\GraphicsMasterHeader.h">
@@ -220,6 +226,12 @@
     </ClInclude>
     <ClInclude Include="Graphics\Vbo.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\GraphicsRenderTextureHandler.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\RenderTextureResource.h">
+      <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
