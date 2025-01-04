@@ -33,7 +33,7 @@ namespace GameEngine
         textureCameraEntity->addComponent<CameraController>();
 
         /* Create Render Texture Using Created Camera */
-        RenderTexture renderTexture = EngineCore->addRenderTexture(camera, 1000, 1000);
+        RenderTexture renderTexture = EngineCore->addRenderTexture(camera, 900, 1500);
 
         /* Cube Making Use Of Render Texture */
         EntityObj portalOne = defaultModule->addEntity();
@@ -44,8 +44,8 @@ namespace GameEngine
 
         TransformObj transform = portalOne->findComponent<Transform>();
         transform.lock()->setRotation(glm::vec3(90.0f, 0.0f, 0.0f));
-        transform.lock()->setPosition(glm::vec3(0.0f, 0.0f, 10.0f));
-        transform.lock()->setScale(glm::vec3(4.0f, 4.0f, 0.00001f));
+        transform.lock()->setPosition(glm::vec3(10.0f, -0.8f, 0.0f));
+        transform.lock()->setScale(glm::vec3(3.0f, 5.0f, 0.00001f));
 
 
 
@@ -57,7 +57,7 @@ namespace GameEngine
             .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
 
         character->findComponent<Transform>().lock()
-            ->setPosition(glm::vec3(10.0f, 0.0f, 0.0f));
+            ->setPosition(glm::vec3(10.0f, 0.0f, -3.0f));
 
         character->addComponent<RigidBody>()->setMass(50.0f);
 
@@ -80,6 +80,19 @@ namespace GameEngine
 
         BoxColliderObj boxCollider = floor->addComponent<AABBCollider>();
         boxCollider.lock()->setColliderSize(glm::vec3(16.0f, 0.4f, 40.0f));
-        boxCollider.lock()->setRenderOutline(true);
+
+        /* Floor Entity 2 */
+        EntityObj floor2 = defaultModule->addEntity();
+        floor2->addComponent<ModelHandler>()
+            ->setModel("Cube/Cube.obj")
+            .setTexture("Colours/GreenTexture.png")
+            .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
+
+        TransformObj transformFloor2 = floor2->findComponent<Transform>();
+        transformFloor2.lock()->setPosition(glm::vec3(-10.0f, -6.0f, 0.0f));
+        transformFloor2.lock()->setScale(glm::vec3(8.0f, 0.2f, 20.0f));
+
+        BoxColliderObj boxCollider2 = floor2->addComponent<AABBCollider>();
+        boxCollider2.lock()->setColliderSize(glm::vec3(16.0f, 0.4f, 40.0f));
     }
 }
