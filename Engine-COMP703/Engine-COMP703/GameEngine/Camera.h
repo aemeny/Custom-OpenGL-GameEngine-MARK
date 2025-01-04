@@ -26,6 +26,9 @@ namespace GameEngine
     
         /* Sets main camera in core as passed camera pointer */
         void setCameraAsMain() { setCameraAsMainProt(m_self); }
+
+        void setShouldRender(bool _render) { m_shouldRender = _render; }
+        bool getShouldRender() { return m_shouldRender; }
     private:
         /* Updates the viewing matrix based on the entities transform */
         void updateViewingMatrix();
@@ -41,5 +44,8 @@ namespace GameEngine
 
         glm::mat4 m_projectionMatrix;
         glm::mat4 m_viewingMatrix;
+
+        /* If the camera should render to the main screen */
+        bool m_shouldRender;
     };
 }

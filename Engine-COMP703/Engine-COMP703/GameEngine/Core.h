@@ -27,15 +27,19 @@ namespace GameEngine
 		/* Main engine game loop ticks all required engine components */
 		void run();
 
-		/* Creates a new module, adds them to the core vector and returns for user use */
-		std::shared_ptr<Module> addModule();
-
 		/* Returns the camera that is currently set to render */
 		std::weak_ptr<Camera> getActiveRenderingCamera() { return m_activeRenderingCamera; }
+
+		/* Creates a new module, adds them to the core vector and returns for user use */
+		std::shared_ptr<Module> addModule();
 	
 		/* Returns the pointer to a module based on the passed name or index */
 		std::shared_ptr<Module> getModule(std::string _name);
 		std::shared_ptr<Module> getModule(int _index);
+
+		/* Returns a weak pointer to a newly created render texture */
+		std::weak_ptr<GraphicsRenderer::RenderTextureHandler> addRenderTexture(std::weak_ptr<Camera> _renderingCamera, int _textureWidth, int _textureHeight);
+
 	private:
 		friend Component;
 		friend Entity;
@@ -54,6 +58,9 @@ namespace GameEngine
 
 		/* Vector of game entity modules which handle sections of grouped entities */
 		std::vector<std::shared_ptr<Module>> m_modules;
+
+		/* Vector of all created render textures to draw to */
+		std::vector<std::shared_ptr<GraphicsRenderer::RenderTextureHandler>> m_renderTextures;
 
 		/* List of all created cameras within the engine */
 		std::vector<std::weak_ptr<Camera>> m_cameras;

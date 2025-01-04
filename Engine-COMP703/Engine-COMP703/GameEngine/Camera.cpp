@@ -17,6 +17,7 @@ namespace GameEngine
     {
         m_self = _selfPtr;
         m_cameraProjection = _projectionType;
+        m_shouldRender = true;
 
         m_transform = getEntityTransform();
 

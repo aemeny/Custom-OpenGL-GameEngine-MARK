@@ -12,6 +12,7 @@
 #include "TextureResource.h"
 #include "ModelResource.h"
 #include "ShaderResource.h"
+#include "../Graphics/GraphicsRenderTextureHandler.h"
 
 namespace GameEngine
 {
@@ -23,6 +24,8 @@ namespace GameEngine
         ModelHandler& setModel(std::string _modelFileAddress);
         /* Loads the Graphics Renderer's TextureHandler resource */
         ModelHandler& setTexture(std::string _textureFileAddress);
+        /* Sets the Graphics Renderer's RenderTextureHandler */
+        ModelHandler& setTexture(std::weak_ptr<GraphicsRenderer::RenderTextureHandler> _renterTexture);
         /* Loads the Graphics Renderer's ShaderHandler resource */
         ModelHandler& setShaders(std::string _vertShaderFileAddress, std::string _fragShaderFileAddress);
 
@@ -30,6 +33,7 @@ namespace GameEngine
         /* Pointer references */
         std::shared_ptr<GraphicsRenderer::ModelHandler> m_model;
         std::shared_ptr<GraphicsRenderer::TextureHandler> m_texture;
+        std::weak_ptr<GraphicsRenderer::RenderTextureHandler> m_renderTexture;
         std::shared_ptr<GraphicsRenderer::ShaderHandler> m_shader;
     };
 }

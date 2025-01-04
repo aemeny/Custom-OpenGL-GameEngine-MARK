@@ -159,6 +159,37 @@ namespace GraphicsRenderer
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 
+    /* Takes in a model and a render texture and instructs OpenGL to draw to the screen */
+    void ShaderHandler::renderModel(std::shared_ptr<ModelHandler> _model, std::weak_ptr<RenderTextureHandler> _renderTexture)
+    {
+        glUseProgram(m_programID);
+
+        /* Bind model ID to VAO */
+        glBindVertexArray(_model->getModelId());
+        /* Bind texture ID */
+        glBindTexture(GL_TEXTURE_2D, _renderTexture.lock()->getID());
+
+        /* Enable Back Face Culling */
+        glEnable(GL_CULL_FACE);
+        /* Enable Depth Testing */
+        glEnable(GL_DEPTH_TEST);
+        /* Enable Alpha Blending */
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        /* Draw model to screen using triangles(3 vertices's) */
+        glDrawArrays(GL_TRIANGLES, 0, _model->getVertices());
+
+        /* Reset the state */
+        glDisable(GL_DEPTH_TEST);
+        glDisable(GL_CULL_FACE);
+        glDisable(GL_BLEND);
+
+        glBindVertexArray(0);
+        glUseProgram(0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
     /* Takes in a Vao from LineRenderer and instruct OpenGL to draw to the screen */
     void ShaderHandler::renderDebugLine(std::shared_ptr<Vao> _Vao, int _numOfLines)
     {

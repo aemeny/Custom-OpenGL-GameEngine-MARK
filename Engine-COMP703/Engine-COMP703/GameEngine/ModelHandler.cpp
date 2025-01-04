@@ -25,7 +25,10 @@ namespace GameEngine
         m_shader->bindShader(transform.lock()->getModelMatrix(), "u_Model");
         m_shader->bindShader(camera.lock()->getViewingMatrix(), "u_Viewing");
 
-        m_shader->renderModel(m_model, m_texture);
+        if(m_renderTexture.expired()) // If no renderTexture is set
+            m_shader->renderModel(m_model, m_texture);
+        else
+            m_shader->renderModel(m_model, m_renderTexture);
     }
 
     /* Loads the Graphics Renderer's ModelHandler resource */
@@ -41,6 +44,13 @@ namespace GameEngine
     {
         m_texture = m_entity.lock()->m_corePtr.lock()->m_resources->
             load<TextureResource>("../Samples/Textures/" + _textureFileAddress)->getTexture();
+        return *this;
+    }
+
+    /* Sets the Graphics Renderer's RenderTextureHandler */
+    ModelHandler& ModelHandler::setTexture(std::weak_ptr<GraphicsRenderer::RenderTextureHandler> _renterTexture)
+    {
+        m_renderTexture = _renterTexture;
         return *this;
     }
 

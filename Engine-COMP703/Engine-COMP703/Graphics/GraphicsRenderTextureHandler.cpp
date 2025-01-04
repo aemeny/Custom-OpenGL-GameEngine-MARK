@@ -11,9 +11,9 @@
 
 namespace GraphicsRenderer
 {
-    RenderTextureHandler::RenderTextureHandler(int _textureWidth, int _textureHeight) :
-        m_textureWidth(_textureWidth), m_textureHeight(_textureHeight), m_dirty(true),
-        m_textureID(0), m_fboID(0), m_rboID(0)
+    RenderTextureHandler::RenderTextureHandler(std::weak_ptr<Camera> _renderingCamera, int _textureWidth, int _textureHeight) :
+        m_textureWidth(_textureWidth), m_textureHeight(_textureHeight), m_renderingCamera(_renderingCamera),
+        m_dirty(true), m_textureID(0), m_fboID(0), m_rboID(0), m_clearColour(0.0f)
     {}
 
     RenderTextureHandler::~RenderTextureHandler()
@@ -38,8 +38,8 @@ namespace GraphicsRenderer
             glGenTextures(1, &m_textureID);
             glBindTexture(GL_TEXTURE_2D, m_textureID);
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_textureWidth, m_textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
             glBindTexture(GL_TEXTURE_2D, 0);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_textureID, 0);
 
@@ -76,5 +76,12 @@ namespace GraphicsRenderer
         glBindTexture(GL_TEXTURE_2D, m_textureID);
         glGenerateMipmap(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
+    void RenderTextureHandler::setNewDimensions(int _textureWidth, int _textureHeight)
+    {
+        m_textureHeight = _textureHeight;
+        m_textureWidth = _textureWidth;
+        m_dirty = true;
     }
 }

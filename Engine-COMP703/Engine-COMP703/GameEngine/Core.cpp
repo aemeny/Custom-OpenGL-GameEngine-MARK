@@ -120,18 +120,53 @@ namespace GameEngine
 			}
 
 
+			/* Render to any render textures in the scene */
+			for (size_t rti = 0; rti < m_renderTextures.size(); ++rti)
+			{
+				m_renderTextures.at(rti)->bind();
+				/* Clear texture from last frame */
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+				/* Set default colour when rendering with no generated texture */
+				if (m_renderTextures.at(rti)->getDirty()) // Only required on first pass
+				{
+					glm::vec3 clearColour = m_renderTextures.at(rti)->getClearColour();
+					glClearColor(clearColour.x, clearColour.y, clearColour.z, 1.0f);
+				}
+
+				/* Entity Render */
+				m_activeRenderingCamera = m_renderTextures.at(rti)->getRenderingCamera();
+				for (size_t mi = 0; mi < m_modules.size(); ++mi)
+				{
+					if (m_modules.at(mi)->getActiveStatus())
+					{
+						m_modules.at(mi)->render();
+					}
+				}
+				/* Debug Lines Render */
+				m_lineRenderer->renderDebugLines(m_self);
+
+				m_renderTextures.at(rti)->generateMipmaps();
+
+				m_renderTextures.at(rti)->unbind();
+			}
+
 			/* Entity render */
 			for (size_t ci = 0; ci < m_cameras.size(); ++ci)
 			{
-				/* Only render with the camera if th entity it is within is active */
-				if (m_cameras.at(ci).lock()->m_entity.lock()->getActiveStatus())
+				/* Only render camera needed to the main screen */
+				if (m_cameras.at(ci).lock()->getShouldRender())
 				{
-					m_activeRenderingCamera = m_cameras.at(ci);
-					for (size_t mi = 0; mi < m_modules.size(); ++mi)
+					/* Only render with the camera if the entity it is within is active */
+					if (m_cameras.at(ci).lock()->m_entity.lock()->getActiveStatus())
 					{
-						if (m_modules.at(mi)->getActiveStatus())
+						m_activeRenderingCamera = m_cameras.at(ci);
+						for (size_t mi = 0; mi < m_modules.size(); ++mi)
 						{
-							m_modules.at(mi)->render();
+							if (m_modules.at(mi)->getActiveStatus())
+							{
+								m_modules.at(mi)->render();
+							}
 						}
 					}
 				}
@@ -209,5 +244,15 @@ namespace GameEngine
 		
 		fprintf(stderr, "Error: No Module found within index range\n");
 		return NULL;
+	}
+
+	std::weak_ptr<GraphicsRenderer::RenderTextureHandler> Core::addRenderTexture(std::weak_ptr<Camera> _renderingCamera, int _textureWidth, int _textureHeight)
+	{
+		std::shared_ptr<GraphicsRenderer::RenderTextureHandler> rtn
+			= std::make_shared<GraphicsRenderer::RenderTextureHandler>(_renderingCamera, _textureWidth, _textureHeight);
+
+		m_renderTextures.push_back(rtn);
+
+		return rtn;
 	}
 }

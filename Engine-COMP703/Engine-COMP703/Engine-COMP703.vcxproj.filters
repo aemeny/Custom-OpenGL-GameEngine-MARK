@@ -40,11 +40,14 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{df2d7efb-e635-4c09-92a1-0897b66f903d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders\Perspective">
-      <UniqueIdentifier>{8878d476-4d90-49da-8b60-d3bed8c2fedf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shaders\Basic">
       <UniqueIdentifier>{541c4ef0-2169-4019-86b4-effc4571cc30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Lit">
+      <UniqueIdentifier>{aaa83a0d-bad3-4833-be80-334599376190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Unlit">
+      <UniqueIdentifier>{3b673127-7785-4a02-aa5c-ec617356d339}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -131,9 +134,6 @@
     </ClCompile>
     <ClCompile Include="Graphics\GraphicsRenderTextureHandler.cpp">
       <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngine\RenderTextureResource.cpp">
-      <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -230,22 +230,25 @@
     <ClInclude Include="Graphics\GraphicsRenderTextureHandler.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngine\RenderTextureResource.h">
-      <Filter>Header Files\GameEngine</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Shaders\Perspective\FragmentShader.glsl">
-      <Filter>Shaders\Perspective</Filter>
-    </None>
-    <None Include="..\Shaders\Perspective\VertexShader.glsl">
-      <Filter>Shaders\Perspective</Filter>
-    </None>
     <None Include="..\Shaders\Basic\fragmentShader.glsl">
       <Filter>Shaders\Basic</Filter>
     </None>
     <None Include="..\Shaders\Basic\vertexShader.glsl">
       <Filter>Shaders\Basic</Filter>
+    </None>
+    <None Include="..\Shaders\Lit\FragmentShader.glsl">
+      <Filter>Shaders\Lit</Filter>
+    </None>
+    <None Include="..\Shaders\Lit\VertexShader.glsl">
+      <Filter>Shaders\Lit</Filter>
+    </None>
+    <None Include="..\Shaders\Unlit\FragmentShader.glsl">
+      <Filter>Shaders\Unlit</Filter>
+    </None>
+    <None Include="..\Shaders\Unlit\VertexShader.glsl">
+      <Filter>Shaders\Unlit</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -86,6 +86,15 @@ void CameraController::onTick()
     /* Multiply movement by speed and delta time */
     position += movement * m_movementSpeed * getDTAsFloat();
 
+    if (m_input.lock()->isKeyHeld(SDLK_LSHIFT)) // DOWN
+    {
+        position.y -= m_movementSpeed * getDTAsFloat();
+    }
+    if (m_input.lock()->isKeyHeld(SDLK_SPACE)) // UP
+    {
+        position.y += m_movementSpeed * getDTAsFloat();
+    }
+
     /* Apply new position to location */
     m_transform.lock()->setPosition(position);
 }
