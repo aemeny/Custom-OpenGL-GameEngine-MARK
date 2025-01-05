@@ -135,6 +135,9 @@
     <ClCompile Include="Graphics\GraphicsRenderTextureHandler.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="GameProject\Portal.cpp">
+      <Filter>Source Files\GameProject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\GraphicsMasterHeader.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="Graphics\GraphicsRenderTextureHandler.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Portal.h">
+      <Filter>Header Files\GameProject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

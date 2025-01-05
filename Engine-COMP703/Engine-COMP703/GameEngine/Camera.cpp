@@ -30,7 +30,7 @@ namespace GameEngine
 
             std::weak_ptr<Window> windowContext = getWindowFromCore();
             m_projectionMatrix = glm::perspective(glm::radians(_perspectibeParams->FOV),
-                (float)(windowContext.lock()->m_windowWidth / windowContext.lock()->m_windowHeight),
+                static_cast<float>(windowContext.lock()->m_windowWidth) / static_cast<float>(windowContext.lock()->m_windowHeight),
                 _perspectibeParams->nearPlane, _perspectibeParams->farPlane);
 
             /* Default viewing matrix set for camera */
@@ -56,6 +56,13 @@ namespace GameEngine
         {
             updateViewingMatrix();
         }
+    }
+
+    void Camera::setProjectionMatrix(float _FOV, float _width, float _height, float _near, float _far)
+    {
+        m_projectionMatrix = glm::perspective(glm::radians(_FOV),
+            _width / _height,
+            _near, _far);
     }
 
     void Camera::updateViewingMatrix()

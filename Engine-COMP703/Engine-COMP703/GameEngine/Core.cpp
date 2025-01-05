@@ -25,8 +25,8 @@ namespace GameEngine
 		}
 
 		/* SDL Window Initialize */
-		int windowWidth = 1000;
-		int windowHeight = 1000;
+		int windowWidth = 1920;
+		int windowHeight = 1080;
 		int swapInterval = 0;
 		rtn->m_windowContext = std::make_shared<Window>();
 		rtn->m_windowContext->initialize(windowWidth, windowHeight, swapInterval);
@@ -109,17 +109,6 @@ namespace GameEngine
 				physicsTimeAccumulator -= fixedTimeStep;
 			}
 
-
-			/* Entity late tick */
-			for (size_t mi = 0; mi < m_modules.size(); ++mi)
-			{
-				if (m_modules.at(mi)->getActiveStatus())
-				{
-					m_modules.at(mi)->lateTick();
-				}
-			}
-
-
 			/* Render to any render textures in the scene */
 			for (size_t rti = 0; rti < m_renderTextures.size(); ++rti)
 			{
@@ -149,6 +138,15 @@ namespace GameEngine
 				m_renderTextures.at(rti)->generateMipmaps();
 
 				m_renderTextures.at(rti)->unbind();
+			}
+
+			/* Entity late tick */
+			for (size_t mi = 0; mi < m_modules.size(); ++mi)
+			{
+				if (m_modules.at(mi)->getActiveStatus())
+				{
+					m_modules.at(mi)->lateTick();
+				}
 			}
 
 			/* Entity render */

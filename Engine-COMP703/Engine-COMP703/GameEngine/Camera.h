@@ -22,6 +22,7 @@ namespace GameEngine
         void onLateTick() override;
 
         glm::mat4 getProjectionMatrix() { return m_projectionMatrix; }
+        void setProjectionMatrix(float _FOV, float _width, float _height, float _near, float _far);
         glm::mat4 getViewingMatrix() { return m_viewingMatrix; }
     
         /* Sets main camera in core as passed camera pointer */

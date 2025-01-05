@@ -8,8 +8,6 @@
 
 #include "CameraController.h"
 
-#include <iostream>
-
 /// THIS IS AN EXAMPLE OF A USER CREATED SCRIPT WHEN USING THE ENGINE AND NOT PART OF THE ENIGNE ITSELF ///
 
 void CameraController::initialize()

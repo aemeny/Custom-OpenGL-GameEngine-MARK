@@ -153,6 +153,7 @@
     <ClCompile Include="GameEngine\Window.cpp" />
     <ClCompile Include="GameProject\CameraController.cpp" />
     <ClCompile Include="GameProject\Hierarchy.cpp" />
+    <ClCompile Include="GameProject\Portal.cpp" />
     <ClCompile Include="Graphics\GraphicsModelHandler.cpp" />
     <ClCompile Include="Graphics\GraphicsRenderTextureHandler.cpp" />
     <ClCompile Include="Graphics\GraphicsShaderHandler.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="GameEngine\Window.h" />
     <ClInclude Include="GameProject\CameraController.h" />
     <ClInclude Include="GameProject\Hierarchy.h" />
+    <ClInclude Include="GameProject\Portal.h" />
     <ClInclude Include="Graphics\GraphicsMasterHeader.h" />
     <ClInclude Include="Graphics\GraphicsModelHandler.h" />
     <ClInclude Include="Graphics\GraphicsRenderTextureHandler.h" />
