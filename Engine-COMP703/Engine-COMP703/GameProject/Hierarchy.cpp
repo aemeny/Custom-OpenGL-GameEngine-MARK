@@ -22,9 +22,21 @@ namespace GameEngine
         /* Camera Entity */
         EntityObj cameraEntity = defaultModule->addEntity();
         cameraEntity->addComponent<Camera>(CameraProjection::Perspective, PerspectiveParamaters{ 60.0f, 0.1f, 100.0f });
-        std::weak_ptr<CameraController> camController = cameraEntity->addComponent<CameraController>();
-        TransformObj transformCameraEntity = cameraEntity->findComponent<Transform>();
 
+        std::weak_ptr<CameraController> camController = cameraEntity->addComponent<CameraController>();
+
+        TransformObj transformCameraEntity = cameraEntity->findComponent<Transform>();
+        transformCameraEntity.lock()->setPosition(glm::vec3(13.0f, 3.5f, -4.0f));
+
+        RigidBodyObj rigidBody = cameraEntity->addComponent<RigidBody>();
+        rigidBody.lock()->setMass(1.0f);
+        rigidBody.lock()->setGravity(glm::vec3(0.0f, -19.6f, 0.0f));
+        camController.lock()->m_rigidBody = rigidBody;
+
+        BoxColliderObj characterCollider = cameraEntity->addComponent<AABBCollider>();
+        characterCollider.lock()->setColliderSize(glm::vec3(1.0f, 2.75f, 1.0f));
+        characterCollider.lock()->setColliderOffset(glm::vec3(0.0f, -1.0f, 0.0f));
+        camController.lock()->m_boxCollider = characterCollider;
 
         /* Render Texture Camera Entity */
         EntityObj textureCameraEntity = defaultModule->addEntity();
@@ -55,7 +67,7 @@ namespace GameEngine
 
         TransformObj transformPortalOne = portalOne->findComponent<Transform>();
         transformPortalOne.lock()->setRotation(glm::vec3(0.0f, 0.0f, 90.0f));
-        transformPortalOne.lock()->setPosition(glm::vec3(10.0f, 2.3f, 0.0f));
+        transformPortalOne.lock()->setPosition(glm::vec3(12.0f, 2.3f, 2.8f));
 
 
         /* Cube 2 Making Use Of Render Texture */
@@ -70,25 +82,26 @@ namespace GameEngine
         transformPortalTwo.lock()->setPosition(glm::vec3(-10.0f, 2.3f, 0.0f));
 
 
-        /* Portal 1 wall */
-        EntityObj portal1Wall = defaultModule->addEntity();
-        portal1Wall->addComponent<ModelHandler>()
+        /* Wall 1 */
+        EntityObj wall1 = defaultModule->addEntity();
+        wall1->addComponent<ModelHandler>()
             ->setModel("Cube/Cube.obj")
-            .setTexture("Colours/OrangeTexture.png")
-            .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
-        TransformObj transformcube1 = portal1Wall->findComponent<Transform>();
-        transformcube1.lock()->setPosition(glm::vec3(10.0f, 4.8f, 0.2f));
-        transformcube1.lock()->setScale(glm::vec3(8.0f, 4.5f, 0.1f));
+            .setTexture("Floor/Portal/concrete_modular_wall001a.png")
+            .setShaders("Lit/VertexShader-Wall.glsl", "Lit/FragmentShader.glsl");
+        TransformObj transformcube1 = wall1->findComponent<Transform>();
+        transformcube1.lock()->setPosition(glm::vec3(10.0f, 6.2f, 3.0f));
+        transformcube1.lock()->setScale(glm::vec3(12.0f, 6.0f, 0.1f));
 
-        /* Portal 2 wall */
-        EntityObj portal2Wall = defaultModule->addEntity();
-        portal2Wall->addComponent<ModelHandler>()
+        /* Wall 2 */
+        EntityObj wall2 = defaultModule->addEntity();
+        wall2->addComponent<ModelHandler>()
             ->setModel("Cube/Cube.obj")
-            .setTexture("Colours/GreenTexture.png")
-            .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
-        TransformObj transformcube2 = portal2Wall->findComponent<Transform>();
-        transformcube2.lock()->setPosition(glm::vec3(-10.0f, 4.8f, 0.2f));
-        transformcube2.lock()->setScale(glm::vec3(8.0f, 4.5f, 0.1f));
+            .setTexture("Floor/Portal/concrete_modular_wall001a.png")
+            .setShaders("Lit/VertexShader-Wall.glsl", "Lit/FragmentShader.glsl");
+        TransformObj transformcube2 = wall2->findComponent<Transform>();
+        transformcube2.lock()->setRotation(glm::vec3(0.0f, 90.0f, 0.0f));
+        transformcube2.lock()->setPosition(glm::vec3(-2.0f, 6.2f, -9.0f));
+        transformcube2.lock()->setScale(glm::vec3(12.0f, 6.0f, 0.1f));
 
 
         /* Player Character Entity */
@@ -101,13 +114,6 @@ namespace GameEngine
         TransformObj playerTransform = character->findComponent<Transform>();
         playerTransform.lock()->setScale(glm::vec3(0.5f));
 
-        //character->addComponent<RigidBody>()->setMass(50.0f);
-
-        //BoxColliderObj characterCollider = character->addComponent<AABBCollider>();
-        //characterCollider.lock()->setColliderSize(glm::vec3(2.0f, 5.5f, 2.0f));
-        //characterCollider.lock()->setColliderOffset(glm::vec3(0.0f, 0.5f, 0.0f));
-
-
         camController.lock()->m_playerCharacter = playerTransform;
 
 
@@ -119,7 +125,7 @@ namespace GameEngine
         portal2.lock()->m_cameraTransform = transformTextureCameraEntity;
         portal2.lock()->m_playerTransform = transformCameraEntity;
         portal2.lock()->m_linkedPortalTransform = transformPortalOne;
-        portal2.lock()->m_portalWall = portal1Wall;
+        portal2.lock()->m_portalWall = wall1;
         portal2.lock()->m_characterEntity = character;
 
         portalOne->setStillTickStatus(true);
@@ -129,7 +135,7 @@ namespace GameEngine
         portal1.lock()->m_cameraTransform = transformTextureCameraEntity2;
         portal1.lock()->m_playerTransform = transformCameraEntity;
         portal1.lock()->m_linkedPortalTransform = transformPortalTwo;
-        portal1.lock()->m_portalWall = portal2Wall;
+        portal1.lock()->m_portalWall = wall2;
         portal1.lock()->m_characterEntity = character;
 
 
@@ -138,31 +144,31 @@ namespace GameEngine
         EntityObj floor = defaultModule->addEntity();
         floor->addComponent<ModelHandler>()
             ->setModel("Cube/Cube.obj")
-            .setTexture("Colours/OrangeTexture.png")
-            .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
+            .setTexture("Floor/Portal/concrete_modular_floor001a.png")
+            .setShaders("Lit/VertexShader-Floor.glsl", "Lit/FragmentShader.glsl");
 
         TransformObj transformFloor = floor->findComponent<Transform>();
         transformFloor.lock()->setPosition(glm::vec3(10.0f, 0.1f, -9.0f));
-        transformFloor.lock()->setScale(glm::vec3(8.0f, 0.2f, 15.0f));
+        transformFloor.lock()->setScale(glm::vec3(12.0f, 0.2f, 12.0f));
 
         BoxColliderObj boxCollider = floor->addComponent<AABBCollider>();
-        boxCollider.lock()->setColliderSize(glm::vec3(16.0f, 0.4f, 30.0f));
+        boxCollider.lock()->setColliderSize(glm::vec3(24.0f, 0.4f, 24.0f));
+        boxCollider.lock()->setKinematicState(true);
 
-        /* Floor Entity 2 */
-        EntityObj floor2 = defaultModule->addEntity();
-        floor2->addComponent<ModelHandler>()
+        /* Roof Entity */
+        EntityObj roof = defaultModule->addEntity();
+        roof->addComponent<ModelHandler>()
             ->setModel("Cube/Cube.obj")
-            .setTexture("Colours/GreenTexture.png")
-            .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
+            .setTexture("Floor/Portal/concrete_modular_floor001a.png")
+            .setShaders("Lit/VertexShader-Floor.glsl", "Lit/FragmentShader.glsl");
 
-        TransformObj transformFloor2 = floor2->findComponent<Transform>();
-        transformFloor2.lock()->setPosition(glm::vec3(-10.0f, 0.1f, -9.0f));
-        transformFloor2.lock()->setScale(glm::vec3(8.0f, 0.2f, 15.0f));
+        TransformObj transformRoof = roof->findComponent<Transform>();
+        transformRoof.lock()->setPosition(glm::vec3(10.0f, 12.1f, -9.0f));
+        transformRoof.lock()->setScale(glm::vec3(12.0f, 0.2f, 12.0f));
 
-        BoxColliderObj boxCollider2 = floor2->addComponent<AABBCollider>();
-        boxCollider2.lock()->setColliderSize(glm::vec3(16.0f, 0.4f, 30.0f));
-
-
+        boxCollider = roof->addComponent<AABBCollider>();
+        boxCollider.lock()->setColliderSize(glm::vec3(24.0f, 0.4f, 24.0f));
+        boxCollider.lock()->setKinematicState(true);
 
 
 
@@ -172,56 +178,46 @@ namespace GameEngine
             ->setModel("Cube/Cube.obj")
             .setTexture("Floor/Tile_Diffuse.png")
             .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
-        cube->findComponent<Transform>().lock()->setPosition(glm::vec3(-6.0f, 1.4f, -8.0f));
+        TransformObj transformcube = cube->findComponent<Transform>();
+        transformcube.lock()->setPosition(glm::vec3(6.5f, 1.1f, -8.5f));
+        transformcube.lock()->setScale(glm::vec3(0.8f));
 
         cube = defaultModule->addEntity();
         cube->addComponent<ModelHandler>()
             ->setModel("Cube/Cube.obj")
             .setTexture("Floor/Tile_Diffuse.png")
             .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
-        cube->findComponent<Transform>().lock()->setPosition(glm::vec3(6.0f, 1.4f, -8.0f));
-
-        cube = defaultModule->addEntity();
-        cube->addComponent<ModelHandler>()
-            ->setModel("Cube/Cube.obj")
-            .setTexture("Floor/Tile_Diffuse.png")
-            .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
-        cube->findComponent<Transform>().lock()->setPosition(glm::vec3(15.0f, 1.4f, -14.0f));
-
-        cube = defaultModule->addEntity();
-        cube->addComponent<ModelHandler>()
-            ->setModel("Cube/Cube.obj")
-            .setTexture("Floor/Tile_Diffuse.png")
-            .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
-        cube->findComponent<Transform>().lock()->setPosition(glm::vec3(-15.0f, 1.4f, -14.0f));
+        transformcube = cube->findComponent<Transform>();
+        transformcube.lock()->setPosition(glm::vec3(15.0f, 1.2f, -14.0f));
+        transformcube.lock()->setScale(glm::vec3(0.9f));
 
 
         /* Portal One Boarder Cubes */
         cube = defaultModule->addEntity();
         cube->addComponent<ModelHandler>()
             ->setModel("Cube/Cube.obj")
-            .setTexture("Colours/BlackTexture.png")
+            .setTexture("Colours/BlueTexture.png")
             .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
-        TransformObj transformcube = cube->findComponent<Transform>();
-        transformcube.lock()->setPosition(glm::vec3(13.2f, 2.4f, 0.0f));
+        transformcube = cube->findComponent<Transform>();
+        transformcube.lock()->setPosition(glm::vec3(15.2f, 2.4f, 2.9f));
         transformcube.lock()->setScale(glm::vec3(0.2f, 2.2f, 0.1f));
 
         cube = defaultModule->addEntity();
         cube->addComponent<ModelHandler>()
             ->setModel("Cube/Cube.obj")
-            .setTexture("Colours/BlackTexture.png")
+            .setTexture("Colours/BlueTexture.png")
             .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
         transformcube = cube->findComponent<Transform>();
-        transformcube.lock()->setPosition(glm::vec3(7.05f, 2.4f, 0.0f));
+        transformcube.lock()->setPosition(glm::vec3(9.05f, 2.4f, 2.9f));
         transformcube.lock()->setScale(glm::vec3(0.2f, 2.2f, 0.1f));
 
         cube = defaultModule->addEntity();
         cube->addComponent<ModelHandler>()
             ->setModel("Cube/Cube.obj")
-            .setTexture("Colours/BlackTexture.png")
+            .setTexture("Colours/BlueTexture.png")
             .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
         transformcube = cube->findComponent<Transform>();
-        transformcube.lock()->setPosition(glm::vec3(10.2f, 4.4f, 0.0f));
+        transformcube.lock()->setPosition(glm::vec3(12.2f, 4.4f, 2.9f));
         transformcube.lock()->setScale(glm::vec3(3.0f, 0.2f, 0.1f));
 
 
@@ -229,7 +225,7 @@ namespace GameEngine
         cube = defaultModule->addEntity();
         cube->addComponent<ModelHandler>()
             ->setModel("Cube/Cube.obj")
-            .setTexture("Colours/BlackTexture.png")
+            .setTexture("Colours/BlueTexture.png")
             .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
         transformcube = cube->findComponent<Transform>();
         transformcube.lock()->setPosition(glm::vec3(-13.2f, 2.4f, 0.0f));
@@ -238,7 +234,7 @@ namespace GameEngine
         cube = defaultModule->addEntity();
         cube->addComponent<ModelHandler>()
             ->setModel("Cube/Cube.obj")
-            .setTexture("Colours/BlackTexture.png")
+            .setTexture("Colours/BlueTexture.png")
             .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
         transformcube = cube->findComponent<Transform>();
         transformcube.lock()->setPosition(glm::vec3(-7.2f, 2.4f, 0.0f));
@@ -247,10 +243,31 @@ namespace GameEngine
         cube = defaultModule->addEntity();
         cube->addComponent<ModelHandler>()
             ->setModel("Cube/Cube.obj")
-            .setTexture("Colours/BlackTexture.png")
+            .setTexture("Colours/BlueTexture.png")
             .setShaders("Lit/VertexShader.glsl", "Lit/FragmentShader.glsl");
         transformcube = cube->findComponent<Transform>();
         transformcube.lock()->setPosition(glm::vec3(-10.2f, 4.4f, 0.0f));
         transformcube.lock()->setScale(glm::vec3(3.0f, 0.2f, 0.1f));
+
+        /* Wall 3 */
+        EntityObj wall = defaultModule->addEntity();
+        wall->addComponent<ModelHandler>()
+            ->setModel("Cube/Cube.obj")
+            .setTexture("Floor/Portal/concrete_modular_wall001a.png")
+            .setShaders("Lit/VertexShader-Wall.glsl", "Lit/FragmentShader.glsl");
+        TransformObj transformWall = wall->findComponent<Transform>();
+        transformWall.lock()->setRotation(glm::vec3(0.0f, 90.0f, 0.0f));
+        transformWall.lock()->setPosition(glm::vec3(22.0f, 6.2f, -9.0f));
+        transformWall.lock()->setScale(glm::vec3(12.0f, 6.0f, 0.1f));
+
+        /* Wall 1 */
+        wall = defaultModule->addEntity();
+        wall->addComponent<ModelHandler>()
+            ->setModel("Cube/Cube.obj")
+            .setTexture("Floor/Portal/concrete_modular_wall001a.png")
+            .setShaders("Lit/VertexShader-Wall.glsl", "Lit/FragmentShader.glsl");
+        transformWall = wall->findComponent<Transform>();
+        transformWall.lock()->setPosition(glm::vec3(10.0f, 6.2f, -21.0f));
+        transformWall.lock()->setScale(glm::vec3(12.0f, 6.0f, 0.1f));
     }
 }

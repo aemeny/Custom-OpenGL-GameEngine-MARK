@@ -51,5 +51,5 @@ void Portal::onLateTick()
 {
     m_portalEntity.lock()->setActiveStatus(true);
     m_portalWall.lock()->setActiveStatus(true);
-    m_characterEntity.lock()->setActiveStatus(false);
+    //m_characterEntity.lock()->setActiveStatus(false);
 }

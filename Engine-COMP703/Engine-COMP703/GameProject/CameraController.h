@@ -11,6 +11,8 @@
 #pragma once
 #include "../GameEngine/Component.h"
 #include "../GameEngine/Transform.h"
+#include "../Physics/RigidBody.h"
+#include "../Physics/BoxCollider.h"
 
 struct CameraController : Component
 {
@@ -18,7 +20,12 @@ struct CameraController : Component
     void onTick() override;
 
     std::weak_ptr<Transform> m_playerCharacter;
+    std::weak_ptr<PhysicsSystem::RigidBody> m_rigidBody;
+    std::weak_ptr<PhysicsSystem::AABBCollider> m_boxCollider;
 private:
+    /* Is can jump again after collision check */
+    bool m_canJump;
+
     /* Weak ref to the input handler */
     std::weak_ptr<InputHandler> m_input;
 

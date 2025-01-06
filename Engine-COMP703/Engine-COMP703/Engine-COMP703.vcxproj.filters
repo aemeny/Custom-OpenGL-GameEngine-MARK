@@ -256,5 +256,11 @@
     <None Include="..\Shaders\Unlit\VertexShader.glsl">
       <Filter>Shaders\Unlit</Filter>
     </None>
+    <None Include="..\Shaders\Lit\VertexShader-Floor.glsl">
+      <Filter>Shaders\Lit</Filter>
+    </None>
+    <None Include="..\Shaders\Lit\VertexShader-Wall.glsl">
+      <Filter>Shaders\Lit</Filter>
+    </None>
   </ItemGroup>
 </Project>

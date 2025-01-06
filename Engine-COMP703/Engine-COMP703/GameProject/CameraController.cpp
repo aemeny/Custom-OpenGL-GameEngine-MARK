@@ -15,6 +15,7 @@ void CameraController::initialize()
     m_mouseSensitivity = glm::vec2(0.2f);
 
     m_movementSpeed = 10.0f;
+    m_canJump = true;
 
     /* Grab engines input handler, lock mouse to center of screen and make it not visible */
     m_input = getInputHandler();
@@ -84,13 +85,18 @@ void CameraController::onTick()
     /* Multiply movement by speed and delta time */
     position += movement * m_movementSpeed * getDTAsFloat();
 
-    if (m_input.lock()->isKeyHeld(SDLK_LSHIFT)) // DOWN
+    if (m_canJump)
     {
-        position.y -= m_movementSpeed * getDTAsFloat();
+        if (m_input.lock()->isKeyPressed(SDLK_SPACE)) // UP
+        {
+            m_canJump = false;
+            m_rigidBody.lock()->addForce(glm::vec3(0.0f, 500.0f, 0.0f));
+        }
     }
-    if (m_input.lock()->isKeyHeld(SDLK_SPACE)) // UP
+    else
     {
-        position.y += m_movementSpeed * getDTAsFloat();
+        if (m_boxCollider.lock()->hasCollided())
+            m_canJump = true;
     }
 
     /* Apply new position to location */

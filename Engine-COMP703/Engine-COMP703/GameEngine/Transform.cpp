@@ -28,13 +28,13 @@ namespace GameEngine
         /* Apply translation */
         m_modelMatrix = glm::translate(m_modelMatrix, m_position);
 
-        /* Apply scale */
-        m_modelMatrix = glm::scale(m_modelMatrix, m_scale);
-
         /* Apply rotation(X->Y->Z) */
         m_modelMatrix = glm::rotate(m_modelMatrix, glm::radians(m_rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
         m_modelMatrix = glm::rotate(m_modelMatrix, glm::radians(m_rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
         m_modelMatrix = glm::rotate(m_modelMatrix, glm::radians(m_rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+
+        /* Apply scale */
+        m_modelMatrix = glm::scale(m_modelMatrix, m_scale);
     }
 
     glm::mat4 Transform::getLocalToWorldMatrix() const

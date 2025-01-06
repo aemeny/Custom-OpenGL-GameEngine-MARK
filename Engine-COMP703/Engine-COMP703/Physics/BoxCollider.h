@@ -34,11 +34,19 @@ namespace PhysicsSystem
 
         /* If the debug outline should be rendered */
         void setRenderOutline(bool _render) { m_renderOutline = _render; }
+
+        void setKinematicState(bool _isKinematic) { m_isKinematic = _isKinematic; }
+        bool hasCollided() { return m_collision; }
     private:
         friend RigidBody;
 
         glm::vec3 getMax() const;
         glm::vec3 getMin() const;
+
+        bool m_isKinematic;
+
+        /* If a collision has been made on this frame */
+        bool m_collision;
 
         /* Pushes updates box collider size to LineRenderer */
         void updateDebugOutline();

@@ -1,2 +1,4 @@
-﻿  CameraController.cpp
+﻿  Hierarchy.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Entity.h(53,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
   Engine-COMP703.vcxproj -> C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\x64\Debug\Engine-COMP703.exe

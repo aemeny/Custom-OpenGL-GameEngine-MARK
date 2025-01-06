@@ -19,6 +19,8 @@ namespace PhysicsSystem
         m_colliderSize = glm::vec3(1.0f);
 
         m_lineRendererDirty = true;
+        m_isKinematic = false;
+        m_collision = false;
 
         /* Checks if a rigid body exists on this entity */
         std::weak_ptr<RigidBody> rigidBodyPtr = m_entity.lock()->findComponent<RigidBody>();
@@ -38,13 +40,18 @@ namespace PhysicsSystem
 
     void AABBCollider::onAABBCollisionUpdate(const std::vector<std::weak_ptr<AABBCollider>>& _AABBColliders)
     {
+        m_collision = false;
         for (size_t ci = 0; ci < _AABBColliders.size(); ++ci)
         {
             if (_AABBColliders.at(ci).lock().get() != this)
             {
                 if (checkCollision(_AABBColliders.at(ci)))
                 {
-                    resolveCollision(_AABBColliders.at(ci));
+                    m_collision = true;
+                    if (m_isKinematic == false)
+                    {
+                        resolveCollision(_AABBColliders.at(ci));
+                    }
                 }
             }
         }
