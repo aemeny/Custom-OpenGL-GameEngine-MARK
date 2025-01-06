@@ -25,10 +25,11 @@ namespace GameEngine
         void setScale(glm::vec3 _scale) { m_scale = _scale; }
 
         /* Transform variables getters */
-        glm::vec3 getRotation() { return m_rotation; }
-        glm::vec3 getPosition() { return m_position; }
-        glm::vec3 getScale() { return m_scale; }
-        glm::mat4 getModelMatrix() { return m_modelMatrix; }
+        glm::vec3 getRotation() const { return m_rotation; }
+        glm::vec3 getPosition() const { return m_position; }
+        glm::vec3 getScale() const { return m_scale; }
+        glm::mat4 getLocalToWorldMatrix() const;
+        glm::mat4 getModelMatrix() const { return m_modelMatrix; }
 
 
     private:

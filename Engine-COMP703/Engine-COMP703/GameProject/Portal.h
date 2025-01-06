@@ -16,8 +16,16 @@
 struct Portal : Component
 {
     void onTick() override;
+    void onLateTick() override;
 
+    /* To activate/deactivate when rendering */
     std::weak_ptr<Entity> m_portalEntity;
+    std::weak_ptr<Entity> m_portalWall;
+    std::weak_ptr<Entity> m_characterEntity;
+
+    /* For relative position math */
     std::weak_ptr<Transform> m_cameraTransform;
     std::weak_ptr<Transform> m_playerTransform;
+    std::weak_ptr<Transform> m_portalTransform;
+    std::weak_ptr<Transform> m_linkedPortalTransform;
 };

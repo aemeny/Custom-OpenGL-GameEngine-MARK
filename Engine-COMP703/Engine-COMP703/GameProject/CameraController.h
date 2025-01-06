@@ -17,6 +17,7 @@ struct CameraController : Component
     void initialize() override;
     void onTick() override;
 
+    std::weak_ptr<Transform> m_playerCharacter;
 private:
     /* Weak ref to the input handler */
     std::weak_ptr<InputHandler> m_input;

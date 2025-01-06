@@ -25,6 +25,10 @@ namespace GameEngine
 		bool getActiveStatus() { return m_active; }
 		void setActiveStatus(bool _active) { m_active = _active; }
 
+		/* Setter and getter for the still tick status of this entity */
+		bool getStillTickStatus() { return m_stillTick; }
+		void setStillTickStatus(bool _active) { m_stillTick = _active; }
+
 		/* Returns a Component of any type that is passed into it.
 		 * Checks through all Components within the Entity for a matching type. */
 		template <typename T>
@@ -148,6 +152,9 @@ namespace GameEngine
 
 		/* If the entity is active, deactivated entities won't call render or tick */
 		bool m_active;
+
+		/* If the entity is not active, it can still be set to tick */
+		bool m_stillTick;
 
 		/* Vector of game components which handle all their independent functions */
 		std::vector<std::shared_ptr<Component>> m_components;

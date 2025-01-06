@@ -25,6 +25,7 @@ namespace GameEngine
 		rtn->m_corePtr = m_corePtr;
 		rtn->m_self = rtn;
 		rtn->m_active = true;
+		rtn->m_stillTick = false;
 
 		/* Each Entity starts with a Transform Component */
 		rtn->m_transformPtr = rtn->addComponent<Transform>();
@@ -41,7 +42,7 @@ namespace GameEngine
 	{
 		for (size_t ei = 0; ei < m_entities.size(); ++ei)
 		{
-			if (m_entities.at(ei)->getActiveStatus())
+			if (m_entities.at(ei)->getActiveStatus() || m_entities.at(ei)->getStillTickStatus())
 			{
 				m_entities.at(ei)->tick();
 			}
@@ -77,7 +78,7 @@ namespace GameEngine
 	{
 		for (size_t ei = 0; ei < m_entities.size(); ++ei)
 		{
-			if (m_entities.at(ei)->getActiveStatus())
+			if (m_entities.at(ei)->getActiveStatus() || m_entities.at(ei)->getStillTickStatus())
 			{
 				m_entities.at(ei)->lateTick();
 			}

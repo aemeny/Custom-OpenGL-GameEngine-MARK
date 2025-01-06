@@ -30,6 +30,7 @@ namespace GameEngine
 		int swapInterval = 0;
 		rtn->m_windowContext = std::make_shared<Window>();
 		rtn->m_windowContext->initialize(windowWidth, windowHeight, swapInterval);
+		rtn->m_windowContext->setWindowSwapInterval(0);
 
 		/* GLEW Initialize */
 		GLenum err = glewInit();

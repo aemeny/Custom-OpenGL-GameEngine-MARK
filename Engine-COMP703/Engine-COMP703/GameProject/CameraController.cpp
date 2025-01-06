@@ -95,4 +95,6 @@ void CameraController::onTick()
 
     /* Apply new position to location */
     m_transform.lock()->setPosition(position);
+    m_playerCharacter.lock()->setPosition(glm::vec3(position.x, position.y - 1.25f, position.z));
+    m_playerCharacter.lock()->setRotation(glm::vec3(0.0f, -m_cameraRotation.y + 90.0f, 0.0f));
 }

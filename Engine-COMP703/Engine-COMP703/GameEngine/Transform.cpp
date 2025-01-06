@@ -31,9 +31,16 @@ namespace GameEngine
         /* Apply scale */
         m_modelMatrix = glm::scale(m_modelMatrix, m_scale);
 
-        /* Apple rotation(X->Y->Z) */
+        /* Apply rotation(X->Y->Z) */
         m_modelMatrix = glm::rotate(m_modelMatrix, glm::radians(m_rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
         m_modelMatrix = glm::rotate(m_modelMatrix, glm::radians(m_rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
         m_modelMatrix = glm::rotate(m_modelMatrix, glm::radians(m_rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+    }
+
+    glm::mat4 Transform::getLocalToWorldMatrix() const
+    {
+        return glm::translate(glm::mat4(1.0f), m_position) *
+               glm::mat4_cast(glm::quat(glm::radians(m_rotation))) *
+               glm::scale(glm::mat4(1.0f), m_scale);
     }
 }

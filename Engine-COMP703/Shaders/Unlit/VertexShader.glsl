@@ -11,12 +11,13 @@ attribute vec2 a_TexCoord;
 
 // Fragment Passed variables
 varying vec2 v_TexCoord;
+varying vec4 v_ClipSpacePosition;
 
 void main()
 {
-    vec4 clipPos = u_Projection * u_Viewing * u_Model * vec4(a_Position, 1.0);
-    gl_Position = clipPos;
+    v_ClipSpacePosition = u_Projection * u_Viewing * u_Model * vec4(a_Position, 1.0);
+    gl_Position = v_ClipSpacePosition;
     
-    v_TexCoord = vec2((a_TexCoord.x * (2.0/3.75)) + 0.2, a_TexCoord.y * (2.0/3.75));
+    v_TexCoord = vec2(a_TexCoord.x, a_TexCoord.y);
     //v_TexCoord = a_TexCoord;
 }
