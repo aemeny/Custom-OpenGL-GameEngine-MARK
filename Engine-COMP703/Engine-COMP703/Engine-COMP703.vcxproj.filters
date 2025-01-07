@@ -138,6 +138,9 @@
     <ClCompile Include="GameProject\Portal.cpp">
       <Filter>Source Files\GameProject</Filter>
     </ClCompile>
+    <ClCompile Include="GameProject\PortalTeleportationHandler.cpp">
+      <Filter>Source Files\GameProject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\GraphicsMasterHeader.h">
@@ -234,6 +237,9 @@
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="GameProject\Portal.h">
+      <Filter>Header Files\GameProject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\PortalTeleportationHandler.h">
       <Filter>Header Files\GameProject</Filter>
     </ClInclude>
   </ItemGroup>

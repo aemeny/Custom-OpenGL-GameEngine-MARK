@@ -37,6 +37,9 @@ namespace PhysicsSystem
 
         void setKinematicState(bool _isKinematic) { m_isKinematic = _isKinematic; }
         bool hasCollided() { return m_collision; }
+
+        void setTriggerCollider(bool _value) { m_isTrigger = _value; }
+        bool isTriggerCollider() { return m_isTrigger; }
     private:
         friend RigidBody;
 
@@ -44,6 +47,7 @@ namespace PhysicsSystem
         glm::vec3 getMin() const;
 
         bool m_isKinematic;
+        bool m_isTrigger;
 
         /* If a collision has been made on this frame */
         bool m_collision;

@@ -24,14 +24,14 @@ void main()
     // Calculate Specular
     vec3 viewDir = normalize(u_ViewPos - v_FragPos);
     vec3 reflectDir = reflect(-lightDir, norm);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 64);
-    vec3 specular = specularColor * spec;
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128);
+    vec3 specular = specularColor * 0.01;
 
     // Calculate Ambient
     vec3 ambient = ambientColor; // Simple ambient light
 
     // Apply lighting with texture colour
     vec4 texColor = texture2D(u_Texture, v_TexCoord);
-    vec3 lighting = ambient + diffuse + specular;
+    vec3 lighting = ambient + diffuse;
     gl_FragColor = vec4(lighting, 1.0) * texColor;
 }

@@ -21,6 +21,7 @@ namespace PhysicsSystem
         m_lineRendererDirty = true;
         m_isKinematic = false;
         m_collision = false;
+        m_isTrigger = false;
 
         /* Checks if a rigid body exists on this entity */
         std::weak_ptr<RigidBody> rigidBodyPtr = m_entity.lock()->findComponent<RigidBody>();
@@ -48,9 +49,12 @@ namespace PhysicsSystem
                 if (checkCollision(_AABBColliders.at(ci)))
                 {
                     m_collision = true;
-                    if (m_isKinematic == false)
+                    if (!isTriggerCollider() || !_AABBColliders.at(ci).lock()->isTriggerCollider())
                     {
-                        resolveCollision(_AABBColliders.at(ci));
+                        if (m_isKinematic == false)
+                        {
+                            resolveCollision(_AABBColliders.at(ci));
+                        }
                     }
                 }
             }
@@ -100,8 +104,20 @@ namespace PhysicsSystem
             penetrationDepth.x = penetrationDepth.y = 0.0f;
         }
 
-        /* Push the current entity out of the collision */
-        getEntityTransform().lock()->setPosition(getEntityTransform().lock()->getPosition() + penetrationDepth);
+        /* Determine which side we are on using the dot product */
+        glm::vec3 centerA = (minA + maxA) * 0.5f;
+        glm::vec3 centerB = (minB + maxB) * 0.5f;
+
+        glm::vec3 collisionDirection = centerA - centerB;
+
+        /* Adjust penetration depth based on the collision direction */
+        penetrationDepth.x *= (glm::dot(collisionDirection, glm::vec3(1.0f, 0.0f, 0.0f)) > 0.0f) ? 1.0f : -1.0f;
+        penetrationDepth.y *= (glm::dot(collisionDirection, glm::vec3(0.0f, 1.0f, 0.0f)) > 0.0f) ? 1.0f : -1.0f;
+        penetrationDepth.z *= (glm::dot(collisionDirection, glm::vec3(0.0f, 0.0f, 1.0f)) > 0.0f) ? 1.0f : -1.0f;
+
+        glm::vec3 currentPosition = getEntityTransform().lock()->getPosition();
+        getEntityTransform().lock()->setPosition(currentPosition + penetrationDepth);
+
         
         /* Stop the rigid body's movement in the direction of collision */
         if (!m_rigidBodyPtr.expired())

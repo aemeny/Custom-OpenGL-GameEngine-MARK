@@ -32,6 +32,7 @@ void CameraController::onTick()
 
     /* Get mouse delta (movement since last frame) */
     glm::vec2 mouseDelta = m_input.lock()->getMouseDelta();
+    m_cameraRotation = m_transform.lock()->getRotation();
 
     /* Adjust rotation based on mouse movement */
     m_cameraRotation.y += mouseDelta.x * m_mouseSensitivity.x; // Yaw
@@ -85,22 +86,31 @@ void CameraController::onTick()
     /* Multiply movement by speed and delta time */
     position += movement * m_movementSpeed * getDTAsFloat();
 
-    if (m_canJump)
+    //if (m_canJump)
+    //{
+    //    if (m_input.lock()->isKeyPressed(SDLK_SPACE)) // UP
+    //    {
+    //        m_canJump = false;
+    //        m_rigidBody.lock()->addForce(glm::vec3(0.0f, 500.0f, 0.0f));
+    //    }
+    //}
+    //else
+    //{
+    //    if (m_boxCollider.lock()->hasCollided())
+    //        m_canJump = true;
+    //}
+
+    if (m_input.lock()->isKeyHeld(SDLK_SPACE)) // UP
     {
-        if (m_input.lock()->isKeyPressed(SDLK_SPACE)) // UP
-        {
-            m_canJump = false;
-            m_rigidBody.lock()->addForce(glm::vec3(0.0f, 500.0f, 0.0f));
-        }
+        position.y += m_movementSpeed * getDTAsFloat();
     }
-    else
+    if (m_input.lock()->isKeyHeld(SDLK_LSHIFT)) // UP
     {
-        if (m_boxCollider.lock()->hasCollided())
-            m_canJump = true;
+        position.y -= m_movementSpeed * getDTAsFloat();
     }
 
     /* Apply new position to location */
     m_transform.lock()->setPosition(position);
-    m_playerCharacter.lock()->setPosition(glm::vec3(position.x, position.y - 1.25f, position.z));
+    m_playerCharacter.lock()->setPosition(glm::vec3(position.x, position.y - 1.5f, position.z));
     m_playerCharacter.lock()->setRotation(glm::vec3(0.0f, -m_cameraRotation.y + 90.0f, 0.0f));
 }
