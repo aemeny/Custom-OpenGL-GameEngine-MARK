@@ -25,5 +25,7 @@ struct PortalTeleportationHandler : Component
     std::weak_ptr<Transform> m_linkedPortalTransform;
 private:
     bool m_dirty;
+    std::string m_portalName;
+    glm::vec3 oldOffsetFromPortal;
     std::weak_ptr<Transform> m_portalTransform;
 };

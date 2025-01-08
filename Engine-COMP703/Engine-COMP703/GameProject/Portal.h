@@ -21,7 +21,9 @@ struct Portal : Component
     /* To activate/deactivate when rendering */
     std::weak_ptr<Entity> m_portalEntity;
     std::weak_ptr<Entity> m_portalWall;
-    std::weak_ptr<Entity> m_characterEntity;
+    std::weak_ptr<Entity> m_characterEntity; 
+
+    std::vector<std::weak_ptr<Entity>> m_portalBoarders;
 
     /* For relative position math */
     std::weak_ptr<Transform> m_cameraTransform;

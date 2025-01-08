@@ -86,29 +86,6 @@ void CameraController::onTick()
     /* Multiply movement by speed and delta time */
     position += movement * m_movementSpeed * getDTAsFloat();
 
-    //if (m_canJump)
-    //{
-    //    if (m_input.lock()->isKeyPressed(SDLK_SPACE)) // UP
-    //    {
-    //        m_canJump = false;
-    //        m_rigidBody.lock()->addForce(glm::vec3(0.0f, 500.0f, 0.0f));
-    //    }
-    //}
-    //else
-    //{
-    //    if (m_boxCollider.lock()->hasCollided())
-    //        m_canJump = true;
-    //}
-
-    if (m_input.lock()->isKeyHeld(SDLK_SPACE)) // UP
-    {
-        position.y += m_movementSpeed * getDTAsFloat();
-    }
-    if (m_input.lock()->isKeyHeld(SDLK_LSHIFT)) // UP
-    {
-        position.y -= m_movementSpeed * getDTAsFloat();
-    }
-
     /* Apply new position to location */
     m_transform.lock()->setPosition(position);
     m_playerCharacter.lock()->setPosition(glm::vec3(position.x, position.y - 1.5f, position.z));

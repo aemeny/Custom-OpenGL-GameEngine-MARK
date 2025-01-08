@@ -41,6 +41,7 @@ namespace PhysicsSystem
 
     void AABBCollider::onAABBCollisionUpdate(const std::vector<std::weak_ptr<AABBCollider>>& _AABBColliders)
     {
+        m_names.clear();
         m_collision = false;
         for (size_t ci = 0; ci < _AABBColliders.size(); ++ci)
         {
@@ -48,6 +49,7 @@ namespace PhysicsSystem
             {
                 if (checkCollision(_AABBColliders.at(ci)))
                 {
+                    m_names.push_back(_AABBColliders.at(ci).lock()->m_entity.lock()->m_name);
                     m_collision = true;
                     if (!isTriggerCollider() || !_AABBColliders.at(ci).lock()->isTriggerCollider())
                     {
@@ -127,6 +129,14 @@ namespace PhysicsSystem
             if (penetrationDepth.y != 0.0f) m_rigidBodyPtr.lock()->setVelocity(glm::vec3(currentVelocity.x, 0.0f, currentVelocity.z));
             if (penetrationDepth.z != 0.0f) m_rigidBodyPtr.lock()->setVelocity(glm::vec3(currentVelocity.x, currentVelocity.y, 0.0f));
         }
+    }
+
+    bool AABBCollider::ifCollidedWithName(std::string _name)
+    {
+        for (size_t i = 0; i < m_names.size(); i++)
+            if (m_names.at(i) == _name)
+                return true;
+        return false;
     }
 
     glm::vec3 AABBCollider::getMax() const

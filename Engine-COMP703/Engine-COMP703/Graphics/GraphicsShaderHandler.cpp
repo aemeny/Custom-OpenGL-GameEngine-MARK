@@ -170,7 +170,7 @@ namespace GraphicsRenderer
         glBindTexture(GL_TEXTURE_2D, _renderTexture.lock()->getID());
 
         /* Enable Back Face Culling */
-        glEnable(GL_CULL_FACE);
+        //glEnable(GL_CULL_FACE);
         /* Enable Depth Testing */
         glEnable(GL_DEPTH_TEST);
         /* Enable Alpha Blending */
@@ -182,7 +182,7 @@ namespace GraphicsRenderer
 
         /* Reset the state */
         glDisable(GL_DEPTH_TEST);
-        glDisable(GL_CULL_FACE);
+        //glDisable(GL_CULL_FACE);
         glDisable(GL_BLEND);
 
         glBindVertexArray(0);

@@ -30,12 +30,11 @@ namespace GameEngine
 
         RigidBodyObj rigidBody = cameraEntity->addComponent<RigidBody>();
         rigidBody.lock()->setMass(1.0f);
-        //rigidBody.lock()->setGravity(glm::vec3(0.0f, -19.6f, 0.0f));
-        rigidBody.lock()->setGravity(glm::vec3(0.0f, 0.0f, 0.0f));
+        rigidBody.lock()->setGravity(glm::vec3(0.0f, -19.6f, 0.0f));
         camController.lock()->m_rigidBody = rigidBody;
 
         BoxColliderObj characterCollider = cameraEntity->addComponent<AABBCollider>();
-        characterCollider.lock()->setColliderSize(glm::vec3(1.0f, 2.5f, 1.0f));
+        characterCollider.lock()->setColliderSize(glm::vec3(0.8f, 5.5f, 0.8f));
         characterCollider.lock()->setColliderOffset(glm::vec3(0.0f, 0.0f, 0.0f));
         camController.lock()->m_boxCollider = characterCollider;
 
@@ -63,6 +62,7 @@ namespace GameEngine
 
         /* Cube Making Use Of Render Texture */
         EntityObj portalOne = defaultModule->addEntity();
+        portalOne->m_name = "Portal1";
         portalOne->addComponent<ModelHandler>()
             ->setModel("Cube/PortalCube.obj")
             .setTexture(renderTexture)
@@ -70,7 +70,7 @@ namespace GameEngine
 
         TransformObj transformPortalOne = portalOne->findComponent<Transform>();
         transformPortalOne.lock()->setRotation(glm::vec3(0.0f, 0.0f, 90.0f));
-        transformPortalOne.lock()->setPosition(glm::vec3(15.0f, 2.3f, 2.85f));
+        transformPortalOne.lock()->setPosition(glm::vec3(15.0f, 2.3f, 2.4f));
 
         BoxColliderObj portalCollider = portalOne->addComponent<AABBCollider>();
         portalCollider.lock()->setColliderSize(glm::vec3(6.0f, 4.0f, 0.01f));
@@ -80,6 +80,7 @@ namespace GameEngine
 
         /* Cube 2 Making Use Of Render Texture */
         EntityObj portalTwo = defaultModule->addEntity();
+        portalTwo->m_name = "Portal2";
         portalTwo->addComponent<ModelHandler>()
             ->setModel("Cube/PortalCube.obj")
             .setTexture(renderTexture2)
@@ -87,7 +88,13 @@ namespace GameEngine
 
         TransformObj transformPortalTwo = portalTwo->findComponent<Transform>();
         transformPortalTwo.lock()->setRotation(glm::vec3(0.0f, 0.0f, 90.0f));
-        transformPortalTwo.lock()->setPosition(glm::vec3(5.0f, 2.3f, 2.85f));
+        transformPortalTwo.lock()->setPosition(glm::vec3(5.0f, 2.3f, 2.4f));
+
+        BoxColliderObj portalCollider2 = portalTwo->addComponent<AABBCollider>();
+        portalCollider2.lock()->setColliderSize(glm::vec3(6.0f, 4.0f, 0.01f));
+        portalCollider2.lock()->setColliderOffset(glm::vec3(0.0f, 0.2f, -0.4f));
+        portalCollider2.lock()->setTriggerCollider(true);
+        portalCollider2.lock()->setKinematicState(true);
 
 
         /* Wall 1 */
@@ -97,9 +104,10 @@ namespace GameEngine
             .setTexture("Props/Portal/concrete_modular_wall001a.png")
             .setShaders("Lit/VertexShader-Wall.glsl", "Lit/FragmentShader.glsl");
         TransformObj transformcube1 = wall1->findComponent<Transform>();
-        transformcube1.lock()->setPosition(glm::vec3(10.0f, 6.2f, 3.0f));
+        transformcube1.lock()->setPosition(glm::vec3(10.0f, 6.2f, 2.6f));
         transformcube1.lock()->setScale(glm::vec3(12.0f, 6.0f, 0.1f));
         BoxColliderObj wallCollider = wall1->addComponent<AABBCollider>();
+        wallCollider.lock()->setColliderOffset(glm::vec3(0.0f, 0.0f, 0.85f));
         wallCollider.lock()->setColliderSize(glm::vec3(24.0f, 12.0f, 1.0f));
         wallCollider.lock()->setKinematicState(true);
 
@@ -143,7 +151,11 @@ namespace GameEngine
         portal2.lock()->m_portalWall = wall1;
         portal2.lock()->m_characterEntity = character;
 
-        
+        std::weak_ptr<PortalTeleportationHandler> portalHandler2 = portalTwo->addComponent<PortalTeleportationHandler>();
+        portalHandler2.lock()->m_playerTransform = transformCameraEntity;
+        portalHandler2.lock()->m_linkedPortalTransform = transformPortalOne;
+        portalHandler2.lock()->m_portalCollider = portalCollider2;
+        portalHandler2.lock()->m_playerCollider = characterCollider;
 
         portalOne->setStillTickStatus(true);
         std::weak_ptr<Portal> portal1 = portalOne->addComponent<Portal>();
@@ -214,6 +226,8 @@ namespace GameEngine
         transformcube.lock()->setScale(glm::vec3(0.9f));
 
 
+        std::vector<std::weak_ptr<Entity>> portalBoarders;
+
         /* Portal One Boarder Cubes */
         cube = defaultModule->addEntity();
         cube->addComponent<ModelHandler>()
@@ -221,8 +235,9 @@ namespace GameEngine
             .setTexture("Colours/BlueTexture.png")
             .setShaders("UnLit/VertexShader.glsl", "UnLit/FragmentShader.glsl");
         transformcube = cube->findComponent<Transform>();
-        transformcube.lock()->setPosition(glm::vec3(18.2f, 2.4f, 2.9f));
+        transformcube.lock()->setPosition(glm::vec3(18.2f, 2.4f, 2.4f));
         transformcube.lock()->setScale(glm::vec3(0.2f, 2.2f, 0.1f));
+        portalBoarders.push_back(cube);
 
         cube = defaultModule->addEntity();
         cube->addComponent<ModelHandler>()
@@ -230,8 +245,9 @@ namespace GameEngine
             .setTexture("Colours/BlueTexture.png")
             .setShaders("UnLit/VertexShader.glsl", "UnLit/FragmentShader.glsl");
         transformcube = cube->findComponent<Transform>();
-        transformcube.lock()->setPosition(glm::vec3(11.8f, 2.4f, 2.9f));
+        transformcube.lock()->setPosition(glm::vec3(11.8f, 2.4f, 2.4f));
         transformcube.lock()->setScale(glm::vec3(0.2f, 2.2f, 0.1f));
+        portalBoarders.push_back(cube);
 
         cube = defaultModule->addEntity();
         cube->addComponent<ModelHandler>()
@@ -239,8 +255,9 @@ namespace GameEngine
             .setTexture("Colours/BlueTexture.png")
             .setShaders("UnLit/VertexShader.glsl", "UnLit/FragmentShader.glsl");
         transformcube = cube->findComponent<Transform>();
-        transformcube.lock()->setPosition(glm::vec3(15.0f, 4.5f, 2.9f));
+        transformcube.lock()->setPosition(glm::vec3(15.0f, 4.5f, 2.4f));
         transformcube.lock()->setScale(glm::vec3(3.4f, 0.2f, 0.1f));
+        portalBoarders.push_back(cube);
 
 
         /* Portal Two Boarder Cubes */
@@ -250,8 +267,9 @@ namespace GameEngine
             .setTexture("Colours/OrangeTexture.png")
             .setShaders("UnLit/VertexShader.glsl", "UnLit/FragmentShader.glsl");
         transformcube = cube->findComponent<Transform>();
-        transformcube.lock()->setPosition(glm::vec3(8.2f, 2.4f, 2.9f));
+        transformcube.lock()->setPosition(glm::vec3(8.2f, 2.4f, 2.4f));
         transformcube.lock()->setScale(glm::vec3(0.2f, 2.2f, 0.1f));
+        portalBoarders.push_back(cube);
 
         cube = defaultModule->addEntity();
         cube->addComponent<ModelHandler>()
@@ -259,8 +277,9 @@ namespace GameEngine
             .setTexture("Colours/OrangeTexture.png")
             .setShaders("UnLit/VertexShader.glsl", "UnLit/FragmentShader.glsl");
         transformcube = cube->findComponent<Transform>();
-        transformcube.lock()->setPosition(glm::vec3(1.8f, 2.4f, 2.9f));
+        transformcube.lock()->setPosition(glm::vec3(1.8f, 2.4f, 2.4f));
         transformcube.lock()->setScale(glm::vec3(0.2f, 2.2f, 0.1f));
+        portalBoarders.push_back(cube);
 
         cube = defaultModule->addEntity();
         cube->addComponent<ModelHandler>()
@@ -268,8 +287,12 @@ namespace GameEngine
             .setTexture("Colours/OrangeTexture.png")
             .setShaders("UnLit/VertexShader.glsl", "UnLit/FragmentShader.glsl");
         transformcube = cube->findComponent<Transform>();
-        transformcube.lock()->setPosition(glm::vec3(5.0f, 4.5f, 2.9f));
+        transformcube.lock()->setPosition(glm::vec3(5.0f, 4.5f, 2.4f));
         transformcube.lock()->setScale(glm::vec3(3.4f, 0.2f, 0.1f));
+        portalBoarders.push_back(cube);
+
+        portal1.lock()->m_portalBoarders = portalBoarders;
+        portal2.lock()->m_portalBoarders = portalBoarders;
 
         /* Wall 3 */
         EntityObj wall = defaultModule->addEntity();

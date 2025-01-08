@@ -18,6 +18,10 @@ void Portal::onTick()
     m_portalEntity.lock()->setActiveStatus(false);
     m_portalWall.lock()->setActiveStatus(false);
     m_characterEntity.lock()->setActiveStatus(true);
+    for (size_t i = 0; i < m_portalBoarders.size(); i++)
+    {
+        m_portalBoarders.at(i).lock()->setActiveStatus(false);
+    }
 
     /* Calculate relative position to portal */
     glm::mat4 portalLocalToWorld = m_portalTransform.lock()->getLocalToWorldMatrix();
@@ -38,6 +42,7 @@ void Portal::onTick()
     glm::vec3 flippedPosition = m_portalTransform.lock()->getPosition() - relativePosition;
     glm::vec3 posPlayer = m_playerTransform.lock()->getPosition();
     flippedPosition.y = posPlayer.y;
+    flippedPosition.z -= 1.1f;
     m_cameraTransform.lock()->setPosition(flippedPosition);
 
 
@@ -51,5 +56,9 @@ void Portal::onLateTick()
 {
     m_portalEntity.lock()->setActiveStatus(true);
     m_portalWall.lock()->setActiveStatus(true);
-    //m_characterEntity.lock()->setActiveStatus(false);
+    m_characterEntity.lock()->setActiveStatus(false);
+    for (size_t i = 0; i < m_portalBoarders.size(); i++)
+    {
+        m_portalBoarders.at(i).lock()->setActiveStatus(true);
+    }
 }

@@ -40,6 +40,9 @@ namespace PhysicsSystem
 
         void setTriggerCollider(bool _value) { m_isTrigger = _value; }
         bool isTriggerCollider() { return m_isTrigger; }
+
+        /* Loops through all names collided with to compare with passed name */
+        bool ifCollidedWithName(std::string _name);
     private:
         friend RigidBody;
 
@@ -69,5 +72,8 @@ namespace PhysicsSystem
         std::weak_ptr<GraphicsRenderer::Vbo> m_vbo;
         bool m_renderOutline;
         bool m_lineRendererDirty;
+
+        /* Keeps track of entity names which have been collided with this frame */
+        std::vector<std::string> m_names;
     };
 }

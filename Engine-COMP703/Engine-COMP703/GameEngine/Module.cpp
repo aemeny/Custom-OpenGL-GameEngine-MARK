@@ -26,6 +26,7 @@ namespace GameEngine
 		rtn->m_self = rtn;
 		rtn->m_active = true;
 		rtn->m_stillTick = false;
+		m_name = "Default";
 
 		/* Each Entity starts with a Transform Component */
 		rtn->m_transformPtr = rtn->addComponent<Transform>();

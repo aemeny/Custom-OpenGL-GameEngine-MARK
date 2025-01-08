@@ -13,44 +13,60 @@
 void PortalTeleportationHandler::initialize()
 {
     m_portalTransform = getEntityTransform();
+    m_portalName = m_entity.lock()->m_name;
     m_dirty = true;
 }
 
 void PortalTeleportationHandler::onLateTick()
 {
-    if (m_portalCollider.lock()->hasCollided() && m_playerCollider.lock()->hasCollided())
+    glm::vec3 offsetFromPortal = m_playerTransform.lock()->getPosition() - m_portalTransform.lock()->getPosition();
+    glm::vec3 forward = glm::normalize(glm::quat(glm::radians(m_playerTransform.lock()->getRotation())) * glm::vec3(0.0f, 0.0f, -1.0f));
+    int portalSide = glm::sign(glm::dot(offsetFromPortal, forward));
+    int portalSideOld = glm::sign(glm::dot(oldOffsetFromPortal, forward));
+
+    if (portalSide != portalSideOld)
     {
-        if (!m_dirty)
+        if (m_playerCollider.lock()->hasCollided() && m_playerCollider.lock()->ifCollidedWithName(m_portalName))
         {
-            glm::mat4 portalLocalToWorld = m_portalTransform.lock()->getLocalToWorldMatrix();
-            glm::mat4 linkedPortalWorldToLocal = glm::inverse(m_linkedPortalTransform.lock()->getLocalToWorldMatrix());
-            glm::mat4 playerCameraLocalToWorld = m_playerTransform.lock()->getLocalToWorldMatrix();
+            if (!m_dirty)
+            {
 
-            glm::mat4 m = portalLocalToWorld * linkedPortalWorldToLocal * playerCameraLocalToWorld;
+                glm::mat4 portalLocalToWorld = m_portalTransform.lock()->getLocalToWorldMatrix();
+                glm::mat4 linkedPortalWorldToLocal = glm::inverse(m_linkedPortalTransform.lock()->getLocalToWorldMatrix());
+                glm::mat4 playerCameraLocalToWorld = m_playerTransform.lock()->getLocalToWorldMatrix();
 
-            glm::vec3 position;
-            glm::quat rotation;
-            glm::vec3 scale, skew;
-            glm::vec4 perspective;
-            glm::decompose(m, scale, rotation, position, skew, perspective);
+                glm::mat4 m = portalLocalToWorld * linkedPortalWorldToLocal * playerCameraLocalToWorld;
 
-            /* Position */
-            glm::vec3 relativePosition = position - m_portalTransform.lock()->getPosition();
-            glm::vec3 flippedPosition = m_portalTransform.lock()->getPosition() - relativePosition;
-            glm::vec3 posPlayer = m_playerTransform.lock()->getPosition();
-            flippedPosition.y = posPlayer.y;
-            m_playerTransform.lock()->setPosition(flippedPosition);
+                glm::vec3 position;
+                glm::quat rotation;
+                glm::vec3 scale, skew;
+                glm::vec4 perspective;
+                glm::decompose(m, scale, rotation, position, skew, perspective);
 
-            /* Rotation */
-            glm::vec3 rotPlayer = m_playerTransform.lock()->getRotation();
-            rotPlayer.y -= 180;
-            m_playerTransform.lock()->setRotation(rotPlayer);
+                /* Position */
+                glm::vec3 relativePosition = position - m_portalTransform.lock()->getPosition();
+                glm::vec3 flippedPosition = m_portalTransform.lock()->getPosition() - relativePosition;
+                glm::vec3 posPlayer = m_playerTransform.lock()->getPosition();
+                flippedPosition.y = posPlayer.y;
+                flippedPosition.z -= 1.1f;
+                m_playerTransform.lock()->setPosition(flippedPosition);
 
-            m_dirty = true;
+                /* Rotation */
+                glm::vec3 rotPlayer = m_playerTransform.lock()->getRotation();
+                rotPlayer.y -= 180;
+                m_playerTransform.lock()->setRotation(rotPlayer);
+
+                m_dirty = true;
+
+            }
+        }
+        else if (m_dirty)
+        {
+            m_dirty = false;
         }
     }
-    else if (m_dirty)
+    else
     {
-        m_dirty = false;
+        oldOffsetFromPortal = offsetFromPortal;
     }
 }

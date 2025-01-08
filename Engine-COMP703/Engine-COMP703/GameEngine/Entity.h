@@ -29,6 +29,9 @@ namespace GameEngine
 		bool getStillTickStatus() { return m_stillTick; }
 		void setStillTickStatus(bool _active) { m_stillTick = _active; }
 
+		/* Entity Name */
+		std::string m_name;
+
 		/* Returns a Component of any type that is passed into it.
 		 * Checks through all Components within the Entity for a matching type. */
 		template <typename T>
