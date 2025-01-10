@@ -21,7 +21,7 @@ namespace GameEngine
 
         /* Camera Entity */
         EntityObj cameraEntity = defaultModule->addEntity();
-        cameraEntity->addComponent<Camera>(CameraProjection::Perspective, PerspectiveParamaters{ 60.0f, 0.1f, 100.0f });
+        CameraObj playerCam = cameraEntity->addComponent<Camera>(CameraProjection::Perspective, PerspectiveParamaters{ 60.0f, 0.1f, 100.0f });
 
         std::weak_ptr<CameraController> camController = cameraEntity->addComponent<CameraController>();
 
@@ -150,6 +150,9 @@ namespace GameEngine
         portal2.lock()->m_linkedPortalTransform = transformPortalOne;
         portal2.lock()->m_portalWall = wall1;
         portal2.lock()->m_characterEntity = character;
+        portal2.lock()->m_renderingCam = camera;
+        portal2.lock()->m_playerCam = playerCam;
+        portal2.lock()->m_portalCollider = portalCollider;
 
         std::weak_ptr<PortalTeleportationHandler> portalHandler2 = portalTwo->addComponent<PortalTeleportationHandler>();
         portalHandler2.lock()->m_playerTransform = transformCameraEntity;
@@ -166,6 +169,9 @@ namespace GameEngine
         portal1.lock()->m_linkedPortalTransform = transformPortalTwo;
         portal1.lock()->m_portalWall = wall1;
         portal1.lock()->m_characterEntity = character;
+        portal1.lock()->m_renderingCam = camera2;
+        portal1.lock()->m_playerCam = playerCam;
+        portal1.lock()->m_portalCollider = portalCollider2;
 
         std::weak_ptr<PortalTeleportationHandler> portalHandler1 = portalOne->addComponent<PortalTeleportationHandler>();
         portalHandler1.lock()->m_playerTransform = transformCameraEntity;
@@ -291,7 +297,7 @@ namespace GameEngine
         transformcube.lock()->setScale(glm::vec3(3.4f, 0.2f, 0.1f));
         portalBoarders.push_back(cube);
 
-        portal1.lock()->m_portalBoarders = portalBoarders;
+        //portal1.lock()->m_portalBoarders = portalBoarders;
         portal2.lock()->m_portalBoarders = portalBoarders;
 
         /* Wall 3 */

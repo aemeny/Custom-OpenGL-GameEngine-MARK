@@ -1,0 +1,84 @@
+﻿  Camera.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Component.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Core.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Entity.cpp
+  Environment.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Environment.cpp(54,10): warning C4244: 'return': conversion from 'const double' to 'float', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Environment.cpp(64,10): warning C4244: 'return': conversion from 'const double' to 'float', possible loss of data
+  Input.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Input.cpp(31,29): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Input.cpp(33,43): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Input.cpp(102,35): warning C4101: 'e': unreferenced local variable
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Input.cpp(115,35): warning C4101: 'e': unreferenced local variable
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Input.cpp(341,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Input.cpp(341,32): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  LineRenderer.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  ModelHandler.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  ModelResource.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Module.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  ResourceParent.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  ShaderResource.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  TextureResource.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Transform.cpp
+  Window.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  CameraController.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Hierarchy.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Portal.cpp
+  PortalTeleportationHandler.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(24,20): warning C4244: 'initializing': conversion from 'genFIType' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(24,20): warning C4244:         with
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(24,20): warning C4244:         [
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(24,20): warning C4244:             genFIType=float
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(24,20): warning C4244:         ]
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(25,23): warning C4244: 'initializing': conversion from 'genFIType' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(25,23): warning C4244:         with
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(25,23): warning C4244:         [
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(25,23): warning C4244:             genFIType=float
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(25,23): warning C4244:         ]
+  Compiling...
+  GraphicsModelHandler.cpp
+  GraphicsRenderTextureHandler.cpp
+  GraphicsShaderHandler.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\GraphicsShaderHandler.cpp(150,58): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\GraphicsShaderHandler.cpp(181,58): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  GraphicsTextureHandler.cpp
+  Vao.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vao.cpp(43,25): warning C4312: 'type cast': conversion from 'int' to 'void *' of greater size
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vao.cpp(38,25): warning C4267: 'argument': conversion from 'size_t' to 'GLuint', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vao.cpp(45,47): warning C4267: 'argument': conversion from 'size_t' to 'GLuint', possible loss of data
+  Vbo.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  BoxCollider.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  PhysicsComponent.cpp
+  PhysicsCore.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  RigidBody.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Entity.h(56): warning C4715: 'GameEngine::Entity::findComponent<PhysicsSystem::AABBCollider>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Entity.h(56): warning C4715: 'GameEngine::Entity::findComponent<PhysicsSystem::RigidBody>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Entity.h(56): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
+  All 2502 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Engine-COMP703.vcxproj -> C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\x64\Release\Engine-COMP703.exe

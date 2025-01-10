@@ -12,7 +12,7 @@
 
 void CameraController::initialize()
 {
-    m_mouseSensitivity = glm::vec2(0.2f);
+    m_mouseSensitivity = glm::vec2(0.1f);
 
     m_movementSpeed = 10.0f;
     m_canJump = true;

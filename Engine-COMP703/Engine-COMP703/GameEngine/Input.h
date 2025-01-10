@@ -10,6 +10,7 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_gamecontroller.h>
 #include <memory>
 #include <vector>
 #include <array>
@@ -30,6 +31,8 @@ namespace GameEngine
 	{
 		/* Input constructor, assigns a weak Window ref and sets up InputHandler variables */
 		InputHandler(std::weak_ptr<Window> _coreRef);
+		/* Cleans up controller pointers */
+		~InputHandler();
 		
 		/* Returns if a key is currently being held down */
 		bool isKeyHeld(int _key);
@@ -43,9 +46,9 @@ namespace GameEngine
 		/* Returns if a mouse button is currently held down */
 		bool isMouseDownHeld(MouseButton _button);
 		/* Getter for mouse coordinate on the screen */
-		glm::ivec2 getMousePos() { return m_mousePos; } 
+		glm::ivec2 getMousePos() const { return m_mousePos; } 
 		/* Getter for the current velocity of the mouse for this frame */
-		glm::vec2 getMouseDelta() { return m_mouseDelta; }
+		glm::vec2 getMouseDelta() const { return m_mouseDelta; }
 
 		/* Checks all SDL poll events to check for mouse and keyboard input */
 		void tick();
@@ -81,5 +84,13 @@ namespace GameEngine
 
 		/* If mouse should be locked to the middle of the screen */
 		bool m_mouseLock;
+
+		/* referenced code for controller SDL support
+		*  https://lazyfoo.net/tutorials/SDL/19_gamepads_and_joysticks/index.php
+		*/
+		/* Controller Input */
+		SDL_GameController* m_controller;
+		const int JOYSTICK_DEAD_ZONE_LEFT = 28000; //Analog joystick dead zone
+		const int JOYSTICK_DEAD_ZONE_RIGHT = 16000; 
 	};
 }

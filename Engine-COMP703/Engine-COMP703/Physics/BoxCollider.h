@@ -25,6 +25,9 @@ namespace PhysicsSystem
         /* Checks if this collider is colliding with passed collider */
         bool checkCollision(const std::weak_ptr<AABBCollider>& _other) const;
 
+        /* Checks if this is colliding with frustum planes */
+        bool checkCollision(const std::array<FrustumPlane, 6>& _frustumPlanes) const;
+
         /* Resolves the conflict if found by moving the collider's transform */
         void resolveCollision(const std::weak_ptr<AABBCollider>& _other);
 
@@ -36,10 +39,10 @@ namespace PhysicsSystem
         void setRenderOutline(bool _render) { m_renderOutline = _render; }
 
         void setKinematicState(bool _isKinematic) { m_isKinematic = _isKinematic; }
-        bool hasCollided() { return m_collision; }
+        bool hasCollided() const { return m_collision; }
 
         void setTriggerCollider(bool _value) { m_isTrigger = _value; }
-        bool isTriggerCollider() { return m_isTrigger; }
+        bool isTriggerCollider() const { return m_isTrigger; }
 
         /* Loops through all names collided with to compare with passed name */
         bool ifCollidedWithName(std::string _name);

@@ -12,6 +12,7 @@
 #pragma once
 #include "../GameEngine/Entity.h"
 #include "../GameEngine/Camera.h"
+#include "../Physics/BoxCollider.h"
 
 struct Portal : Component
 {
@@ -24,6 +25,11 @@ struct Portal : Component
     std::weak_ptr<Entity> m_characterEntity; 
 
     std::vector<std::weak_ptr<Entity>> m_portalBoarders;
+
+    /* Optimization check for rendering */
+    std::weak_ptr<Camera> m_renderingCam;
+    std::weak_ptr<Camera> m_playerCam;
+    std::weak_ptr<AABBCollider> m_portalCollider;
 
     /* For relative position math */
     std::weak_ptr<Transform> m_cameraTransform;

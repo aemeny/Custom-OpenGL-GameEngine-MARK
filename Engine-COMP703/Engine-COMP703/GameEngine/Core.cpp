@@ -126,17 +126,20 @@ namespace GameEngine
 
 				/* Entity Render */
 				m_activeRenderingCamera = m_renderTextures.at(rti)->getRenderingCamera();
-				for (size_t mi = 0; mi < m_modules.size(); ++mi)
+				if (m_activeRenderingCamera.lock()->getShouldRender())
 				{
-					if (m_modules.at(mi)->getActiveStatus())
+					for (size_t mi = 0; mi < m_modules.size(); ++mi)
 					{
-						m_modules.at(mi)->render();
+						if (m_modules.at(mi)->getActiveStatus())
+						{
+							m_modules.at(mi)->render();
+						}
 					}
-				}
-				/* Debug Lines Render */
-				m_lineRenderer->renderDebugLines(m_self);
+					/* Debug Lines Render */
+					m_lineRenderer->renderDebugLines(m_self);
 
-				m_renderTextures.at(rti)->generateMipmaps();
+					m_renderTextures.at(rti)->generateMipmaps();
+				}
 
 				m_renderTextures.at(rti)->unbind();
 			}
@@ -196,7 +199,7 @@ namespace GameEngine
 
 			/* Swap window */
 			SDL_GL_SwapWindow(m_windowContext->m_window);
-
+			
 			if (DTCount >= 1.0)
 			{
 				std::cout << tickCount << std::endl;

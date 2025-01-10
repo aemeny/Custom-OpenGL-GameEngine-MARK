@@ -8,6 +8,7 @@
 
 #include "LineRenderer.h"
 #include "Core.h"
+#include <iostream>
 
 namespace GameEngine
 {

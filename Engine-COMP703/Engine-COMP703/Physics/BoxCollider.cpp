@@ -77,6 +77,31 @@ namespace PhysicsSystem
                (maxA.z > minB.z && minA.z < maxB.z);
     }
 
+     /* Checks if this is colliding with frustum planes */
+    bool AABBCollider::checkCollision(const std::array<FrustumPlane, 6>& _frustumPlanes) const
+    {
+        glm::vec3 min = getMin();
+        glm::vec3 max = getMax();
+
+        for (const FrustumPlane& plane : _frustumPlanes) 
+        {
+            /* Find the furthest point in the direction of the plane normal */
+            glm::vec3 positiveVertex = glm::vec3(
+                (plane.m_normal.x < 0) ? max.x : min.x,
+                (plane.m_normal.y < 0) ? max.y : min.y,
+                (plane.m_normal.z < 0) ? max.z : min.z
+            );
+
+            /* If the furthest point is outside the plane */
+            if (glm::dot(plane.m_normal, positiveVertex) + plane.m_distance > 0) 
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /* Resolves the conflict if found by moving the collider's transform */
     void AABBCollider::resolveCollision(const std::weak_ptr<AABBCollider>& _other)
     {

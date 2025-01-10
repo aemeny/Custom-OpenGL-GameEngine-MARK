@@ -15,45 +15,52 @@
 
 void Portal::onTick()
 {
-    m_portalEntity.lock()->setActiveStatus(false);
-    m_portalWall.lock()->setActiveStatus(false);
-    m_characterEntity.lock()->setActiveStatus(true);
-    for (size_t i = 0; i < m_portalBoarders.size(); i++)
+    std::array<FrustumPlane, 6> frustumPlanes = m_playerCam.lock()->getFrustumPlanes();
+    if (m_portalCollider.lock()->checkCollision(frustumPlanes))
     {
-        m_portalBoarders.at(i).lock()->setActiveStatus(false);
+        m_renderingCam.lock()->setShouldRender(true);
+
+        m_portalEntity.lock()->setActiveStatus(false);
+        m_portalWall.lock()->setActiveStatus(false);
+        m_characterEntity.lock()->setActiveStatus(true);
+        for (size_t i = 0; i < m_portalBoarders.size(); i++)
+        {
+            m_portalBoarders.at(i).lock()->setActiveStatus(false);
+        }
+
+        /* Calculate relative position to portal */
+        glm::mat4 portalLocalToWorld = m_portalTransform.lock()->getLocalToWorldMatrix();
+        glm::mat4 linkedPortalWorldToLocal = glm::inverse(m_linkedPortalTransform.lock()->getLocalToWorldMatrix());
+        glm::mat4 playerCameraLocalToWorld = m_playerTransform.lock()->getLocalToWorldMatrix();
+
+        glm::mat4 m = portalLocalToWorld * linkedPortalWorldToLocal * playerCameraLocalToWorld;
+
+        glm::vec3 position;
+        glm::quat rotation;
+        glm::vec3 scale, skew;
+        glm::vec4 perspective;
+        glm::decompose(m, scale, rotation, position, skew, perspective);
+
+
+        /* Position */
+        glm::vec3 relativePosition = position - m_portalTransform.lock()->getPosition();
+        glm::vec3 flippedPosition = m_portalTransform.lock()->getPosition() - relativePosition;
+        glm::vec3 posPlayer = m_playerTransform.lock()->getPosition();
+        flippedPosition.y = posPlayer.y;
+        flippedPosition.z -= 1.1f;
+        m_cameraTransform.lock()->setPosition(flippedPosition);
+
+
+        /* Rotation */
+        glm::vec3 rotPlayer = m_playerTransform.lock()->getRotation();
+        rotPlayer.y -= 180;
+        m_cameraTransform.lock()->setRotation(rotPlayer);
     }
-
-    /* Calculate relative position to portal */
-    glm::mat4 portalLocalToWorld = m_portalTransform.lock()->getLocalToWorldMatrix();
-    glm::mat4 linkedPortalWorldToLocal = glm::inverse(m_linkedPortalTransform.lock()->getLocalToWorldMatrix());
-    glm::mat4 playerCameraLocalToWorld = m_playerTransform.lock()->getLocalToWorldMatrix();
-
-    glm::mat4 m = portalLocalToWorld * linkedPortalWorldToLocal * playerCameraLocalToWorld;
-
-    glm::vec3 position;
-    glm::quat rotation;
-    glm::vec3 scale, skew;
-    glm::vec4 perspective;
-    glm::decompose(m, scale, rotation, position, skew, perspective);
-
-
-    /* Position */
-    glm::vec3 relativePosition = position - m_portalTransform.lock()->getPosition();
-    glm::vec3 flippedPosition = m_portalTransform.lock()->getPosition() - relativePosition;
-    glm::vec3 posPlayer = m_playerTransform.lock()->getPosition();
-    flippedPosition.y = posPlayer.y;
-    flippedPosition.z -= 1.1f;
-    m_cameraTransform.lock()->setPosition(flippedPosition);
-
-
-    /* Rotation */
-    glm::vec3 rotPlayer = m_playerTransform.lock()->getRotation();
-    rotPlayer.y -= 180;
-    m_cameraTransform.lock()->setRotation(rotPlayer);
 }
 
 void Portal::onLateTick()
 {
+    m_renderingCam.lock()->setShouldRender(false);
     m_portalEntity.lock()->setActiveStatus(true);
     m_portalWall.lock()->setActiveStatus(true);
     m_characterEntity.lock()->setActiveStatus(false);

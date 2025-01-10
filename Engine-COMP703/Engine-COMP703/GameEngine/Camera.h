@@ -12,8 +12,16 @@
 #include "Component.h"
 #include "glm/gtc/matrix_transform.hpp"
 
+#include <array>
+
 namespace GameEngine
 {
+    struct FrustumPlane
+    {
+        glm::vec3 m_normal; // Normal vector of the plane.
+        float m_distance; // The distance measured from the Plane to the origin, along the Plane's normal.
+    };
+
     struct Core;
     struct Transform;
     struct Camera : Component
@@ -21,15 +29,17 @@ namespace GameEngine
         void initialize(CameraProjection _projectionType, std::weak_ptr<Camera> _selfPtr, std::optional<PerspectiveParamaters> _perspectibeParams) override;
         void onLateTick() override;
 
-        glm::mat4 getProjectionMatrix() { return m_projectionMatrix; }
+        glm::mat4 getProjectionMatrix() const { return m_projectionMatrix; }
         void setProjectionMatrix(float _FOV, float _width, float _height, float _near, float _far);
-        glm::mat4 getViewingMatrix() { return m_viewingMatrix; }
+        glm::mat4 getViewingMatrix() const { return m_viewingMatrix; }
+
+        std::array<FrustumPlane, 6> getFrustumPlanes() const;
     
         /* Sets main camera in core as passed camera pointer */
         void setCameraAsMain() { setCameraAsMainProt(m_self); }
 
         void setShouldRender(bool _render) { m_shouldRender = _render; }
-        bool getShouldRender() { return m_shouldRender; }
+        bool getShouldRender() const { return m_shouldRender; }
     private:
         /* Updates the viewing matrix based on the entities transform */
         void updateViewingMatrix();

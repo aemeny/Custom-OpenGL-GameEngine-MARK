@@ -65,6 +65,60 @@ namespace GameEngine
             _near, _far);
     }
 
+    std::array<FrustumPlane, 6> Camera::getFrustumPlanes() const
+    {
+        std::array<FrustumPlane, 6> frustumePlanes;
+        glm::mat4 viewProjection = getProjectionMatrix() * getViewingMatrix();
+
+        /* Left Plane */
+        frustumePlanes[0].m_normal = glm::vec3(viewProjection[0][3] + viewProjection[0][0],
+                                               viewProjection[1][3] + viewProjection[1][0],
+                                               viewProjection[2][3] + viewProjection[2][0]);
+        frustumePlanes[0].m_distance = viewProjection[3][3] + viewProjection[3][0];
+
+        /* Right Plane */
+        frustumePlanes[1].m_normal = glm::vec3(viewProjection[0][3] - viewProjection[0][0],
+                                               viewProjection[1][3] - viewProjection[1][0],
+                                               viewProjection[2][3] - viewProjection[2][0]);
+        frustumePlanes[1].m_distance = viewProjection[3][3] - viewProjection[3][0];
+
+        /* Bottom Plane */
+        frustumePlanes[2].m_normal = glm::vec3(viewProjection[0][3] + viewProjection[0][1],
+                                               viewProjection[1][3] + viewProjection[1][1],
+                                               viewProjection[2][3] + viewProjection[2][1]);
+        frustumePlanes[2].m_distance = viewProjection[3][3] + viewProjection[3][1];
+
+        /* Top Plane */
+        frustumePlanes[3].m_normal = glm::vec3(viewProjection[0][3] - viewProjection[0][1],
+                                               viewProjection[1][3] - viewProjection[1][1],
+                                               viewProjection[2][3] - viewProjection[2][1]);
+        frustumePlanes[3].m_distance = viewProjection[3][3] - viewProjection[3][1];
+
+        // Near Plane
+        frustumePlanes[4].m_normal = glm::vec3(viewProjection[0][3] + viewProjection[0][2],
+            viewProjection[1][3] + viewProjection[1][2],
+            viewProjection[2][3] + viewProjection[2][2]);
+        frustumePlanes[4].m_distance = viewProjection[3][3] + viewProjection[3][2];
+
+        // Far Plane
+        frustumePlanes[5].m_normal = glm::vec3(viewProjection[0][3] - viewProjection[0][2],
+            viewProjection[1][3] - viewProjection[1][2],
+            viewProjection[2][3] - viewProjection[2][2]);
+        frustumePlanes[5].m_distance = viewProjection[3][3] - viewProjection[3][2];
+
+        /* Normalize the planes */
+        for (auto& plane : frustumePlanes) {
+            float length = glm::length(plane.m_normal);
+            plane.m_normal /= length;
+            plane.m_distance /= length;
+
+            plane.m_normal = -plane.m_normal;
+            plane.m_distance = -plane.m_distance;
+        }
+
+        return frustumePlanes;
+    }
+
     void Camera::updateViewingMatrix()
     {
         if (m_transform.expired())
