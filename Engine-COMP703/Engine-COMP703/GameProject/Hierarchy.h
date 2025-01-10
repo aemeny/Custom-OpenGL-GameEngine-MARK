@@ -10,6 +10,7 @@ using CameraObj = std::weak_ptr<GameEngine::Camera>;
 using RigidBodyObj = std::weak_ptr<PhysicsSystem::RigidBody>;
 using BoxColliderObj = std::weak_ptr<PhysicsSystem::AABBCollider>;
 using LineRendererObj = std::weak_ptr<GameEngine::LineRenderer>;
+using GUIObj = std::weak_ptr<GameEngine::GUI>;
 using RenderTexture = std::weak_ptr<GraphicsRenderer::RenderTextureHandler>;
 
 using namespace PhysicsSystem;

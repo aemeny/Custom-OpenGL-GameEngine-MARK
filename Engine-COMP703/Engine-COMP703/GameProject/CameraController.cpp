@@ -7,6 +7,7 @@
  */
 
 #include "CameraController.h"
+#include <iostream>
 
 /// THIS IS AN EXAMPLE OF A USER CREATED SCRIPT WHEN USING THE ENGINE AND NOT PART OF THE ENIGNE ITSELF ///
 
@@ -89,5 +90,18 @@ void CameraController::onTick()
     /* Apply new position to location */
     m_transform.lock()->setPosition(position);
     m_playerCharacter.lock()->setPosition(glm::vec3(position.x, position.y - 1.5f, position.z));
+    m_playerCharacter.lock()->setRotation(glm::vec3(0.0f, -m_cameraRotation.y + 90.0f, 0.0f));
+}
+
+void CameraController::sendToFirstLocation()
+{
+    /* Apply default position and rotation */
+    glm::vec3 defaultPos = glm::vec3(13.0f, 3.1f, -19.5f);
+    m_cameraRotation.x = 0.0f;
+    m_cameraRotation.y = 90.0f;
+
+    m_transform.lock()->setPosition(defaultPos);
+    m_transform.lock()->setRotation(m_cameraRotation);
+    m_playerCharacter.lock()->setPosition(glm::vec3(defaultPos.x, defaultPos.y - 1.5f, defaultPos.z));
     m_playerCharacter.lock()->setRotation(glm::vec3(0.0f, -m_cameraRotation.y + 90.0f, 0.0f));
 }

@@ -19,6 +19,8 @@ struct CameraController : Component
     void initialize() override;
     void onTick() override;
 
+    void sendToFirstLocation();
+
     std::weak_ptr<Transform> m_playerCharacter;
     std::weak_ptr<PhysicsSystem::RigidBody> m_rigidBody;
     std::weak_ptr<PhysicsSystem::AABBCollider> m_boxCollider;

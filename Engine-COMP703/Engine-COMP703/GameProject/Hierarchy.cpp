@@ -38,7 +38,10 @@ namespace GameEngine
         characterCollider.lock()->setColliderOffset(glm::vec3(0.0f, 0.0f, 0.0f));
         camController.lock()->m_boxCollider = characterCollider;
 
-
+        /* GUI Camera */
+        EntityObj cameraGUIEntity = defaultModule->addEntity();
+        CameraObj GUICam = cameraGUIEntity->addComponent<Camera>(CameraProjection::Orthographic);
+        GUICam.lock()->setCameraAsMain();
 
         /* Render Texture Camera Entity */
         EntityObj textureCameraEntity = defaultModule->addEntity();
@@ -53,7 +56,7 @@ namespace GameEngine
         TransformObj transformTextureCameraEntity2 = textureCameraEntity2->findComponent<Transform>();
 
 
-
+        
 
         /* Create Render Texture Using Created Camera */
         RenderTexture renderTexture = EngineCore->addRenderTexture(camera, 1920, 1080);
@@ -138,7 +141,7 @@ namespace GameEngine
         playerTransform.lock()->setScale(glm::vec3(0.5f));
 
         camController.lock()->m_playerCharacter = playerTransform;
-
+        camController.lock()->sendToFirstLocation();
 
         /* Portal scripts setup */
         portalTwo->setStillTickStatus(true);
@@ -330,5 +333,20 @@ namespace GameEngine
         wallCollider.lock()->setColliderSize(glm::vec3(24.0f, 12.0f, 1.0f));
         wallCollider.lock()->setKinematicState(true);
         wallCollider.lock()->setRenderOutline(true);
+
+        /* GUI */
+        EntityObj GUIEntityPlay = defaultModule->addEntity();
+        GUIObj GUIPlay = GUIEntityPlay->addComponent<GUI>();
+        GUIPlay.lock()->setTexture("UI/Playtexture.png");
+        TransformObj GUITransform = GUIEntityPlay->findComponent<Transform>();
+        GUITransform.lock()->setScale(glm::vec3(365.3, 160.8f, 0.0f));
+        GUITransform.lock()->setPosition(glm::vec3(960.0f, 440.0f, 0.0f));
+
+        EntityObj GUIEntityExit = defaultModule->addEntity();
+        GUIObj GUIExit = GUIEntityExit->addComponent<GUI>();
+        GUIExit.lock()->setTexture("UI/Exittexture.png");
+        GUITransform = GUIEntityExit->findComponent<Transform>();
+        GUITransform.lock()->setScale(glm::vec3(365.3, 160.8f, 0.0f));
+        GUITransform.lock()->setPosition(glm::vec3(960.0f, 200.0f, 0.0f));
     }
 }

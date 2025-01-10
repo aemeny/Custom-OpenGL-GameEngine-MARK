@@ -27,6 +27,8 @@ namespace GameEngine
 
         bool hasBeenClicked() { return m_clicked; }
 
+        void setTexture(std::string _textureFileAddress);
+
     private:
         /* Checks if the mouse click input happened over this GUI for interaction */
         void checkClickGUI();
@@ -35,7 +37,7 @@ namespace GameEngine
         bool rectIntersect();
 
         bool m_clickable;
-        std::weak_ptr<QuadRenderer> m_quadRenderer;
+        std::shared_ptr<QuadRenderer> m_quadRenderer;
 
         /* Used to poll for clicks */
         std::weak_ptr<InputHandler> m_inputHandler;

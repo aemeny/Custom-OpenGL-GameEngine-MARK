@@ -28,6 +28,8 @@ namespace GraphicsRenderer
         void renderModel(std::shared_ptr<ModelHandler> _model, std::weak_ptr<RenderTextureHandler> _renderTexture);
         /* Takes in a Vao from LineRenderer and instruct OpenGL to draw to the screen */
         void renderDebugLine(std::shared_ptr<Vao> _Vao, int _numOfLines);
+        /* Takes in a Vao and texture and instructs OpenGL to draw to the screen */
+        void renderQuad(std::shared_ptr<Vao> _Vao, std::shared_ptr<TextureHandler> _texture);
 
         /* Binds matrix with passed shader type */
         void bindShader(glm::mat4 _matrix, const GLchar* _type);

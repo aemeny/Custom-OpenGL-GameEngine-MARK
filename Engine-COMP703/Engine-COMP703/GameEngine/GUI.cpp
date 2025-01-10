@@ -8,12 +8,14 @@
  */
 
 #include "GUI.h"
+#include "QuadRenderer.h"
 #include "Core.h"
 
 namespace GameEngine
 {
     void GUI::initialize()
     {
+        m_quadRenderer = std::make_shared<QuadRenderer>(m_entity);
         m_inputHandler = getInputHandler();
         m_clickable = false;
         m_clicked = false;
@@ -25,9 +27,15 @@ namespace GameEngine
         {
             checkClickGUI();
         }
-        // RENDER QUAD WITH QUAD RENDERER
+        m_quadRenderer->renderQuad();
     }
 
+    void GUI::setTexture(std::string _textureFileAddress)
+    {
+        m_quadRenderer->setTexture(_textureFileAddress);
+    }
+
+    /* Checks if the mouse click input happened over this GUI for interaction */
     void GUI::checkClickGUI()
     {
         if (m_inputHandler.lock()->isMouseDown(MouseButton::Left))
@@ -41,6 +49,7 @@ namespace GameEngine
         m_clicked = false;
     }
 
+    /* Checks the mouse position compared to the GUI position and scale */
     bool GUI::rectIntersect()
     {
         glm::vec3 GUIPos = getEntityTransform().lock()->getPosition();

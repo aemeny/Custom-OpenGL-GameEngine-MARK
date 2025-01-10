@@ -214,4 +214,33 @@ namespace GraphicsRenderer
         glBindVertexArray(0);
         glUseProgram(0);
     }
+
+    void ShaderHandler::renderQuad(std::shared_ptr<Vao> _Vao, std::shared_ptr<TextureHandler> _texture)
+    {
+        // Instruct OpenGL to use our shader program and our VAO
+        glUseProgram(m_programID);
+
+        //glBindVertexArray(vaoId);
+        glBindVertexArray(_Vao->getID());
+
+        //Bind Texture
+        glBindTexture(GL_TEXTURE_2D, _texture->getID());
+
+        //Depth Testing
+        glEnable(GL_DEPTH_TEST);
+
+        //Alpha Blending
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        // Draw 3 vertices (a triangle)
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+
+        // Reset the state
+        glDisable(GL_DEPTH_TEST);
+        glDisable(GL_BLEND);
+        glBindVertexArray(0);
+        glUseProgram(0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }   
 }

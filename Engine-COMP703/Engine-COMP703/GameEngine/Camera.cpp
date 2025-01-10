@@ -47,6 +47,7 @@ namespace GameEngine
             m_projectionMatrix = glm::ortho(0.0f, (float)windowContext.lock()->m_windowWidth, //Camera width bounds
                                             0.0f, (float)windowContext.lock()->m_windowHeight, //Camera height bounds
                                             -1.0f, 1.0f); // Far/Near plane
+            m_viewingMatrix = glm::mat4(1.0f);
         }
     }
 

@@ -15,18 +15,18 @@
 
 void Portal::onTick()
 {
+    for (size_t i = 0; i < m_portalBoarders.size(); i++)
+    {
+        m_portalBoarders.at(i).lock()->setActiveStatus(false);
+    }
+    m_portalEntity.lock()->setActiveStatus(false);
+    m_portalWall.lock()->setActiveStatus(false);
+    m_characterEntity.lock()->setActiveStatus(true);
+
     std::array<FrustumPlane, 6> frustumPlanes = m_playerCam.lock()->getFrustumPlanes();
     if (m_portalCollider.lock()->checkCollision(frustumPlanes))
     {
         m_renderingCam.lock()->setShouldRender(true);
-
-        m_portalEntity.lock()->setActiveStatus(false);
-        m_portalWall.lock()->setActiveStatus(false);
-        m_characterEntity.lock()->setActiveStatus(true);
-        for (size_t i = 0; i < m_portalBoarders.size(); i++)
-        {
-            m_portalBoarders.at(i).lock()->setActiveStatus(false);
-        }
 
         /* Calculate relative position to portal */
         glm::mat4 portalLocalToWorld = m_portalTransform.lock()->getLocalToWorldMatrix();

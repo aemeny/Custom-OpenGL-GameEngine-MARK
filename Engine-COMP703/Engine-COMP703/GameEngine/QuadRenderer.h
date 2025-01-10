@@ -18,12 +18,13 @@ namespace GameEngine
         QuadRenderer(std::weak_ptr<Entity> _GUIEntity);
 
         /* Render a quad based on GUI location and texture */
-        void renderQuad(GUI* _gui);
+        void renderQuad();
 
         /* Loads the Graphics Renderer's TextureHandler resource */
         void setTexture(std::string _textureFileAddress);
 
     private:
+        std::weak_ptr<Entity> m_GUIEntity;
         std::shared_ptr<GraphicsRenderer::Vao> m_quad;
         std::shared_ptr<GraphicsRenderer::ShaderHandler> m_shader;
         std::shared_ptr<GraphicsRenderer::TextureHandler> m_texture;
