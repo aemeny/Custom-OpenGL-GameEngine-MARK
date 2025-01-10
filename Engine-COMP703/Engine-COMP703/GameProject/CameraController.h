@@ -24,6 +24,9 @@ struct CameraController : Component
     std::weak_ptr<Transform> m_playerCharacter;
     std::weak_ptr<PhysicsSystem::RigidBody> m_rigidBody;
     std::weak_ptr<PhysicsSystem::AABBCollider> m_boxCollider;
+
+    /* If the controller should be intractable */
+    bool m_intractable;
 private:
     /* Is can jump again after collision check */
     bool m_canJump;

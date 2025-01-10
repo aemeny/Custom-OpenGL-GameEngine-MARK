@@ -48,7 +48,7 @@ void PortalTeleportationHandler::onLateTick()
                 glm::vec3 flippedPosition = m_portalTransform.lock()->getPosition() - relativePosition;
                 glm::vec3 posPlayer = m_playerTransform.lock()->getPosition();
                 flippedPosition.y = posPlayer.y;
-                flippedPosition.z -= 1.1f;
+                flippedPosition.z -= 1.25f;
                 m_playerTransform.lock()->setPosition(flippedPosition);
 
                 /* Rotation */

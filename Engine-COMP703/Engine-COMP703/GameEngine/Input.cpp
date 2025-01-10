@@ -129,6 +129,9 @@ namespace GameEngine
 		m_mouseDelta.x = 0;
 		m_mouseDelta.y = 0;
 
+		/* Sets current mouse position */
+		SDL_GetMouseState(&m_mousePos.x, &m_mousePos.y);
+
 		/* Poll input events and loop through them */
 		while (SDL_PollEvent(&m_event) != 0)
 		{

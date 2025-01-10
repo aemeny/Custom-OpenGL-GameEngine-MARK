@@ -3,6 +3,7 @@
 #include "CameraController.h"
 #include "Portal.h"
 #include "PortalTeleportationHandler.h"
+#include "MenuManager.h"
 
 namespace GameEngine
 {
@@ -224,6 +225,9 @@ namespace GameEngine
         TransformObj transformcube = cube->findComponent<Transform>();
         transformcube.lock()->setPosition(glm::vec3(6.5f, 1.1f, -4.5f));
         transformcube.lock()->setScale(glm::vec3(0.8f));
+        BoxColliderObj cubeCollider = cube->addComponent<AABBCollider>();
+        cubeCollider.lock()->setColliderSize(glm::vec3(1.6f, 1.6f, 1.6f));
+        cubeCollider.lock()->setKinematicState(true);
 
         cube = defaultModule->addEntity();
         cube->addComponent<ModelHandler>()
@@ -233,6 +237,9 @@ namespace GameEngine
         transformcube = cube->findComponent<Transform>();
         transformcube.lock()->setPosition(glm::vec3(15.0f, 1.2f, -14.0f));
         transformcube.lock()->setScale(glm::vec3(0.9f));
+        cubeCollider = cube->addComponent<AABBCollider>();
+        cubeCollider.lock()->setColliderSize(glm::vec3(1.8f, 1.8f, 1.8f));
+        cubeCollider.lock()->setKinematicState(true);
 
 
         std::vector<std::weak_ptr<Entity>> portalBoarders;
@@ -317,7 +324,6 @@ namespace GameEngine
         wallCollider = wall->addComponent<AABBCollider>();
         wallCollider.lock()->setColliderSize(glm::vec3(1.0f, 12.0f, 24.0f));
         wallCollider.lock()->setKinematicState(true);
-        wallCollider.lock()->setRenderOutline(true);
 
         /* Wall 4 */
         wall = defaultModule->addEntity();
@@ -332,7 +338,22 @@ namespace GameEngine
         wallCollider = wall->addComponent<AABBCollider>();
         wallCollider.lock()->setColliderSize(glm::vec3(24.0f, 12.0f, 1.0f));
         wallCollider.lock()->setKinematicState(true);
-        wallCollider.lock()->setRenderOutline(true);
+
+        /* Wall 5 */
+        wall = defaultModule->addEntity();
+        wall->addComponent<ModelHandler>()
+            ->setModel("Cube/CubeWall.obj")
+            .setTexture("Props/Portal/glasswindow_frosted_002.png")
+            .setShaders("Lit/VertexShader-Glass.glsl", "Lit/FragmentShader.glsl");
+        transformWall = wall->findComponent<Transform>();
+        transformWall.lock()->setRotation(glm::vec3(0.0f, 90.0f, 0.0f));
+        transformWall.lock()->setPosition(glm::vec3(10.0f, 6.2f, -9.0f));
+        transformWall.lock()->setScale(glm::vec3(12.0f, 6.0f, 0.1f));
+
+        wallCollider = wall->addComponent<AABBCollider>();
+        wallCollider.lock()->setColliderSize(glm::vec3(1.0f, 12.0f, 24.0f));
+        wallCollider.lock()->setKinematicState(true);
+
 
         /* GUI */
         EntityObj GUIEntityPlay = defaultModule->addEntity();
@@ -348,5 +369,20 @@ namespace GameEngine
         GUITransform = GUIEntityExit->findComponent<Transform>();
         GUITransform.lock()->setScale(glm::vec3(365.3, 160.8f, 0.0f));
         GUITransform.lock()->setPosition(glm::vec3(960.0f, 200.0f, 0.0f));
+
+        EntityObj GUIEntityRestart = defaultModule->addEntity();
+        GUIObj GUIRestart = GUIEntityRestart->addComponent<GUI>();
+        GUIRestart.lock()->setTexture("UI/Restarttexture.png");
+        GUITransform = GUIEntityRestart->findComponent<Transform>();
+        GUITransform.lock()->setScale(glm::vec3(365.3, 160.8f, 0.0f));
+        GUITransform.lock()->setPosition(glm::vec3(960.0f, 320.0f, 0.0f));
+
+        EntityObj menu = defaultModule->addEntity();
+        std::weak_ptr<MenuManager> menuManager = menu->addComponent<MenuManager>();
+        menuManager.lock()->m_playButton = GUIPlay;
+        menuManager.lock()->m_exitButton = GUIExit;
+        menuManager.lock()->m_restartButton = GUIRestart;
+        menuManager.lock()->m_camController = camController;
+        menuManager.lock()->m_engineCore = EngineCore;
     }
 }

@@ -61,7 +61,7 @@ namespace GameEngine
 	/* Main engine game loop ticks all required engine components */
 	void Core::run()
 	{
-		isGameRunning = true;
+		m_isGameRunning = true;
 
 		/* Physics time steps */
 		const double fixedTimeStep = 0.02; // 20 ms
@@ -71,7 +71,7 @@ namespace GameEngine
 		int tickCount = 0;
 		double DTCount = 0;
 
-		while (isGameRunning)
+		while (m_isGameRunning)
 		{
 			/* Clear depth buffer */
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -170,12 +170,13 @@ namespace GameEngine
 								m_modules.at(mi)->render();
 							}
 						}
+
+						/* Debug Lines Render */
+						m_lineRenderer->renderDebugLines(m_self);
 					}
 				}
 			}
 
-			/* Debug Lines Render */
-			m_lineRenderer->renderDebugLines(m_self);
 
 			/* GUI render */
 			m_activeRenderingCamera = m_mainCamera; // Only main camera renders GUI
@@ -190,7 +191,7 @@ namespace GameEngine
 
 			/* Built in escape method from window */
 			if (m_inputHandler->isKeyPressed(SDLK_ESCAPE))
-				isGameRunning = false;
+				m_isGameRunning = false;
 
 
 			/* Clear frame dependent input */

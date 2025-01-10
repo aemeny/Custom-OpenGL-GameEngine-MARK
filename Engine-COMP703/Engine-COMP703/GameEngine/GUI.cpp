@@ -16,17 +16,22 @@ namespace GameEngine
     void GUI::initialize()
     {
         m_quadRenderer = std::make_shared<QuadRenderer>(m_entity);
+        m_thisEntity = m_entity;
         m_inputHandler = getInputHandler();
         m_clickable = false;
         m_clicked = false;
     }
 
-    void GUI::onDisplay()
+    void GUI::onTick()
     {
         if (m_clickable)
         {
             checkClickGUI();
         }
+    }
+
+    void GUI::onGUIRender()
+    {
         m_quadRenderer->renderQuad();
     }
 

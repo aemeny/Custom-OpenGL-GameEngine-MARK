@@ -21,7 +21,8 @@ namespace GameEngine
     struct GUI : Component
     {
         void initialize() override;
-        void onDisplay() override;
+        void onTick() override;
+        void onGUIRender() override;
 
         void setClickable(bool _clickable) { m_clickable = _clickable; }
 
@@ -29,6 +30,7 @@ namespace GameEngine
 
         void setTexture(std::string _textureFileAddress);
 
+        std::weak_ptr<Entity> m_thisEntity;
     private:
         /* Checks if the mouse click input happened over this GUI for interaction */
         void checkClickGUI();

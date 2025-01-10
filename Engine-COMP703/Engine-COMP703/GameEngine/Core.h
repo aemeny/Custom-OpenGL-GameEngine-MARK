@@ -40,6 +40,9 @@ namespace GameEngine
 		/* Returns a weak pointer to a newly created render texture */
 		std::weak_ptr<GraphicsRenderer::RenderTextureHandler> addRenderTexture(std::weak_ptr<Camera> _renderingCamera, int _textureWidth, int _textureHeight);
 
+		/* Stops the program from running the core loop */
+		void stopProgram() { m_isGameRunning = false; }
+
 	private:
 		friend Component;
 		friend Entity;
@@ -74,6 +77,6 @@ namespace GameEngine
 		std::weak_ptr<Core> m_self;
 
 		/* Keeps the main game loop running while true */
-		bool isGameRunning; 
+		bool m_isGameRunning;
 	};
 }
