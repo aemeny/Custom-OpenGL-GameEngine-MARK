@@ -139,6 +139,7 @@ namespace GameEngine
 		friend PhysicsSystem::PhysicsCore;
 		friend PhysicsSystem::AABBCollider;
 		friend struct ModelHandler;
+		friend struct QuadRenderer;
 		friend struct LineRenderer;
 
 		/* Loops through all Components and calls tick on them */

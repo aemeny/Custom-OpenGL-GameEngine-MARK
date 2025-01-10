@@ -1,4 +1,47 @@
-﻿  Hierarchy.cpp
+﻿  Camera.cpp
 C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Component.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Core.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Entity.cpp
+  GUI.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  LineRenderer.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  ModelHandler.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Module.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  QuadRenderer.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Hierarchy.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Portal.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  PortalTeleportationHandler.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(24,20): warning C4244: 'initializing': conversion from 'genFIType' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(24,20): warning C4244:         with
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(24,20): warning C4244:         [
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(24,20): warning C4244:             genFIType=float
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(24,20): warning C4244:         ]
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(25,23): warning C4244: 'initializing': conversion from 'genFIType' to 'int', possible loss of data
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(25,23): warning C4244:         with
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(25,23): warning C4244:         [
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(25,23): warning C4244:             genFIType=float
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameProject\PortalTeleportationHandler.cpp(25,23): warning C4244:         ]
+  BoxCollider.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  PhysicsCore.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  RigidBody.cpp
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\Graphics\Vbo.h(36,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Entity.h(56,1): warning C4715: 'GameEngine::Entity::findComponent<PhysicsSystem::AABBCollider>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Entity.h(56,1): warning C4715: 'GameEngine::Entity::findComponent<PhysicsSystem::RigidBody>': not all control paths return a value
+C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Entity.h(56,1): warning C4715: 'GameEngine::Entity::findComponent<PhysicsSystem::RigidBody>': not all control paths return a value
 C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\Engine-COMP703\GameEngine\Entity.h(56,1): warning C4715: 'GameEngine::Entity::findComponent<GameEngine::Transform>': not all control paths return a value
   Engine-COMP703.vcxproj -> C:\Users\alexe\Documents\GitHub\Engine-COMP703-AlexEmeny\Engine-COMP703\x64\Debug\Engine-COMP703.exe

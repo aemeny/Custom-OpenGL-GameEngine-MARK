@@ -140,12 +140,14 @@
     <ClCompile Include="GameEngine\Core.cpp" />
     <ClCompile Include="GameEngine\Entity.cpp" />
     <ClCompile Include="GameEngine\Environment.cpp" />
+    <ClCompile Include="GameEngine\GUI.cpp" />
     <ClCompile Include="GameEngine\Input.cpp" />
     <ClCompile Include="GameEngine\LineRenderer.cpp" />
     <ClCompile Include="GameEngine\main.cpp" />
     <ClCompile Include="GameEngine\ModelHandler.cpp" />
     <ClCompile Include="GameEngine\ModelResource.cpp" />
     <ClCompile Include="GameEngine\Module.cpp" />
+    <ClCompile Include="GameEngine\QuadRenderer.cpp" />
     <ClCompile Include="GameEngine\ResourceParent.cpp" />
     <ClCompile Include="GameEngine\ShaderResource.cpp" />
     <ClCompile Include="GameEngine\TextureResource.cpp" />
@@ -174,11 +176,13 @@
     <ClInclude Include="GameEngine\Entity.h" />
     <ClInclude Include="GameEngine\Environment.h" />
     <ClInclude Include="GameEngine\GameEngineMasterHeader.h" />
+    <ClInclude Include="GameEngine\GUI.h" />
     <ClInclude Include="GameEngine\Input.h" />
     <ClInclude Include="GameEngine\LineRenderer.h" />
     <ClInclude Include="GameEngine\ModelHandler.h" />
     <ClInclude Include="GameEngine\ModelResource.h" />
     <ClInclude Include="GameEngine\Module.h" />
+    <ClInclude Include="GameEngine\QuadRenderer.h" />
     <ClInclude Include="GameEngine\ResourceParent.h" />
     <ClInclude Include="GameEngine\Resources.h" />
     <ClInclude Include="GameEngine\ShaderResource.h" />
@@ -208,6 +212,8 @@
     <None Include="..\Shaders\Lit\VertexShader-Floor.glsl" />
     <None Include="..\Shaders\Lit\VertexShader-Wall.glsl" />
     <None Include="..\Shaders\Lit\VertexShader.glsl" />
+    <None Include="..\Shaders\Orphographics\fragmentShader.glsl" />
+    <None Include="..\Shaders\Orphographics\vertexShader.glsl" />
     <None Include="..\Shaders\Unlit\FragmentShader.glsl" />
     <None Include="..\Shaders\Unlit\VertexShader.glsl" />
   </ItemGroup>

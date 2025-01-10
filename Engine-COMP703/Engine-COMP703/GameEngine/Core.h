@@ -45,6 +45,7 @@ namespace GameEngine
 		friend Entity;
 		friend Camera;
 		friend struct ModelHandler;
+		friend struct QuadRenderer;
 		friend struct LineRenderer;
 		friend PhysicsSystem::AABBCollider;
 
