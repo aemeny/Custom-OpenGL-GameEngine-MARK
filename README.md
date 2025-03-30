@@ -1,26 +1,35 @@
-# Custom Game Engine 🛠️
+# OpenGL Game Demake
 
-This repository contains the development of a custom game engine created for the module **COMP703 24/25** as part of my MSc Game Programming course. This project focuses on building a robust and flexible engine capable of supporting 3D gameplay experiences.
+This is a custom-built game engine developed using **OpenGL**, **SDL2**, and **GLEW**. The engine supports 3D rendering, basic physics, collision detection, GUI rendering, and more.
 
-## 🌟 About the Project
-This project aims to gain deeper insights into game engine architecture by building a custom solution from scratch. While the engine will be tested with a demake of *Portal*, the development of the engine itself is the main focus.
+## Features
+- **3D Graphics**: Render models, textures, and shaders.
+- **Physics**: Includes rigid body dynamics and AABB collision detection.
+- **Input Handling**: Supports keyboard, mouse, and controller input.
+- **GUI Support**: On-screen interactable elements with an orthographic projection.
+- **Portals**: Fully functional portal mechanics inspired by the game *Portal*.
 
-## 🛠️ Technologies Used
-- **OpenGL** (via **GLEW**) for rendering.
-- **SDL2** for managing windows and input.
-- Custom systems for physics, entity management, and rendering pipeline.
+---
 
-## 🚀 Planned Features
-- Modular architecture for easier expansion and maintenance.
-- 3D rendering pipeline with support for basic shaders and lighting.
-- Scene and entity management to handle complex gameplay scenarios.
-- Performance optimizations for real-time rendering and physics.
+## Controls
 
-## 🧪 Testing with Portal Demake
-To demonstrate the engine's capabilities, I plan to create a simplified version of *Portal* to demonstrate the engine's capabilities. This test case will:
-- Validate the engine's ability to handle mechanics like portals.
-- Showcase rendering and interaction systems in action.
+### Keyboard and Mouse
+- **W/A/S/D**: Move forward, left, backward, and right.
+- **Mouse**: Look around.
+- **Esc**: Exit the game.
 
-## 📚 Key Learning Outcomes
-- Advanced understanding of game engine design and implementation.
-- Practical experience with OpenGL and SDL2 in a 3D context.
+### Controller (Optional)
+- **Left Joystick**: Move the player.
+- **Right Joystick**: Control camera rotation.
+
+---
+
+## How to Use
+- Requires files not uploaded to GitHub can be found here:
+https://www.dropbox.com/scl/fo/6jlkhsnxr6qj5gu88ypyd/AICyoORrTY4v8P11_kq5TBM?rlkey=mx4zf96zam6337l2fh6jtddtp&st=jirop9ap&dl=0
+
+- **Models** file should be added to \Engine-COMP703\Samples folder, alongside the Textures folder
+- **Bin** & **Lib** files should be added to Engine-COMP703\contrib\windows-cl-amd64 folder, alongside the include folder
+
+- The VS Code project file can be opened within \Engine-COMP703\Engine-COMP703. The project can be run from within this IDE.
+- Alternatively if a build is created, it can be accessed in \Engine-COMP703\Engine-COMP703\x64 folder. Any build files within \Bebug or \Release should be moved out to the \x64 file, and the glew32.dll & SDL2.dll's should be moved within this folder also.
