@@ -32,4 +32,4 @@ https://www.dropbox.com/scl/fo/6jlkhsnxr6qj5gu88ypyd/AICyoORrTY4v8P11_kq5TBM?rlk
 - **Bin** & **Lib** files should be added to Engine-COMP703\contrib\windows-cl-amd64 folder, alongside the include folder
 
 - The VS Code project file can be opened within \Engine-COMP703\Engine-COMP703. The project can be run from within this IDE.
-- Alternatively if a build is created, it can be accessed in \Engine-COMP703\Engine-COMP703\x64 folder. Any build files within \Bebug or \Release should be moved out to the \x64 file, and the glew32.dll & SDL2.dll's should be moved within this folder also.
+- Alternatively if a build is created, it can be accessed in \Engine-COMP703\Engine-COMP703\x64 folder. Any build files within \Debug or \Release should be moved out to the \x64 file, and the glew32.dll & SDL2.dll's should be moved within this folder also.
